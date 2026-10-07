@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GreenLeaf - Cart</title>
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f8f3;
+    color:#222;
+}
+
+header{
+    background:#173d27;
+    color:white;
+    padding:18px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:8px;
+    font-weight:bold;
+}
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:40px auto;
+}
+
+h1{
+    text-align:center;
+    color:#176b2c;
+}
+
+
+/* Back Button */
+
+.back-btn{
+    display:block;
+    width:max-content;
+    margin:10px auto 25px;
+    padding:10px 20px;
+    background:#176b2c;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.back-btn:hover{
+    background:#0e4e20;
+}
+
+
+.cart-item{
+    background:white;
+    padding:20px;
+    margin:20px 0;
+    border-radius:15px;
+    box-shadow:0 4px 15px #ccc;
+}
+
+.product-name{
+    font-size:22px;
+    font-weight:bold;
+    color:#176b2c;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.qty button{
+    width:35px;
+    height:35px;
+    border:0;
+    border-radius:50%;
+    background:#176b2c;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.remove{
+    background:#d62828;
+    color:white;
+    border:0;
+    padding:10px 15px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.summary{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 15px #ccc;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.checkout{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+    border:0;
+    border-radius:30px;
+    background:#176b2c;
+    color:white;
+    font-size:19px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.checkout:hover{
+    background:#0e4e20;
+}
+
+.shop{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    padding:13px;
+    border:2px solid #176b2c;
+    border-radius:30px;
+    color:#176b2c;
+    text-decoration:none;
+}
+
+.empty{
+    background:white;
+    padding:60px 20px;
+    text-align:center;
+    border-radius:15px;
+    box-shadow:0 4px 15px #ccc;
+    font-size:22px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+    🌿 GreenLeaf Plant Nursery
+</div>
+
+
+<nav>
+
+<a href="index.html" data-cart-lang="home">
+    Home
+</a>
+
+<a href="indoor.html" data-cart-lang="indoor">
+    Indoor Plants
+</a>
+
+<a href="outdoor.html" data-cart-lang="outdoor">
+    Outdoor Plants
+</a>
+
+<a href="diseases.html" data-cart-lang="diseases">
+    Diseases
+</a>
+
+<a href="orders.html" data-cart-lang="orders">
+    My Orders
+</a>
+
+<a href="cart.html" data-cart-lang="cart">
+    🛒 Cart
+</a>
+
+</nav>
+
+</header>
+
+
+
+<div class="container">
+
+
+<h1 data-cart-lang="cartTitle">
+    🛒 Your Shopping Cart
+</h1>
+
+
+<!-- BACK TO EXPLORE PLANTS -->
+
+<a href="plants.html"
+   class="back-btn"
+   data-cart-lang="backExplore">
+
+    ← Back to Explore Plants
+
+</a>
+
+
+<div id="cart"></div>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   CART DATA
+===================================================== */
+
+let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+
+
+/* =====================================================
+   LANGUAGE TRANSLATIONS
+===================================================== */
+
+const cartTranslations = {
+
+    home: {
+        en: "Home",
+        te: "హోమ్",
+        hi: "होम"
+    },
+
+    indoor: {
+        en: "Indoor Plants",
+        te: "ఇండోర్ మొక్కలు",
+        hi: "इंडोर पौधे"
+    },
+
+    outdoor: {
+        en: "Outdoor Plants",
+        te: "అవుట్‌డోర్ మొక్కలు",
+        hi: "आउटडोर पौधे"
+    },
+
+    diseases: {
+        en: "Diseases",
+        te: "వ్యాధులు",
+        hi: "रोग"
+    },
+
+    orders: {
+        en: "My Orders",
+        te: "నా ఆర్డర్లు",
+        hi: "मेरे ऑर्डर"
+    },
+
+    cart: {
+        en: "🛒 Cart",
+        te: "🛒 కార్ట్",
+        hi: "🛒 कार्ट"
+    },
+
+    cartTitle: {
+        en: "🛒 Your Shopping Cart",
+        te: "🛒 మీ షాపింగ్ కార్ట్",
+        hi: "🛒 आपकी शॉपिंग कार्ट"
+    },
+
+    backExplore: {
+        en: "← Back to Explore Plants",
+        te: "← మొక్కలను చూడటానికి తిరిగి వెళ్ళండి",
+        hi: "← पौधों को देखने के लिए वापस जाएं"
+    },
+
+    price: {
+        en: "Price:",
+        te: "ధర:",
+        hi: "कीमत:"
+    },
+
+    remove: {
+        en: "Remove",
+        te: "తొలగించు",
+        hi: "हटाएं"
+    },
+
+    totalAmount: {
+        en: "Total Amount",
+        te: "మొత్తం మొత్తం",
+        hi: "कुल राशि"
+    },
+
+    checkout: {
+        en: "🛒 Continue to Checkout →",
+        te: "🛒 చెక్‌అవుట్‌కు కొనసాగండి →",
+        hi: "🛒 चेकआउट के लिए आगे बढ़ें →"
+    },
+
+    continueShopping: {
+        en: "🌿 Continue Shopping",
+        te: "🌿 షాపింగ్ కొనసాగించండి",
+        hi: "🌿 खरीदारी जारी रखें"
+    },
+
+    emptyCart: {
+        en: "Your cart is empty",
+        te: "మీ కార్ట్ ఖాళీగా ఉంది",
+        hi: "आपकी कार्ट खाली है"
+    },
+
+    emptyAlert: {
+        en: "Your cart is empty!",
+        te: "మీ కార్ట్ ఖాళీగా ఉంది!",
+        hi: "आपकी कार्ट खाली है!"
+    }
+
+};
+
+
+
+/* =====================================================
+   GET SELECTED LANGUAGE
+===================================================== */
+
+function getCartLanguage(){
+
+    return localStorage.getItem(
+        "selectedLanguage"
+    ) || "en";
+
+}
+
+
+
+/* =====================================================
+   APPLY CART LANGUAGE
+===================================================== */
+
+function applyCartLanguage(){
+
+    const language =
+        getCartLanguage();
+
+    const elements =
+        document.querySelectorAll(
+            "[data-cart-lang]"
+        );
+
+
+    elements.forEach(function(element){
+
+        const key =
+            element.getAttribute(
+                "data-cart-lang"
+            );
+
+
+        if(
+            cartTranslations[key] &&
+            cartTranslations[key][language]
+        ){
+
+            element.innerText =
+                cartTranslations[key][language];
+
+        }
+
+    });
+
+}
+
+
+
+/* =====================================================
+   SAVE CART
+===================================================== */
+
+function saveCart(){
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    showCart();
+
+}
+
+
+
+/* =====================================================
+   SHOW CART
+===================================================== */
+
+function showCart(){
+
+    let box =
+        document.getElementById("cart");
+
+
+    const language =
+        getCartLanguage();
+
+
+    /* EMPTY CART */
+
+    if(cart.length===0){
+
+        box.innerHTML=`
+
+        <div class="empty">
+
+            🌱
+            <br><br>
+
+            ${cartTranslations.emptyCart[language]}
+
+            <br><br>
+
+            <a class="shop"
+               href="index.html">
+
+                ${cartTranslations.continueShopping[language]}
+
+            </a>
+
+        </div>`;
+
+        return;
+
+    }
+
+
+    let total=0;
+
+    let html="";
+
+
+    /* CART ITEMS */
+
+    cart.forEach(function(item,index){
+
+
+        let name =
+            item.name ||
+            item.product ||
+            "Plant";
+
+
+        let price =
+            Number(item.price)||0;
+
+
+        let qty =
+            Number(item.quantity)||1;
+
+
+        let amount =
+            price*qty;
+
+
+        total+=amount;
+
+
+        html+=`
+
+        <div class="cart-item">
+
+            <div class="row">
+
+
+                <div>
+
+                    <div class="product-name">
+
+                        🌱 ${name}
+
+                    </div>
+
+
+                    <p>
+
+                        ${cartTranslations.price[language]}
+                        ₹${price}
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="qty">
+
+                    <button
+                        onclick="minus(${index})">
+
+                        −
+
+                    </button>
+
+
+                    <b>
+
+                        ${qty}
+
+                    </b>
+
+
+                    <button
+                        onclick="plus(${index})">
+
+                        +
+
+                    </button>
+
+                </div>
+
+
+
+                <b>
+
+                    ₹${amount}
+
+                </b>
+
+
+
+                <button
+                    class="remove"
+                    onclick="removeItem(${index})">
+
+                    ${cartTranslations.remove[language]}
+
+                </button>
+
+
+            </div>
+
+        </div>`;
+
+    });
+
+
+
+    /* SUMMARY */
+
+    html+=`
+
+    <div class="summary">
+
+
+        <div class="total">
+
+            <span>
+
+                ${cartTranslations.totalAmount[language]}
+
+            </span>
+
+
+            <span>
+
+                ₹${total}
+
+            </span>
+
+        </div>
+
+
+
+        <button
+            class="checkout"
+            onclick="goCheckout()">
+
+            ${cartTranslations.checkout[language]}
+
+        </button>
+
+
+
+        <a
+            class="shop"
+            href="index.html">
+
+            ${cartTranslations.continueShopping[language]}
+
+        </a>
+
+
+    </div>`;
+
+
+    box.innerHTML=html;
+
+}
+
+
+
+/* =====================================================
+   PLUS QUANTITY
+===================================================== */
+
+function plus(index){
+
+    cart[index].quantity =
+        (Number(cart[index].quantity)||1)+1;
+
+    saveCart();
+
+}
+
+
+
+/* =====================================================
+   MINUS QUANTITY
+===================================================== */
+
+function minus(index){
+
+    let qty =
+        Number(cart[index].quantity)||1;
+
+
+    if(qty>1){
+
+        cart[index].quantity =
+            qty-1;
+
+    }else{
+
+        cart.splice(index,1);
+
+    }
+
+
+    saveCart();
+
+}
+
+
+
+/* =====================================================
+   REMOVE ITEM
+===================================================== */
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    saveCart();
+
+}
+
+
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
+
+function goCheckout(){
+
+    const language =
+        getCartLanguage();
+
+
+    if(cart.length===0){
+
+        alert(
+            cartTranslations.emptyAlert[language]
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "checkout.html";
+
+}
+
+
+
+/* =====================================================
+   LOAD CART
+===================================================== */
+
+applyCartLanguage();
+
+showCart();
+
+</script>
+
+
+</body>
+
+</html>

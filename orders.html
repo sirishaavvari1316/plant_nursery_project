@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Orders - GreenLeaf Nursery</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f8f4;
+            color: #333;
+        }
+
+        header {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 8px 0 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .top-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .top-buttons a {
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 7px;
+            background: #2e7d32;
+            color: white;
+            font-weight: bold;
+        }
+
+        .top-buttons a:hover {
+            background: #1b5e20;
+        }
+
+        h2 {
+            color: #1b5e20;
+        }
+
+        .order-card {
+            background: white;
+            padding: 22px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .order-card h3 {
+            color: #1b5e20;
+            margin-top: 0;
+        }
+
+        .order-info {
+            line-height: 1.8;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .ordered {
+            background: #dff5e3;
+            color: #16833a;
+        }
+
+        .cancelled {
+            background: #ffe1e1;
+            color: #d32f2f;
+        }
+
+        .empty {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 12px;
+            color: #777;
+            font-size: 18px;
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 94%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <h1>🌿 GreenLeaf Nursery</h1>
+
+    <p id="adminOrdersTitle">
+        Admin Orders
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="top-buttons">
+
+        <a href="admin-dashboard.html"
+           id="dashboardButton">
+
+            📊 Admin Dashboard
+
+        </a>
+
+        <a href="admin.html"
+           id="addPlantButton">
+
+            ➕ Add Plant
+
+        </a>
+
+        <a href="index.html"
+           id="homeButton">
+
+            🏠 Home
+
+        </a>
+
+    </div>
+
+
+    <h2 id="customerOrdersTitle">
+        📦 Customer Orders
+    </h2>
+
+
+    <div id="ordersContainer"></div>
+
+
+</div>
+
+
+<script>
+
+
+// =================================
+// ADMIN ORDERS TRANSLATIONS
+// =================================
+
+const adminOrdersTranslations = {
+
+    en: {
+
+        title:
+            "Admin Orders",
+
+        dashboard:
+            "📊 Admin Dashboard",
+
+        addPlant:
+            "➕ Add Plant",
+
+        home:
+            "🏠 Home",
+
+        customerOrders:
+            "📦 Customer Orders",
+
+        noOrders:
+            "No customer orders found.",
+
+        order:
+            "Order",
+
+        product:
+            "🌱 Product:",
+
+        quantity:
+            "🔢 Quantity:",
+
+        amount:
+            "💰 Amount:",
+
+        customerName:
+            "👤 Customer Name:",
+
+        address:
+            "📍 Address:",
+
+        payment:
+            "💳 Payment:",
+
+        date:
+            "📅 Date:",
+
+        status:
+            "📌 Status:",
+
+        cancelled:
+            "Cancelled",
+
+        ordered:
+            "Ordered",
+
+        defaultPlant:
+            "Plant",
+
+        defaultCustomer:
+            "Customer",
+
+        notProvided:
+            "Not provided",
+
+        recently:
+            "Recently"
+
+    },
+
+
+    te: {
+
+        title:
+            "అడ్మిన్ ఆర్డర్లు",
+
+        dashboard:
+            "📊 అడ్మిన్ డ్యాష్‌బోర్డ్",
+
+        addPlant:
+            "➕ మొక్కను జోడించండి",
+
+        home:
+            "🏠 హోమ్",
+
+        customerOrders:
+            "📦 కస్టమర్ ఆర్డర్లు",
+
+        noOrders:
+            "కస్టమర్ ఆర్డర్లు ఏవీ కనుగొనబడలేదు.",
+
+        order:
+            "ఆర్డర్",
+
+        product:
+            "🌱 ఉత్పత్తి:",
+
+        quantity:
+            "🔢 పరిమాణం:",
+
+        amount:
+            "💰 మొత్తం:",
+
+        customerName:
+            "👤 కస్టమర్ పేరు:",
+
+        address:
+            "📍 చిరునామా:",
+
+        payment:
+            "💳 చెల్లింపు:",
+
+        date:
+            "📅 తేదీ:",
+
+        status:
+            "📌 స్థితి:",
+
+        cancelled:
+            "రద్దు చేయబడింది",
+
+        ordered:
+            "ఆర్డర్ చేయబడింది",
+
+        defaultPlant:
+            "మొక్క",
+
+        defaultCustomer:
+            "కస్టమర్",
+
+        notProvided:
+            "అందించబడలేదు",
+
+        recently:
+            "ఇటీవల"
+
+    },
+
+
+    hi: {
+
+        title:
+            "एडमिन ऑर्डर",
+
+        dashboard:
+            "📊 एडमिन डैशबोर्ड",
+
+        addPlant:
+            "➕ पौधा जोड़ें",
+
+        home:
+            "🏠 होम",
+
+        customerOrders:
+            "📦 ग्राहक ऑर्डर",
+
+        noOrders:
+            "कोई ग्राहक ऑर्डर नहीं मिला।",
+
+        order:
+            "ऑर्डर",
+
+        product:
+            "🌱 उत्पाद:",
+
+        quantity:
+            "🔢 मात्रा:",
+
+        amount:
+            "💰 राशि:",
+
+        customerName:
+            "👤 ग्राहक का नाम:",
+
+        address:
+            "📍 पता:",
+
+        payment:
+            "💳 भुगतान:",
+
+        date:
+            "📅 तारीख:",
+
+        status:
+            "📌 स्थिति:",
+
+        cancelled:
+            "रद्द किया गया",
+
+        ordered:
+            "ऑर्डर किया गया",
+
+        defaultPlant:
+            "पौधा",
+
+        defaultCustomer:
+            "ग्राहक",
+
+        notProvided:
+            "उपलब्ध नहीं",
+
+        recently:
+            "हाल ही में"
+
+    }
+
+};
+
+
+// =================================
+// GET CURRENT LANGUAGE
+// =================================
+
+function getAdminOrdersLanguage() {
+
+    return localStorage.getItem(
+        "selectedLanguage"
+    ) || "en";
+
+}
+
+
+// =================================
+// APPLY PAGE LANGUAGE
+// =================================
+
+function applyAdminOrdersLanguage() {
+
+    const language =
+        getAdminOrdersLanguage();
+
+    const t =
+        adminOrdersTranslations[language]
+        || adminOrdersTranslations.en;
+
+
+    document.getElementById(
+        "adminOrdersTitle"
+    ).textContent = t.title;
+
+
+    document.getElementById(
+        "dashboardButton"
+    ).textContent = t.dashboard;
+
+
+    document.getElementById(
+        "addPlantButton"
+    ).textContent = t.addPlant;
+
+
+    document.getElementById(
+        "homeButton"
+    ).textContent = t.home;
+
+
+    document.getElementById(
+        "customerOrdersTitle"
+    ).textContent = t.customerOrders;
+
+
+    document.documentElement.lang =
+        language;
+
+
+    if (language === "te") {
+
+        document.title =
+            "అడ్మిన్ ఆర్డర్లు - GreenLeaf Nursery";
+
+    }
+    else if (language === "hi") {
+
+        document.title =
+            "एडमिन ऑर्डर - GreenLeaf Nursery";
+
+    }
+    else {
+
+        document.title =
+            "Admin Orders - GreenLeaf Nursery";
+
+    }
+
+}
+
+
+// =================================
+// DISPLAY ORDERS
+// =================================
+
+function displayOrders() {
+
+    const container =
+        document.getElementById("ordersContainer");
+
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem("orders")
+        ) || [];
+
+
+    const language =
+        getAdminOrdersLanguage();
+
+    const t =
+        adminOrdersTranslations[language]
+        || adminOrdersTranslations.en;
+
+
+    // ===============================
+    // NO ORDERS
+    // ===============================
+
+    if (orders.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div style="font-size:45px;">
+                    📦
+                </div>
+
+                <p>
+                    ${t.noOrders}
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    // ===============================
+    // DISPLAY LATEST FIRST
+    // ===============================
+
+    orders.slice().reverse().forEach(
+        (order, reverseIndex) => {
+
+
+            const actualIndex =
+                orders.length - 1 - reverseIndex;
+
+
+            const status =
+                order.status || "Ordered";
+
+
+            const isCancelled =
+                status.toLowerCase() === "cancelled";
+
+
+            const product =
+                order.product || t.defaultPlant;
+
+
+            const quantity =
+                order.quantity || 1;
+
+
+            const amount =
+                order.amount || 0;
+
+
+            const name =
+                order.name || t.defaultCustomer;
+
+
+            const address =
+                order.address || t.notProvided;
+
+
+            const payment =
+                order.payment || t.notProvided;
+
+
+            const date =
+                order.date || t.recently;
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className = "order-card";
+
+
+            card.innerHTML = `
+
+                <h3>
+                    📦 ${t.order} #${actualIndex + 1}
+                </h3>
+
+                <div class="order-info">
+
+                    <strong>${t.product}</strong>
+                    ${product}
+
+                    <br>
+
+                    <strong>${t.quantity}</strong>
+                    ${quantity}
+
+                    <br>
+
+                    <strong>${t.amount}</strong>
+                    ₹${amount}
+
+                    <br>
+
+                    <strong>${t.customerName}</strong>
+                    ${name}
+
+                    <br>
+
+                    <strong>${t.address}</strong>
+                    ${address}
+
+                    <br>
+
+                    <strong>${t.payment}</strong>
+                    ${payment}
+
+                    <br>
+
+                    <strong>${t.date}</strong>
+                    ${date}
+
+                    <br>
+
+                    <strong>${t.status}</strong>
+
+                    <span class="status ${
+                        isCancelled
+                        ? "cancelled"
+                        : "ordered"
+                    }">
+
+                        ${
+                            isCancelled
+                            ? t.cancelled
+                            : t.ordered
+                        }
+
+                    </span>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        }
+    );
+
+}
+
+
+// =================================
+// LOAD ORDERS
+// =================================
+
+applyAdminOrdersLanguage();
+
+displayOrders();
+
+
+</script>
+
+
+</body>
+
+</html>

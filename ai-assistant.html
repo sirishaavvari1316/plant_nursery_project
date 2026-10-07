@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Plant Assistant - GreenLeaf Nursery</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f8f4;
+            color: #333;
+        }
+
+        header {
+            background: #176b3a;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        header h1 {
+            margin: 0 0 12px;
+            font-size: 28px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* LANGUAGE */
+
+        .language-box {
+            margin-top: 12px;
+        }
+
+        .language-box select {
+            padding: 7px 10px;
+            border-radius: 6px;
+            border: none;
+            font-weight: bold;
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn {
+            display: inline-block;
+            margin: 20px 20px 0;
+            padding: 10px 18px;
+            background: #176b3a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #0f4f2b;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            color: #176b3a;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+        }
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .suggestion {
+            background: white;
+            border: 1px solid #176b3a;
+            color: #176b3a;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .suggestion:hover {
+            background: #176b3a;
+            color: white;
+        }
+
+        .chat-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 350px;
+            max-height: 500px;
+            overflow-y: auto;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .message {
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            line-height: 1.5;
+        }
+
+        .user-message {
+            background: #dff2e5;
+            text-align: right;
+            margin-left: 20%;
+        }
+
+        .ai-message {
+            background: #f0f0f0;
+            margin-right: 20%;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .send-btn,
+        .clear-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .send-btn {
+            background: #176b3a;
+            color: white;
+        }
+
+        .send-btn:hover {
+            background: #0f4f2b;
+        }
+
+        .clear-btn {
+            background: #ddd;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .clear-btn:hover {
+            background: #ccc;
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px;
+            }
+
+            nav {
+                gap: 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .input-area {
+                flex-direction: column;
+            }
+
+            .user-message {
+                margin-left: 5%;
+            }
+
+            .ai-message {
+                margin-right: 5%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <h1>🌿 GreenLeaf Nursery</h1>
+
+    <nav>
+
+        <a href="index.html" data-lang="home">Home</a>
+
+        <a href="indoor.html" data-lang="indoor">Indoor</a>
+
+        <a href="outdoor.html" data-lang="outdoor">Outdoor</a>
+
+        <a href="countries.html" data-lang="countries">
+            Other Countries
+        </a>
+
+        <a href="diseases.html" data-lang="diseases">
+            Diseases
+        </a>
+
+        <a href="cart.html" data-lang="cart">
+            🛒 Cart
+        </a>
+
+    </nav>
+
+
+    <!-- LANGUAGE -->
+
+    <div class="language-box">
+
+        <select id="languageSelect"
+                onchange="changeLanguage(this.value)">
+
+            <option value="en">English</option>
+            <option value="te">తెలుగు</option>
+            <option value="hi">हिंदी</option>
+
+        </select>
+
+    </div>
+
+</header>
+
+
+<!-- BACK BUTTON -->
+
+<a href="index.html"
+   class="back-btn"
+   data-ai-lang="back">
+
+    ← Back
+
+</a>
+
+
+<div class="container">
+
+    <h2 class="title"
+        data-ai-lang="title">
+
+        🤖 AI Plant Assistant
+
+    </h2>
+
+
+    <p class="subtitle"
+       data-ai-lang="subtitle">
+
+        Ask me anything about plants, care, diseases and gardening 🌱
+
+    </p>
+
+
+    <!-- SUGGESTED QUESTIONS -->
+
+    <div class="suggestions">
+
+        <button
+            class="suggestion"
+            onclick="askQuestion('How often should I water my plants?')"
+            data-ai-lang="waterQuestion">
+
+            💧 How often should I water?
+
+        </button>
+
+
+        <button
+            class="suggestion"
+            onclick="askQuestion('Which plants are good for beginners?')"
+            data-ai-lang="beginnerQuestion">
+
+            🌱 Plants for beginners
+
+        </button>
+
+
+        <button
+            class="suggestion"
+            onclick="askQuestion('Why are my plant leaves turning yellow?')"
+            data-ai-lang="yellowQuestion">
+
+            🍃 Yellow leaves
+
+        </button>
+
+
+        <button
+            class="suggestion"
+            onclick="askQuestion('Which plants need low sunlight?')"
+            data-ai-lang="lowLightQuestion">
+
+            ☀️ Low sunlight plants
+
+        </button>
+
+
+        <button
+            class="suggestion"
+            onclick="askQuestion('What is root rot?')"
+            data-ai-lang="rootRotQuestion">
+
+            🦠 Root rot
+
+        </button>
+
+
+        <button
+            class="suggestion"
+            onclick="askQuestion('Best flowering plants')"
+            data-ai-lang="flowerQuestion">
+
+            🌸 Flowering plants
+
+        </button>
+
+    </div>
+
+
+    <!-- CHAT BOX -->
+
+    <div class="chat-box"
+         id="chatBox">
+
+        <div class="message ai-message">
+
+            🤖 <strong class="ai-label">AI Assistant:</strong><br>
+
+            <span data-ai-lang="welcome">
+
+                Hello! 🌱 Welcome to GreenLeaf Nursery.
+
+                I can help you with plant care,
+                watering, sunlight, diseases,
+                fertilizers and more.
+
+                Ask me anything!
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- INPUT -->
+
+    <div class="input-area">
+
+        <input
+            type="text"
+            id="userInput"
+            placeholder="Ask about plants..."
+            onkeydown="handleEnter(event)">
+
+        <button
+            class="send-btn"
+            onclick="sendMessage()"
+            data-ai-lang="send">
+
+            Send 🌿
+
+        </button>
+
+    </div>
+
+
+    <button
+        class="clear-btn"
+        onclick="clearChat()"
+        data-ai-lang="clear">
+
+        🗑️ Clear Chat
+
+    </button>
+
+</div>
+
+
+<script>
+
+
+// ======================================
+// LANGUAGE
+// ======================================
+
+const aiLanguages = {
+
+    en: {
+
+        back: "← Back",
+
+        title: "🤖 AI Plant Assistant",
+
+        subtitle:
+        "Ask me anything about plants, care, diseases and gardening 🌱",
+
+        waterQuestion:
+        "💧 How often should I water?",
+
+        beginnerQuestion:
+        "🌱 Plants for beginners",
+
+        yellowQuestion:
+        "🍃 Yellow leaves",
+
+        lowLightQuestion:
+        "☀️ Low sunlight plants",
+
+        rootRotQuestion:
+        "🦠 Root rot",
+
+        flowerQuestion:
+        "🌸 Flowering plants",
+
+        welcome:
+        `Hello! 🌱 Welcome to GreenLeaf Nursery.
+
+        I can help you with plant care,
+        watering, sunlight, diseases,
+        fertilizers and more.
+
+        Ask me anything!`,
+
+        send: "Send 🌿",
+
+        clear: "🗑️ Clear Chat",
+
+        you: "You:",
+
+        ai: "AI Assistant:",
+
+        hello:
+        `Hello! 🌱😊<br><br>
+        Welcome to GreenLeaf Nursery!
+        <br><br>
+        I can help you with plant selection,
+        watering, sunlight, diseases,
+        fertilizers and plant care.`,
+
+        thanks:
+        `You're welcome! 🌿😊<br><br>
+        Happy gardening!`,
+
+        watering:
+        `💧 <strong>Plant Watering Tips</strong><br><br>
+        Do not water plants on a fixed schedule only.
+        <br><br>
+        Check the top layer of soil first.
+        <br><br>
+        If the soil is dry, water the plant.
+        <br><br>
+        Avoid overwatering because it can cause root rot.`,
+
+        sunlight:
+        `☀️ <strong>Sunlight Tips</strong><br><br>
+        Plants have different light requirements.
+        <br><br>
+        • Low light: Snake Plant, ZZ Plant<br>
+        • Medium light: Peace Lily<br>
+        • Bright light: Monstera<br>
+        • Full sun: Rose, Hibiscus, Marigold`,
+
+        soil:
+        `🌱 <strong>Soil Tips</strong><br><br>
+        Most plants prefer loose,
+        nutrient-rich and well-draining soil.
+        <br><br>
+        For indoor plants, make sure excess water
+        can drain from the pot.`,
+
+        fertilizer:
+        `🌿 <strong>Fertilizer Tips</strong><br><br>
+        Use a balanced fertilizer during
+        the plant's active growing season.
+        <br><br>
+        Avoid using too much fertilizer because
+        it can damage roots.`,
+
+        yellow:
+        `🍃 <strong>Yellow Leaves</strong><br><br>
+        Common causes include:
+        <br><br>
+        • Overwatering<br>
+        • Poor drainage<br>
+        • Lack of sunlight<br>
+        • Nutrient deficiency<br>
+        • Natural aging
+        <br><br>
+        First check the soil moisture and drainage.`,
+
+        rootRot:
+        `🦠 <strong>Root Rot</strong><br><br>
+        Root rot is usually caused by
+        excessive moisture around the roots.
+        <br><br>
+        Symptoms:
+        <br>
+        • Yellow leaves<br>
+        • Soft roots<br>
+        • Bad smell<br>
+        • Wilting
+        <br><br>
+        Improve drainage and reduce watering.`,
+
+        indoor:
+        `🏠 <strong>Good Indoor Plants</strong><br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Peace Lily<br>
+        • ZZ Plant<br>
+        • Spider Plant<br>
+        • Monstera
+        <br><br>
+        Most prefer bright indirect light.`,
+
+        outdoor:
+        `🌳 <strong>Outdoor Plants</strong><br><br>
+        • Rose<br>
+        • Hibiscus<br>
+        • Marigold<br>
+        • Jasmine<br>
+        • Bougainvillea<br>
+        • Tulsi
+        <br><br>
+        Most outdoor flowering plants need good sunlight.`,
+
+        beginner:
+        `🌱 <strong>Best Plants for Beginners</strong><br><br>
+        I recommend:
+        <br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Aloe Vera<br>
+        • Spider Plant<br>
+        • ZZ Plant
+        <br><br>
+        These plants are relatively easy to maintain.`,
+
+        flowering:
+        `🌸 <strong>Flowering Plants</strong><br><br>
+        • Rose<br>
+        • Hibiscus<br>
+        • Jasmine<br>
+        • Marigold<br>
+        • Tulip<br>
+        • Lavender`,
+
+        lowMaintenance:
+        `🌱 <strong>Low Maintenance Plants</strong><br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Aloe Vera<br>
+        • ZZ Plant<br>
+        • Spider Plant`,
+
+        diseases:
+        `🦠 <strong>Common Plant Diseases</strong><br><br>
+        • Root rot<br>
+        • Powdery mildew<br>
+        • Leaf spot<br>
+        • Rust
+        <br><br>
+        Good air circulation and proper watering
+        help prevent many diseases.`,
+
+        pests:
+        `🐛 <strong>Plant Pest Control</strong><br><br>
+        Common pests include aphids,
+        mealybugs and spider mites.
+        <br><br>
+        • Isolate affected plants<br>
+        • Wash leaves gently<br>
+        • Remove visible pests<br>
+        • Use suitable organic pest control`,
+
+        shopping:
+        `🛒 You can explore our plant categories
+        and add your favourite plants to the cart.
+        <br><br>
+        Visit the Home page to start shopping. 🌱`,
+
+        default:
+        `🌱 I'm here to help with plant care!
+        <br><br>
+        You can ask me about:
+        <br><br>
+        • Plant watering 💧<br>
+        • Sunlight ☀️<br>
+        • Soil 🌱<br>
+        • Fertilizers 🌿<br>
+        • Plant diseases 🦠<br>
+        • Indoor plants 🏠<br>
+        • Outdoor plants 🌳<br>
+        • Flowering plants 🌸
+        <br><br>
+        Tell me the name of a specific plant
+        and I can give you its care tips.`
+
+    },
+
+
+    te: {
+
+        back: "← వెనుకకు",
+
+        title: "🤖 AI మొక్కల సహాయకుడు",
+
+        subtitle:
+        "మొక్కలు, సంరక్షణ, వ్యాధులు మరియు గార్డెనింగ్ గురించి ఏదైనా అడగండి 🌱",
+
+        waterQuestion:
+        "💧 మొక్కలకు ఎంత తరచుగా నీరు పోయాలి?",
+
+        beginnerQuestion:
+        "🌱 ప్రారంభకులకు మంచి మొక్కలు",
+
+        yellowQuestion:
+        "🍃 ఆకులు పసుపు రంగులోకి ఎందుకు మారుతున్నాయి?",
+
+        lowLightQuestion:
+        "☀️ తక్కువ సూర్యకాంతి అవసరమైన మొక్కలు",
+
+        rootRotQuestion:
+        "🦠 Root Rot అంటే ఏమిటి?",
+
+        flowerQuestion:
+        "🌸 పూల మొక్కలు",
+
+        welcome:
+        `హలో! 🌱 GreenLeaf Nursery కి స్వాగతం.
+
+        మొక్కల సంరక్షణ, నీరు, సూర్యకాంతి,
+        వ్యాధులు, ఎరువులు మరియు మరెన్నో విషయాలలో
+        నేను మీకు సహాయం చేయగలను.
+
+        ఏదైనా అడగండి!`,
+
+        send: "పంపండి 🌿",
+
+        clear: "🗑️ చాట్ క్లియర్ చేయండి",
+
+        you: "మీరు:",
+
+        ai: "AI సహాయకుడు:",
+
+        hello:
+        `హలో! 🌱😊<br><br>
+        GreenLeaf Nursery కి స్వాగతం!
+        <br><br>
+        మొక్కల ఎంపిక, నీరు, సూర్యకాంతి,
+        వ్యాధులు, ఎరువులు మరియు మొక్కల సంరక్షణ
+        గురించి నేను సహాయం చేయగలను.`,
+
+        thanks:
+        `మీకు స్వాగతం! 🌿😊<br><br>
+        మీ గార్డెనింగ్ ఆనందంగా సాగాలని కోరుకుంటున్నాను!`,
+
+        watering:
+        `💧 <strong>మొక్కలకు నీరు పోయడం</strong><br><br>
+        ప్రతిరోజూ ఒకే సమయానికి నీరు పోయాల్సిన అవసరం లేదు.
+        <br><br>
+        ముందుగా మట్టి పై పొరను పరిశీలించండి.
+        <br><br>
+        మట్టి పొడిగా ఉంటే నీరు పోయండి.
+        <br><br>
+        ఎక్కువ నీరు పోయడం వల్ల Root Rot రావచ్చు.`,
+
+        sunlight:
+        `☀️ <strong>సూర్యకాంతి సూచనలు</strong><br><br>
+        ప్రతి మొక్కకు వేర్వేరు కాంతి అవసరం ఉంటుంది.
+        <br><br>
+        • తక్కువ కాంతి: Snake Plant, ZZ Plant<br>
+        • మధ్యస్థ కాంతి: Peace Lily<br>
+        • ప్రకాశవంతమైన కాంతి: Monstera<br>
+        • పూర్తి సూర్యకాంతి: Rose, Hibiscus, Marigold`,
+
+        soil:
+        `🌱 <strong>మట్టి సూచనలు</strong><br><br>
+        ఎక్కువ మొక్కలకు వదులుగా ఉండే,
+        పోషకాలు కలిగిన మరియు నీరు సులభంగా బయటకు వెళ్లే
+        మట్టి మంచిది.
+        <br><br>
+        కుండలో అదనపు నీరు బయటకు వెళ్లేలా చూసుకోండి.`,
+
+        fertilizer:
+        `🌿 <strong>ఎరువుల సూచనలు</strong><br><br>
+        మొక్క పెరుగుతున్న సమయంలో సమతుల్యమైన ఎరువును ఉపయోగించండి.
+        <br><br>
+        ఎక్కువ ఎరువు ఉపయోగించకండి.
+        అది వేర్లను దెబ్బతీయవచ్చు.`,
+
+        yellow:
+        `🍃 <strong>పసుపు ఆకులు</strong><br><br>
+        సాధారణ కారణాలు:
+        <br><br>
+        • ఎక్కువ నీరు<br>
+        • సరైన డ్రైనేజ్ లేకపోవడం<br>
+        • తగినంత సూర్యకాంతి లేకపోవడం<br>
+        • పోషకాల లోపం<br>
+        • సహజమైన వృద్ధాప్యం
+        <br><br>
+        ముందుగా మట్టి తేమ మరియు డ్రైనేజ్‌ను పరిశీలించండి.`,
+
+        rootRot:
+        `🦠 <strong>Root Rot</strong><br><br>
+        వేర్ల దగ్గర ఎక్కువ తేమ ఉండటం వల్ల సాధారణంగా Root Rot వస్తుంది.
+        <br><br>
+        లక్షణాలు:
+        <br>
+        • పసుపు ఆకులు<br>
+        • మెత్తబడిన వేర్లు<br>
+        • దుర్వాసన<br>
+        • మొక్క వాడిపోవడం
+        <br><br>
+        డ్రైనేజ్ మెరుగుపరచి నీరు పోయడం తగ్గించండి.`,
+
+        indoor:
+        `🏠 <strong>మంచి Indoor Plants</strong><br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Peace Lily<br>
+        • ZZ Plant<br>
+        • Spider Plant<br>
+        • Monstera
+        <br><br>
+        వీటిలో చాలా మొక్కలకు ప్రకాశవంతమైన పరోక్ష కాంతి ఇష్టం.`,
+
+        outdoor:
+        `🌳 <strong>Outdoor Plants</strong><br><br>
+        • Rose<br>
+        • Hibiscus<br>
+        • Marigold<br>
+        • Jasmine<br>
+        • Bougainvillea<br>
+        • Tulsi
+        <br><br>
+        ఎక్కువ Outdoor పూల మొక్కలకు మంచి సూర్యకాంతి అవసరం.`,
+
+        beginner:
+        `🌱 <strong>ప్రారంభకులకు మంచి మొక్కలు</strong><br><br>
+        నేను సూచించేవి:
+        <br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Aloe Vera<br>
+        • Spider Plant<br>
+        • ZZ Plant
+        <br><br>
+        ఈ మొక్కలను సంరక్షించడం సులభం.`,
+
+        flowering:
+        `🌸 <strong>పూల మొక్కలు</strong><br><br>
+        • Rose<br>
+        • Hibiscus<br>
+        • Jasmine<br>
+        • Marigold<br>
+        • Tulip<br>
+        • Lavender`,
+
+        lowMaintenance:
+        `🌱 <strong>తక్కువ సంరక్షణ అవసరమైన మొక్కలు</strong><br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Aloe Vera<br>
+        • ZZ Plant<br>
+        • Spider Plant`,
+
+        diseases:
+        `🦠 <strong>సాధారణ మొక్కల వ్యాధులు</strong><br><br>
+        • Root Rot<br>
+        • Powdery Mildew<br>
+        • Leaf Spot<br>
+        • Rust
+        <br><br>
+        మంచి గాలి ప్రసరణ మరియు సరైన నీరు పోయడం
+        చాలా వ్యాధులను నివారించడంలో సహాయపడతాయి.`,
+
+        pests:
+        `🐛 <strong>మొక్కల పురుగుల నియంత్రణ</strong><br><br>
+        సాధారణ పురుగులు Aphids, Mealybugs మరియు Spider Mites.
+        <br><br>
+        • ప్రభావిత మొక్కను వేరుగా ఉంచండి<br>
+        • ఆకులను మెల్లగా కడగండి<br>
+        • కనిపించే పురుగులను తొలగించండి<br>
+        • సరైన organic pest control ఉపయోగించండి`,
+
+        shopping:
+        `🛒 మా మొక్కల categories ను చూడండి
+        మరియు మీకు నచ్చిన మొక్కలను Cart లోకి జోడించండి.
+        <br><br>
+        Shopping ప్రారంభించడానికి Home page కి వెళ్లండి. 🌱`,
+
+        default:
+        `🌱 మొక్కల సంరక్షణ గురించి సహాయం చేయడానికి నేను ఇక్కడ ఉన్నాను!
+        <br><br>
+        మీరు వీటి గురించి అడగవచ్చు:
+        <br><br>
+        • మొక్కలకు నీరు 💧<br>
+        • సూర్యకాంతి ☀️<br>
+        • మట్టి 🌱<br>
+        • ఎరువులు 🌿<br>
+        • మొక్కల వ్యాధులు 🦠<br>
+        • Indoor Plants 🏠<br>
+        • Outdoor Plants 🌳<br>
+        • పూల మొక్కలు 🌸
+        <br><br>
+        ఏదైనా మొక్క పేరు చెప్పండి,
+        దాని సంరక్షణ గురించి చెబుతాను.`
+
+    },
+
+
+    hi: {
+
+        back: "← वापस",
+
+        title: "🤖 AI पौधा सहायक",
+
+        subtitle:
+        "पौधों, देखभाल, बीमारियों और बागवानी के बारे में कुछ भी पूछें 🌱",
+
+        waterQuestion:
+        "💧 पौधों को कितनी बार पानी देना चाहिए?",
+
+        beginnerQuestion:
+        "🌱 शुरुआती लोगों के लिए पौधे",
+
+        yellowQuestion:
+        "🍃 पत्तियाँ पीली क्यों हो रही हैं?",
+
+        lowLightQuestion:
+        "☀️ कम रोशनी वाले पौधे",
+
+        rootRotQuestion:
+        "🦠 Root Rot क्या है?",
+
+        flowerQuestion:
+        "🌸 फूलों वाले पौधे",
+
+        welcome:
+        `नमस्ते! 🌱 GreenLeaf Nursery में आपका स्वागत है।
+
+        मैं पौधों की देखभाल, पानी,
+        रोशनी, बीमारियों, खाद और अन्य विषयों
+        में आपकी मदद कर सकता हूँ।
+
+        मुझसे कुछ भी पूछें!`,
+
+        send: "भेजें 🌿",
+
+        clear: "🗑️ चैट साफ करें",
+
+        you: "आप:",
+
+        ai: "AI सहायक:",
+
+        hello:
+        `नमस्ते! 🌱😊<br><br>
+        GreenLeaf Nursery में आपका स्वागत है!
+        <br><br>
+        मैं पौधों का चयन, पानी, रोशनी,
+        बीमारियों, खाद और पौधों की देखभाल
+        में आपकी मदद कर सकता हूँ.`,
+
+        thanks:
+        `आपका स्वागत है! 🌿😊<br><br>
+        Happy Gardening!`,
+
+        watering:
+        `💧 <strong>पौधों को पानी देने के सुझाव</strong><br><br>
+        पौधों को केवल एक निश्चित समय के अनुसार पानी न दें।
+        <br><br>
+        पहले मिट्टी की ऊपरी परत को देखें।
+        <br><br>
+        यदि मिट्टी सूखी है तो पानी दें।
+        <br><br>
+        अधिक पानी देने से Root Rot हो सकता है.`,
+
+        sunlight:
+        `☀️ <strong>सूरज की रोशनी के सुझाव</strong><br><br>
+        अलग-अलग पौधों को अलग-अलग रोशनी की जरूरत होती है।
+        <br><br>
+        • कम रोशनी: Snake Plant, ZZ Plant<br>
+        • मध्यम रोशनी: Peace Lily<br>
+        • तेज रोशनी: Monstera<br>
+        • पूरी धूप: Rose, Hibiscus, Marigold`,
+
+        soil:
+        `🌱 <strong>मिट्टी के सुझाव</strong><br><br>
+        अधिकतर पौधों के लिए ढीली,
+        पोषक तत्वों वाली और अच्छी drainage वाली मिट्टी अच्छी होती है।
+        <br><br>
+        गमले में अतिरिक्त पानी बाहर निकलना चाहिए.`,
+
+        fertilizer:
+        `🌿 <strong>खाद के सुझाव</strong><br><br>
+        पौधे के बढ़ने के समय संतुलित खाद का उपयोग करें।
+        <br><br>
+        बहुत अधिक खाद का उपयोग न करें,
+        इससे जड़ों को नुकसान हो सकता है.`,
+
+        yellow:
+        `🍃 <strong>पीली पत्तियाँ</strong><br><br>
+        सामान्य कारण:
+        <br><br>
+        • अधिक पानी<br>
+        • खराब drainage<br>
+        • कम रोशनी<br>
+        • पोषक तत्वों की कमी<br>
+        • प्राकृतिक उम्र
+        <br><br>
+        सबसे पहले मिट्टी की नमी और drainage देखें.`,
+
+        rootRot:
+        `🦠 <strong>Root Rot</strong><br><br>
+        जड़ों के आसपास अधिक नमी के कारण Root Rot हो सकता है।
+        <br><br>
+        लक्षण:
+        <br>
+        • पीली पत्तियाँ<br>
+        • नरम जड़ें<br>
+        • खराब गंध<br>
+        • पौधे का मुरझाना
+        <br><br>
+        drainage सुधारें और पानी कम दें.`,
+
+        indoor:
+        `🏠 <strong>अच्छे Indoor Plants</strong><br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Peace Lily<br>
+        • ZZ Plant<br>
+        • Spider Plant<br>
+        • Monstera
+        <br><br>
+        इनमें से अधिकतर को bright indirect light पसंद है.`,
+
+        outdoor:
+        `🌳 <strong>Outdoor Plants</strong><br><br>
+        • Rose<br>
+        • Hibiscus<br>
+        • Marigold<br>
+        • Jasmine<br>
+        • Bougainvillea<br>
+        • Tulsi
+        <br><br>
+        अधिकतर outdoor flowering plants को अच्छी धूप चाहिए.`,
+
+        beginner:
+        `🌱 <strong>शुरुआती लोगों के लिए अच्छे पौधे</strong><br><br>
+        मैं सुझाव देता हूँ:
+        <br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Aloe Vera<br>
+        • Spider Plant<br>
+        • ZZ Plant
+        <br><br>
+        इन पौधों की देखभाल अपेक्षाकृत आसान है.`,
+
+        flowering:
+        `🌸 <strong>फूलों वाले पौधे</strong><br><br>
+        • Rose<br>
+        • Hibiscus<br>
+        • Jasmine<br>
+        • Marigold<br>
+        • Tulip<br>
+        • Lavender`,
+
+        lowMaintenance:
+        `🌱 <strong>कम देखभाल वाले पौधे</strong><br><br>
+        • Snake Plant<br>
+        • Money Plant<br>
+        • Aloe Vera<br>
+        • ZZ Plant<br>
+        • Spider Plant`,
+
+        diseases:
+        `🦠 <strong>सामान्य पौधों की बीमारियाँ</strong><br><br>
+        • Root Rot<br>
+        • Powdery Mildew<br>
+        • Leaf Spot<br>
+        • Rust
+        <br><br>
+        अच्छी हवा और सही पानी देने से
+        कई बीमारियों को रोका जा सकता है.`,
+
+        pests:
+        `🐛 <strong>पौधों के कीट नियंत्रण</strong><br><br>
+        सामान्य कीटों में Aphids,
+        Mealybugs और Spider Mites शामिल हैं।
+        <br><br>
+        • प्रभावित पौधे को अलग रखें<br>
+        • पत्तियों को धीरे से धोएँ<br>
+        • दिखाई देने वाले कीट हटाएँ<br>
+        • उचित organic pest control का उपयोग करें`,
+
+        shopping:
+        `🛒 हमारी plant categories देखें
+        और अपने पसंदीदा पौधों को Cart में जोड़ें।
+        <br><br>
+        Shopping शुरू करने के लिए Home page पर जाएँ. 🌱`,
+
+        default:
+        `🌱 मैं पौधों की देखभाल में आपकी मदद करने के लिए यहाँ हूँ!
+        <br><br>
+        आप इन विषयों के बारे में पूछ सकते हैं:
+        <br><br>
+        • पानी 💧<br>
+        • सूरज की रोशनी ☀️<br>
+        • मिट्टी 🌱<br>
+        • खाद 🌿<br>
+        • पौधों की बीमारियाँ 🦠<br>
+        • Indoor Plants 🏠<br>
+        • Outdoor Plants 🌳<br>
+        • Flowering Plants 🌸
+        <br><br>
+        किसी पौधे का नाम बताइए,
+        मैं उसकी देखभाल के बारे में बताऊँगा.`
+
+    }
+
+};
+
+
+// ======================================
+// GET LANGUAGE
+// ======================================
+
+function getLanguage() {
+
+    return localStorage.getItem("selectedLanguage") || "en";
+
+}
+
+
+// ======================================
+// CHANGE LANGUAGE
+// ======================================
+
+function changeLanguage(language) {
+
+    localStorage.setItem(
+        "selectedLanguage",
+        language
+    );
+
+    applyAILanguage(language);
+
+}
+
+
+// ======================================
+// APPLY LANGUAGE
+// ======================================
+
+function applyAILanguage(language) {
+
+    const t =
+        aiLanguages[language] ||
+        aiLanguages.en;
+
+
+    document.documentElement.lang =
+        language;
+
+
+    document
+        .getElementById("languageSelect")
+        .value = language;
+
+
+    document
+        .querySelectorAll("[data-ai-lang]")
+        .forEach(element => {
+
+            const key =
+                element.getAttribute("data-ai-lang");
+
+            if (t[key]) {
+                element.innerHTML =
+                    t[key];
+            }
+
+        });
+
+
+    document
+        .getElementById("userInput")
+        .placeholder =
+        language === "te"
+        ? "మొక్కల గురించి అడగండి..."
+        : language === "hi"
+        ? "पौधों के बारे में पूछें..."
+        : "Ask about plants...";
+
+
+    document.title =
+        language === "te"
+        ? "AI మొక్కల సహాయకుడు - GreenLeaf Nursery"
+        : language === "hi"
+        ? "AI पौधा सहायक - GreenLeaf Nursery"
+        : "AI Plant Assistant - GreenLeaf Nursery";
+
+
+    updateChatLanguage(language);
+
+}
+
+
+// ======================================
+// UPDATE INITIAL CHAT
+// ======================================
+
+function updateChatLanguage(language) {
+
+    const t =
+        aiLanguages[language] ||
+        aiLanguages.en;
+
+    const chatBox =
+        document.getElementById("chatBox");
+
+    /*
+       Only update the initial message
+       if there are no user messages.
+    */
+
+    const userMessages =
+        chatBox.querySelectorAll(".user-message");
+
+    if (userMessages.length === 0) {
+
+        chatBox.innerHTML = `
+
+            <div class="message ai-message">
+
+                🤖 <strong>${t.ai}</strong><br><br>
+
+                ${t.welcome}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ======================================
+// SEND MESSAGE
+// ======================================
+
+function sendMessage() {
+
+    let input =
+        document.getElementById("userInput");
+
+    let question =
+        input.value.trim();
+
+    if (question === "") {
+        return;
+    }
+
+    askQuestion(question);
+
+    input.value = "";
+
+}
+
+
+// ======================================
+// ENTER KEY
+// ======================================
+
+function handleEnter(event) {
+
+    if (event.key === "Enter") {
+
+        sendMessage();
+
+    }
+
+}
+
+
+// ======================================
+// ASK QUESTION
+// ======================================
+
+function askQuestion(question) {
+
+    let chatBox =
+        document.getElementById("chatBox");
+
+
+    const language =
+        getLanguage();
+
+    const t =
+        aiLanguages[language] ||
+        aiLanguages.en;
+
+
+    // USER MESSAGE
+
+    let userMessage =
+        document.createElement("div");
+
+    userMessage.className =
+        "message user-message";
+
+    userMessage.innerHTML =
+        "👤 <strong>" +
+        t.you +
+        "</strong><br>" +
+        question;
+
+    chatBox.appendChild(userMessage);
+
+
+    // AI RESPONSE
+
+    let response =
+        getAIResponse(question);
+
+
+    let aiMessage =
+        document.createElement("div");
+
+    aiMessage.className =
+        "message ai-message";
+
+    aiMessage.innerHTML =
+        "🤖 <strong>" +
+        t.ai +
+        "</strong><br><br>" +
+        response;
+
+    chatBox.appendChild(aiMessage);
+
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+
+}
+
+
+// ======================================
+// AI RESPONSE
+// ======================================
+
+function getAIResponse(question) {
+
+    let q =
+        question.toLowerCase();
+
+    const language =
+        getLanguage();
+
+    const t =
+        aiLanguages[language] ||
+        aiLanguages.en;
+
+
+    // GREETING
+
+    if (
+        q.includes("hello") ||
+        q.includes("hi") ||
+        q.includes("hey") ||
+        q.includes("హలో") ||
+        q.includes("నమస్తే") ||
+        q.includes("नमस्ते")
+    ) {
+
+        return t.hello;
+
+    }
+
+
+    // THANK YOU
+
+    if (
+        q.includes("thank") ||
+        q.includes("thanks") ||
+        q.includes("ధన్యవాద") ||
+        q.includes("धन्यवाद")
+    ) {
+
+        return t.thanks;
+
+    }
+
+
+    // WATERING
+
+    if (
+        q.includes("water") ||
+        q.includes("watering") ||
+        q.includes("నీరు") ||
+        q.includes("पानी")
+    ) {
+
+        return t.watering;
+
+    }
+
+
+    // SUNLIGHT
+
+    if (
+        q.includes("sunlight") ||
+        q.includes("light") ||
+        q.includes("సూర్యకాంతి") ||
+        q.includes("रोशनी")
+    ) {
+
+        return t.sunlight;
+
+    }
+
+
+    // SOIL
+
+    if (
+        q.includes("soil") ||
+        q.includes("మట్టి") ||
+        q.includes("मिट्टी")
+    ) {
+
+        return t.soil;
+
+    }
+
+
+    // FERTILIZER
+
+    if (
+        q.includes("fertilizer") ||
+        q.includes("fertiliser") ||
+        q.includes("ఎరువు") ||
+        q.includes("खाद")
+    ) {
+
+        return t.fertilizer;
+
+    }
+
+
+    // YELLOW LEAVES
+
+    if (
+        q.includes("yellow") ||
+        q.includes("yellow leaves") ||
+        q.includes("పసుపు") ||
+        q.includes("पीली")
+    ) {
+
+        return t.yellow;
+
+    }
+
+
+    // ROOT ROT
+
+    if (
+        q.includes("root rot") ||
+        q.includes("వేరు కుళ్ళు") ||
+        q.includes("जड़ सड़न")
+    ) {
+
+        return t.rootRot;
+
+    }
+
+
+    // INDOOR
+
+    if (
+        q.includes("indoor") ||
+        q.includes("ఇండోర్") ||
+        q.includes("इनडोर")
+    ) {
+
+        return t.indoor;
+
+    }
+
+
+    // OUTDOOR
+
+    if (
+        q.includes("outdoor") ||
+        q.includes("అవుట్‌డోర్") ||
+        q.includes("आउटडोर")
+    ) {
+
+        return t.outdoor;
+
+    }
+
+
+    // BEGINNER
+
+    if (
+        q.includes("beginner") ||
+        q.includes("new gardener") ||
+        q.includes("ప్రారంభక") ||
+        q.includes("शुरुआती")
+    ) {
+
+        return t.beginner;
+
+    }
+
+
+    // FLOWERING
+
+    if (
+        q.includes("flowering") ||
+        q.includes("flowers") ||
+        q.includes("పూల") ||
+        q.includes("फूल")
+    ) {
+
+        return t.flowering;
+
+    }
+
+
+    // LOW MAINTENANCE
+
+    if (
+        q.includes("low maintenance") ||
+        q.includes("easy care") ||
+        q.includes("తక్కువ సంరక్షణ") ||
+        q.includes("कम देखभाल")
+    ) {
+
+        return t.lowMaintenance;
+
+    }
+
+
+    // DISEASES
+
+    if (
+        q.includes("disease") ||
+        q.includes("diseases") ||
+        q.includes("వ్యాధి") ||
+        q.includes("बीमारी")
+    ) {
+
+        return t.diseases;
+
+    }
+
+
+    // PESTS
+
+    if (
+        q.includes("pest") ||
+        q.includes("insect") ||
+        q.includes("bugs") ||
+        q.includes("పురుగు") ||
+        q.includes("कीट")
+    ) {
+
+        return t.pests;
+
+    }
+
+
+    // SHOPPING
+
+    if (
+        q.includes("buy") ||
+        q.includes("shop") ||
+        q.includes("purchase") ||
+        q.includes("కొన") ||
+        q.includes("खरीद")
+    ) {
+
+        return t.shopping;
+
+    }
+
+
+    // SPECIFIC PLANTS
+
+    if (q.includes("money plant") ||
+        q.includes("pothos")) {
+
+        return plantResponse(
+            "Money Plant",
+            language
+        );
+
+    }
+
+
+    if (q.includes("snake plant")) {
+
+        return plantResponse(
+            "Snake Plant",
+            language
+        );
+
+    }
+
+
+    if (q.includes("peace lily")) {
+
+        return plantResponse(
+            "Peace Lily",
+            language
+        );
+
+    }
+
+
+    if (
+        q.includes("aloe vera") ||
+        q.includes("aloe")
+    ) {
+
+        return plantResponse(
+            "Aloe Vera",
+            language
+        );
+
+    }
+
+
+    if (q.includes("monstera")) {
+
+        return plantResponse(
+            "Monstera",
+            language
+        );
+
+    }
+
+
+    if (q.includes("hibiscus")) {
+
+        return plantResponse(
+            "Hibiscus",
+            language
+        );
+
+    }
+
+
+    if (q.includes("rose")) {
+
+        return plantResponse(
+            "Rose",
+            language
+        );
+
+    }
+
+
+    if (q.includes("marigold")) {
+
+        return plantResponse(
+            "Marigold",
+            language
+        );
+
+    }
+
+
+    if (q.includes("jasmine")) {
+
+        return plantResponse(
+            "Jasmine",
+            language
+        );
+
+    }
+
+
+    if (q.includes("lavender")) {
+
+        return plantResponse(
+            "Lavender",
+            language
+        );
+
+    }
+
+
+    // DEFAULT
+
+    return t.default;
+
+}
+
+
+// ======================================
+// SPECIFIC PLANT RESPONSE
+// ======================================
+
+function plantResponse(plant, language) {
+
+
+    const responses = {
+
+        en: {
+
+            "Money Plant":
+            `🌿 <strong>Money Plant Care</strong><br><br>
+            • Light: Bright indirect sunlight<br>
+            • Water: When top soil becomes dry<br>
+            • Soil: Well-draining soil<br>
+            • Fertilizer: Once every 1–2 months<br><br>
+            It is a great indoor plant for beginners.`,
+
+            "Snake Plant":
+            `🌱 <strong>Snake Plant Care</strong><br><br>
+            • Light: Low to bright indirect light<br>
+            • Water: Every 2–3 weeks<br>
+            • Avoid overwatering<br>
+            • Soil: Well-draining soil<br><br>
+            Snake plants are very low-maintenance.`,
+
+            "Peace Lily":
+            `🌸 <strong>Peace Lily Care</strong><br><br>
+            • Light: Bright indirect light<br>
+            • Water: Keep soil slightly moist<br>
+            • Humidity: Medium to high<br>
+            • Avoid direct harsh sunlight`,
+
+            "Aloe Vera":
+            `🌿 <strong>Aloe Vera Care</strong><br><br>
+            • Light: Bright sunlight<br>
+            • Water: Every 2–3 weeks<br>
+            • Soil: Sandy, well-draining soil<br>
+            • Avoid excess water<br><br>
+            Aloe Vera is an easy-care plant.`,
+
+            "Monstera":
+            `🌿 <strong>Monstera Care</strong><br><br>
+            • Light: Bright indirect light<br>
+            • Water: When top soil dries<br>
+            • Humidity: Moderate to high<br>
+            • Provide support for climbing`,
+
+            "Hibiscus":
+            `🌺 <strong>Hibiscus Care</strong><br><br>
+            • Light: 5–6 hours sunlight<br>
+            • Water: Regularly when soil dries<br>
+            • Fertilizer: Every 2–4 weeks<br>
+            • Prune after flowering`,
+
+            "Rose":
+            `🌹 <strong>Rose Plant Care</strong><br><br>
+            • Light: 5–6 hours sunlight<br>
+            • Water: Deep watering when soil dries<br>
+            • Fertilizer: Every 2–4 weeks<br>
+            • Remove dead flowers regularly`,
+
+            "Marigold":
+            `🌼 <strong>Marigold Care</strong><br><br>
+            • Light: Full sunlight<br>
+            • Water: Moderate watering<br>
+            • Soil: Well-draining soil<br>
+            • Remove faded flowers`,
+
+            "Jasmine":
+            `🌼 <strong>Jasmine Care</strong><br><br>
+            • Light: Bright sunlight<br>
+            • Water: Moderate<br>
+            • Soil: Well-draining soil<br>
+            • Pruning helps new growth`,
+
+            "Lavender":
+            `💜 <strong>Lavender Care</strong><br><br>
+            • Light: Full sunlight<br>
+            • Water: Low to moderate<br>
+            • Soil: Well-draining soil<br>
+            • Avoid waterlogging`
+
+        },
+
+
+        te: {
+
+            "Money Plant":
+            `🌿 <strong>Money Plant సంరక్షణ</strong><br><br>
+            • కాంతి: ప్రకాశవంతమైన పరోక్ష సూర్యకాంతి<br>
+            • నీరు: మట్టి పై పొర ఎండినప్పుడు<br>
+            • మట్టి: మంచి డ్రైనేజ్ ఉన్న మట్టి<br>
+            • ఎరువు: ప్రతి 1–2 నెలలకు ఒకసారి<br><br>
+            ప్రారంభకులకు ఇది మంచి Indoor Plant.`,
+
+            "Snake Plant":
+            `🌱 <strong>Snake Plant సంరక్షణ</strong><br><br>
+            • కాంతి: తక్కువ నుండి ప్రకాశవంతమైన పరోక్ష కాంతి<br>
+            • నీరు: ప్రతి 2–3 వారాలకు<br>
+            • ఎక్కువ నీరు పోయకండి<br>
+            • మట్టి: మంచి డ్రైనేజ్ ఉన్న మట్టి<br><br>
+            Snake Plant చాలా తక్కువ సంరక్షణతో పెరుగుతుంది.`,
+
+            "Peace Lily":
+            `🌸 <strong>Peace Lily సంరక్షణ</strong><br><br>
+            • కాంతి: ప్రకాశవంతమైన పరోక్ష కాంతి<br>
+            • నీరు: మట్టి కొద్దిగా తేమగా ఉండాలి<br>
+            • తేమ: మధ్యస్థం నుండి ఎక్కువ<br>
+            • తీవ్రమైన ప్రత్యక్ష సూర్యకాంతిని నివారించండి.`,
+
+            "Aloe Vera":
+            `🌿 <strong>Aloe Vera సంరక్షణ</strong><br><br>
+            • కాంతి: ప్రకాశవంతమైన సూర్యకాంతి<br>
+            • నీరు: ప్రతి 2–3 వారాలకు<br>
+            • మట్టి: ఇసుకతో కూడిన డ్రైనేజ్ మట్టి<br>
+            • ఎక్కువ నీటిని నివారించండి<br><br>
+            Aloe Vera సులభంగా సంరక్షించగల మొక్క.`,
+
+            "Monstera":
+            `🌿 <strong>Monstera సంరక్షణ</strong><br><br>
+            • కాంతి: ప్రకాశవంతమైన పరోక్ష కాంతి<br>
+            • నీరు: మట్టి పై పొర ఎండినప్పుడు<br>
+            • తేమ: మధ్యస్థం నుండి ఎక్కువ<br>
+            • ఎక్కడానికి support ఇవ్వండి.`,
+
+            "Hibiscus":
+            `🌺 <strong>Hibiscus సంరక్షణ</strong><br><br>
+            • కాంతి: 5–6 గంటల సూర్యకాంతి<br>
+            • నీరు: మట్టి ఎండినప్పుడు<br>
+            • ఎరువు: ప్రతి 2–4 వారాలకు<br>
+            • పూలు పూసిన తర్వాత pruning చేయండి.`,
+
+            "Rose":
+            `🌹 <strong>Rose Plant సంరక్షణ</strong><br><br>
+            • కాంతి: 5–6 గంటల సూర్యకాంతి<br>
+            • నీరు: మట్టి ఎండినప్పుడు బాగా నీరు పోయాలి<br>
+            • ఎరువు: ప్రతి 2–4 వారాలకు<br>
+            • ఎండిపోయిన పూలను తొలగించండి.`,
+
+            "Marigold":
+            `🌼 <strong>Marigold సంరక్షణ</strong><br><br>
+            • కాంతి: పూర్తి సూర్యకాంతి<br>
+            • నీరు: మితంగా<br>
+            • మట్టి: మంచి డ్రైనేజ్ ఉన్న మట్టి<br>
+            • వాడిపోయిన పూలను తొలగించండి.`,
+
+            "Jasmine":
+            `🌼 <strong>Jasmine సంరక్షణ</strong><br><br>
+            • కాంతి: ప్రకాశవంతమైన సూర్యకాంతి<br>
+            • నీరు: మితంగా<br>
+            • మట్టి: మంచి డ్రైనేజ్ ఉన్న మట్టి<br>
+            • Pruning కొత్త పెరుగుదలకు సహాయపడుతుంది.`,
+
+            "Lavender":
+            `💜 <strong>Lavender సంరక్షణ</strong><br><br>
+            • కాంతి: పూర్తి సూర్యకాంతి<br>
+            • నీరు: తక్కువ నుండి మితంగా<br>
+            • మట్టి: మంచి డ్రైనేజ్ ఉన్న మట్టి<br>
+            • నీరు నిల్వ ఉండకుండా చూడండి.`
+
+        },
+
+
+        hi: {
+
+            "Money Plant":
+            `🌿 <strong>Money Plant की देखभाल</strong><br><br>
+            • रोशनी: तेज indirect sunlight<br>
+            • पानी: मिट्टी की ऊपरी परत सूखने पर<br>
+            • मिट्टी: अच्छी drainage वाली मिट्टी<br>
+            • खाद: हर 1–2 महीने में<br><br>
+            यह शुरुआती लोगों के लिए अच्छा Indoor Plant है.`,
+
+            "Snake Plant":
+            `🌱 <strong>Snake Plant की देखभाल</strong><br><br>
+            • रोशनी: कम से तेज indirect light<br>
+            • पानी: हर 2–3 सप्ताह<br>
+            • अधिक पानी न दें<br>
+            • मिट्टी: अच्छी drainage वाली मिट्टी<br><br>
+            Snake Plant की देखभाल बहुत आसान है.`,
+
+            "Peace Lily":
+            `🌸 <strong>Peace Lily की देखभाल</strong><br><br>
+            • रोशनी: तेज indirect light<br>
+            • पानी: मिट्टी थोड़ी नम रखें<br>
+            • नमी: मध्यम से अधिक<br>
+            • तेज direct sunlight से बचाएँ.`,
+
+            "Aloe Vera":
+            `🌿 <strong>Aloe Vera की देखभाल</strong><br><br>
+            • रोशनी: तेज sunlight<br>
+            • पानी: हर 2–3 सप्ताह<br>
+            • मिट्टी: sandy और अच्छी drainage वाली<br>
+            • अधिक पानी से बचें<br><br>
+            Aloe Vera की देखभाल आसान है.`,
+
+            "Monstera":
+            `🌿 <strong>Monstera की देखभाल</strong><br><br>
+            • रोशनी: तेज indirect light<br>
+            • पानी: मिट्टी की ऊपरी परत सूखने पर<br>
+            • नमी: मध्यम से अधिक<br>
+            • चढ़ने के लिए support दें.`,
+
+            "Hibiscus":
+            `🌺 <strong>Hibiscus की देखभाल</strong><br><br>
+            • रोशनी: 5–6 घंटे sunlight<br>
+            • पानी: मिट्टी सूखने पर<br>
+            • खाद: हर 2–4 सप्ताह<br>
+            • फूल आने के बाद pruning करें.`,
+
+            "Rose":
+            `🌹 <strong>Rose Plant की देखभाल</strong><br><br>
+            • रोशनी: 5–6 घंटे sunlight<br>
+            • पानी: मिट्टी सूखने पर अच्छी तरह पानी दें<br>
+            • खाद: हर 2–4 सप्ताह<br>
+            • सूखे फूलों को हटाएँ.`,
+
+            "Marigold":
+            `🌼 <strong>Marigold की देखभाल</strong><br><br>
+            • रोशनी: पूरी sunlight<br>
+            • पानी: मध्यम मात्रा में<br>
+            • मिट्टी: अच्छी drainage वाली<br>
+            • सूखे फूलों को हटाएँ.`,
+
+            "Jasmine":
+            `🌼 <strong>Jasmine की देखभाल</strong><br><br>
+            • रोशनी: तेज sunlight<br>
+            • पानी: मध्यम<br>
+            • मिट्टी: अच्छी drainage वाली<br>
+            • Pruning नई growth में मदद करती है.`,
+
+            "Lavender":
+            `💜 <strong>Lavender की देखभाल</strong><br><br>
+            • रोशनी: पूरी sunlight<br>
+            • पानी: कम से मध्यम<br>
+            • मिट्टी: अच्छी drainage वाली<br>
+            • पानी जमा न होने दें.`
+
+        }
+
+    };
+
+
+    return responses[language][plant]
+        || responses.en[plant];
+
+}
+
+
+// ======================================
+// CLEAR CHAT
+// ======================================
+
+function clearChat() {
+
+    const language =
+        getLanguage();
+
+    updateChatLanguage(language);
+
+}
+
+
+// ======================================
+// PAGE LOAD
+// ======================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const language =
+            localStorage.getItem("selectedLanguage")
+            || "en";
+
+        document
+            .getElementById("languageSelect")
+            .value = language;
+
+        applyAILanguage(language);
+
+    }
+);
+
+</script>
+
+
+<!--
+    Existing common language file.
+    This keeps the navbar language
+    consistent with the complete project.
+-->
+
+<script src="language.js"></script>
+
+
+</body>
+
+</html>

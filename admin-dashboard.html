@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - GreenLeaf Nursery</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f8f4;
+            color: #333;
+        }
+
+        header {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h2 {
+            margin: 0;
+            color: #2e7d32;
+            font-size: 32px;
+        }
+
+        .stat-card p {
+            margin: 10px 0 0;
+            font-size: 17px;
+        }
+
+        .section-title {
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
+
+        #plantList {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .plant-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .plant-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .plant-info {
+            padding: 18px;
+        }
+
+        .plant-info h3 {
+            color: #1b5e20;
+            margin-top: 0;
+        }
+
+        .plant-info p {
+            margin: 8px 0;
+        }
+
+        .delete-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #d32f2f;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .delete-btn:hover {
+            background: #b71c1c;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .actions a,
+        .actions button {
+            text-decoration: none;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+            color: white;
+            background: #2e7d32;
+        }
+
+        .actions a:hover,
+        .actions button:hover {
+            background: #1b5e20;
+        }
+
+        .clear-btn {
+            background: #c62828 !important;
+        }
+
+        .clear-btn:hover {
+            background: #b71c1c !important;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <h1>🌿 GreenLeaf Nursery</h1>
+
+    <p id="adminDashboardTitle">
+        Admin Dashboard
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- ========================= -->
+    <!-- STATISTICS -->
+    <!-- ========================= -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h2 id="totalPlants">0</h2>
+
+            <p id="totalPlantsText">
+                🌱 Total Plants
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2 id="indoorPlants">0</h2>
+
+            <p id="indoorPlantsText">
+                🏠 Indoor Plants
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2 id="outdoorPlants">0</h2>
+
+            <p id="outdoorPlantsText">
+                🌳 Outdoor Plants
+            </p>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- TOTAL ORDERS -->
+        <!-- ========================= -->
+
+        <div class="stat-card">
+
+            <h2 id="totalOrders">0</h2>
+
+            <p id="totalOrdersText">
+                📦 Total Orders
+            </p>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- ORDERED ORDERS -->
+        <!-- ========================= -->
+
+        <div class="stat-card">
+
+            <h2 id="orderedOrders">0</h2>
+
+            <p id="orderedOrdersText">
+                ✅ Ordered Orders
+            </p>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- CANCELLED ORDERS -->
+        <!-- ========================= -->
+
+        <div class="stat-card">
+
+            <h2 id="cancelledOrders">0</h2>
+
+            <p id="cancelledOrdersText">
+                ❌ Cancelled Orders
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- ACTION BUTTONS -->
+    <!-- ========================= -->
+
+    <div class="actions">
+
+        <a href="admin.html"
+           id="addNewPlantButton">
+
+            ➕ Add New Plant
+
+        </a>
+
+        <a href="admin-orders.html"
+           id="viewOrdersButton">
+
+            📦 View Orders
+
+        </a>
+
+        <a href="index.html"
+           id="backHomeButton">
+
+            🏠 Back to Home
+
+        </a>
+
+        <button
+            class="clear-btn"
+            onclick="clearAllPlants()"
+            id="deleteAllButton">
+
+            🗑️ Delete All Plants
+
+        </button>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PLANTS -->
+    <!-- ========================= -->
+
+    <h2 class="section-title"
+        id="managePlantsTitle">
+
+        🌱 Manage Plants
+
+    </h2>
+
+
+    <div id="plantList"></div>
+
+
+</div>
+
+
+<script>
+
+
+// =================================
+// ADMIN DASHBOARD TRANSLATIONS
+// =================================
+
+const dashboardTranslations = {
+
+    en: {
+
+        title:
+            "Admin Dashboard",
+
+        totalPlants:
+            "🌱 Total Plants",
+
+        indoorPlants:
+            "🏠 Indoor Plants",
+
+        outdoorPlants:
+            "🌳 Outdoor Plants",
+
+        totalOrders:
+            "📦 Total Orders",
+
+        orderedOrders:
+            "✅ Ordered Orders",
+
+        cancelledOrders:
+            "❌ Cancelled Orders",
+
+        addNewPlant:
+            "➕ Add New Plant",
+
+        viewOrders:
+            "📦 View Orders",
+
+        backHome:
+            "🏠 Back to Home",
+
+        deleteAll:
+            "🗑️ Delete All Plants",
+
+        managePlants:
+            "🌱 Manage Plants",
+
+        noPlants:
+            "🌱 No Plants Added",
+
+        noPlantsDescription:
+            "Add a new plant from the Admin Panel.",
+
+        category:
+            "Category:",
+
+        price:
+            "Price:",
+
+        sunlight:
+            "Sunlight:",
+
+        watering:
+            "Watering:",
+
+        diseases:
+            "Diseases:",
+
+        description:
+            "Description:",
+
+        deletePlant:
+            "🗑️ Delete Plant"
+
+    },
+
+
+    te: {
+
+        title:
+            "అడ్మిన్ డ్యాష్‌బోర్డ్",
+
+        totalPlants:
+            "🌱 మొత్తం మొక్కలు",
+
+        indoorPlants:
+            "🏠 ఇండోర్ మొక్కలు",
+
+        outdoorPlants:
+            "🌳 అవుట్‌డోర్ మొక్కలు",
+
+        totalOrders:
+            "📦 మొత్తం ఆర్డర్లు",
+
+        orderedOrders:
+            "✅ ఆర్డర్ చేసినవి",
+
+        cancelledOrders:
+            "❌ రద్దు చేసిన ఆర్డర్లు",
+
+        addNewPlant:
+            "➕ కొత్త మొక్కను జోడించండి",
+
+        viewOrders:
+            "📦 ఆర్డర్లను చూడండి",
+
+        backHome:
+            "🏠 హోమ్‌కు తిరిగి వెళ్ళండి",
+
+        deleteAll:
+            "🗑️ అన్ని మొక్కలను తొలగించండి",
+
+        managePlants:
+            "🌱 మొక్కలను నిర్వహించండి",
+
+        noPlants:
+            "🌱 మొక్కలు ఏవీ జోడించబడలేదు",
+
+        noPlantsDescription:
+            "అడ్మిన్ ప్యానెల్ నుండి కొత్త మొక్కను జోడించండి.",
+
+        category:
+            "వర్గం:",
+
+        price:
+            "ధర:",
+
+        sunlight:
+            "సూర్యకాంతి:",
+
+        watering:
+            "నీరు పెట్టడం:",
+
+        diseases:
+            "వ్యాధులు:",
+
+        description:
+            "వివరణ:",
+
+        deletePlant:
+            "🗑️ మొక్కను తొలగించండి"
+
+    },
+
+
+    hi: {
+
+        title:
+            "एडमिन डैशबोर्ड",
+
+        totalPlants:
+            "🌱 कुल पौधे",
+
+        indoorPlants:
+            "🏠 इनडोर पौधे",
+
+        outdoorPlants:
+            "🌳 आउटडोर पौधे",
+
+        totalOrders:
+            "📦 कुल ऑर्डर",
+
+        orderedOrders:
+            "✅ ऑर्डर किए गए",
+
+        cancelledOrders:
+            "❌ रद्द किए गए ऑर्डर",
+
+        addNewPlant:
+            "➕ नया पौधा जोड़ें",
+
+        viewOrders:
+            "📦 ऑर्डर देखें",
+
+        backHome:
+            "🏠 होम पर वापस जाएँ",
+
+        deleteAll:
+            "🗑️ सभी पौधे हटाएँ",
+
+        managePlants:
+            "🌱 पौधों को प्रबंधित करें",
+
+        noPlants:
+            "🌱 कोई पौधा नहीं जोड़ा गया",
+
+        noPlantsDescription:
+            "एडमिन पैनल से नया पौधा जोड़ें।",
+
+        category:
+            "श्रेणी:",
+
+        price:
+            "कीमत:",
+
+        sunlight:
+            "सूरज की रोशनी:",
+
+        watering:
+            "पानी देना:",
+
+        diseases:
+            "बीमारियाँ:",
+
+        description:
+            "विवरण:",
+
+        deletePlant:
+            "🗑️ पौधा हटाएँ"
+
+    }
+
+};
+
+
+// =================================
+// GET CURRENT LANGUAGE
+// =================================
+
+function getDashboardLanguage() {
+
+    return localStorage.getItem(
+        "selectedLanguage"
+    ) || "en";
+
+}
+
+
+// =================================
+// APPLY DASHBOARD LANGUAGE
+// =================================
+
+function applyDashboardLanguage() {
+
+    const language =
+        getDashboardLanguage();
+
+    const t =
+        dashboardTranslations[language]
+        || dashboardTranslations.en;
+
+
+    document.getElementById(
+        "adminDashboardTitle"
+    ).textContent = t.title;
+
+
+    document.getElementById(
+        "totalPlantsText"
+    ).textContent = t.totalPlants;
+
+
+    document.getElementById(
+        "indoorPlantsText"
+    ).textContent = t.indoorPlants;
+
+
+    document.getElementById(
+        "outdoorPlantsText"
+    ).textContent = t.outdoorPlants;
+
+
+    document.getElementById(
+        "totalOrdersText"
+    ).textContent = t.totalOrders;
+
+
+    document.getElementById(
+        "orderedOrdersText"
+    ).textContent = t.orderedOrders;
+
+
+    document.getElementById(
+        "cancelledOrdersText"
+    ).textContent = t.cancelledOrders;
+
+
+    document.getElementById(
+        "addNewPlantButton"
+    ).textContent = t.addNewPlant;
+
+
+    document.getElementById(
+        "viewOrdersButton"
+    ).textContent = t.viewOrders;
+
+
+    document.getElementById(
+        "backHomeButton"
+    ).textContent = t.backHome;
+
+
+    document.getElementById(
+        "deleteAllButton"
+    ).textContent = t.deleteAll;
+
+
+    document.getElementById(
+        "managePlantsTitle"
+    ).textContent = t.managePlants;
+
+
+    document.documentElement.lang =
+        language;
+
+
+    if (language === "te") {
+
+        document.title =
+            "అడ్మిన్ డ్యాష్‌బోర్డ్ - GreenLeaf Nursery";
+
+    }
+    else if (language === "hi") {
+
+        document.title =
+            "एडमिन डैशबोर्ड - GreenLeaf Nursery";
+
+    }
+    else {
+
+        document.title =
+            "Admin Dashboard - GreenLeaf Nursery";
+
+    }
+
+}
+
+
+// =================================
+// LOAD PLANTS
+// =================================
+
+function loadPlants() {
+
+    let plants =
+        JSON.parse(
+            localStorage.getItem("greenleafPlants")
+        ) || [];
+
+
+    // ===============================
+    // UPDATE TOTAL
+    // ===============================
+
+    document.getElementById("totalPlants").textContent =
+        plants.length;
+
+
+    // ===============================
+    // INDOOR COUNT
+    // ===============================
+
+    let indoorCount =
+        plants.filter(
+            plant =>
+            plant.category === "Indoor Plant"
+        ).length;
+
+
+    document.getElementById("indoorPlants").textContent =
+        indoorCount;
+
+
+    // ===============================
+    // OUTDOOR COUNT
+    // ===============================
+
+    let outdoorCount =
+        plants.filter(
+            plant =>
+            plant.category === "Outdoor Plant"
+        ).length;
+
+
+    document.getElementById("outdoorPlants").textContent =
+        outdoorCount;
+
+
+    // ===============================
+    // PLANT LIST
+    // ===============================
+
+    const plantList =
+        document.getElementById("plantList");
+
+
+    plantList.innerHTML = "";
+
+
+    const language =
+        getDashboardLanguage();
+
+    const t =
+        dashboardTranslations[language]
+        || dashboardTranslations.en;
+
+
+    // ===============================
+    // NO PLANTS
+    // ===============================
+
+    if (plants.length === 0) {
+
+        plantList.innerHTML = `
+            <div class="empty">
+
+                <h3>${t.noPlants}</h3>
+
+                <p>
+                    ${t.noPlantsDescription}
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // ===============================
+    // DISPLAY PLANTS
+    // ===============================
+
+    plants.forEach(function(plant) {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "plant-card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${plant.image}"
+                alt="${plant.name}"
+                onerror="this.src='https://via.placeholder.com/400x200?text=Plant+Image'"
+            >
+
+            <div class="plant-info">
+
+                <h3>
+                    🌿 ${plant.name}
+                </h3>
+
+                <p>
+                    <strong>${t.category}</strong>
+                    ${plant.category}
+                </p>
+
+                <p>
+                    <strong>${t.price}</strong>
+                    ₹${plant.price}
+                </p>
+
+                <p>
+                    <strong>${t.sunlight}</strong>
+                    ${plant.sunlight}
+                </p>
+
+                <p>
+                    <strong>${t.watering}</strong>
+                    ${plant.watering}
+                </p>
+
+                <p>
+                    <strong>${t.diseases}</strong>
+                    ${plant.diseases}
+                </p>
+
+                <p>
+                    <strong>${t.description}</strong>
+                    ${plant.description}
+                </p>
+
+                <button
+                    class="delete-btn"
+                    onclick="deletePlant(${plant.id})">
+
+                    ${t.deletePlant}
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        plantList.appendChild(card);
+
+    });
+
+}
+
+
+// =================================
+// LOAD ORDER STATISTICS
+// =================================
+
+function loadOrderStats() {
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem("orders")
+        ) || [];
+
+
+    // ===============================
+    // TOTAL ORDERS
+    // ===============================
+
+    document.getElementById("totalOrders").textContent =
+        orders.length;
+
+
+    // ===============================
+    // ORDERED ORDERS
+    // ===============================
+
+    let orderedCount =
+        orders.filter(function(order) {
+
+            return (order.status || "Ordered")
+                .toLowerCase() !== "cancelled";
+
+        }).length;
+
+
+    document.getElementById("orderedOrders").textContent =
+        orderedCount;
+
+
+    // ===============================
+    // CANCELLED ORDERS
+    // ===============================
+
+    let cancelledCount =
+        orders.filter(function(order) {
+
+            return (order.status || "Ordered")
+                .toLowerCase() === "cancelled";
+
+        }).length;
+
+
+    document.getElementById("cancelledOrders").textContent =
+        cancelledCount;
+
+}
+
+
+// =================================
+// DELETE SINGLE PLANT
+// =================================
+// Direct delete - NO confirmation popup
+// =================================
+
+function deletePlant(id) {
+
+    let plants =
+        JSON.parse(
+            localStorage.getItem("greenleafPlants")
+        ) || [];
+
+
+    plants =
+        plants.filter(
+            plant => plant.id !== id
+        );
+
+
+    localStorage.setItem(
+        "greenleafPlants",
+        JSON.stringify(plants)
+    );
+
+
+    // Refresh dashboard
+    loadPlants();
+
+}
+
+
+// =================================
+// DELETE ALL PLANTS
+// =================================
+
+function clearAllPlants() {
+
+    localStorage.removeItem(
+        "greenleafPlants"
+    );
+
+
+    // Refresh dashboard
+    loadPlants();
+
+}
+
+
+// =================================
+// PAGE LOAD
+// =================================
+
+applyDashboardLanguage();
+
+loadPlants();
+
+loadOrderStats();
+
+
+</script>
+
+
+</body>
+
+</html>

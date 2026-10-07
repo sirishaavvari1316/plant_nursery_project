@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Plant Diseases - GreenLeaf Nursery</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .disease-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 7%;
+        }
+
+        .disease-card {
+            width: 280px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .disease-card h3 {
+            color: #176b2c;
+            font-size: 22px;
+        }
+
+        .disease-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .disease-card .icon {
+            font-size: 55px;
+        }
+
+        /* Back Button */
+
+        .back-btn {
+            display: block;
+            width: max-content;
+            margin: 10px auto 25px;
+            padding: 10px 20px;
+            background: #176b2c;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #0e4d1e;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🌿 GreenLeaf Nursery
+    </div>
+
+    <nav>
+
+        <a href="index.html" data-lang="home">
+            Home
+        </a>
+
+        <a href="indoor.html" data-lang="indoor">
+            Indoor Plants
+        </a>
+
+        <a href="outdoor.html" data-lang="outdoor">
+            Outdoor Plants
+        </a>
+
+        <a href="countries.html" data-lang="countries">
+            Other Countries
+        </a>
+
+        <a href="diseases.html" data-lang="diseases">
+            Diseases
+        </a>
+
+        <a href="cart.html" data-lang="cart">
+            🛒 Cart
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<section class="plants">
+
+    <h2 data-disease-lang="diseaseTitle">
+        🦠 Common Plant Diseases
+    </h2>
+
+
+    <!-- BACK TO EXPLORE PLANTS -->
+
+    <a href="plants.html"
+       class="back-btn"
+       data-disease-lang="backExplore">
+
+        ← Back to Explore Plants
+
+    </a>
+
+
+    <div class="disease-container">
+
+
+        <!-- LEAF SPOT -->
+
+        <div class="disease-card">
+
+            <div class="icon">🍂</div>
+
+            <h3 data-disease-lang="leafSpot">
+                Leaf Spot
+            </h3>
+
+            <p data-disease-lang="leafSpotDescription">
+                Brown or black spots appear on plant leaves.
+            </p>
+
+            <p>
+                <b data-disease-lang="solution">
+                    Solution:
+                </b>
+
+                <span data-disease-lang="leafSpotSolution">
+                    Remove affected leaves and avoid excessive moisture.
+                </span>
+            </p>
+
+        </div>
+
+
+
+        <!-- POWDERY MILDEW -->
+
+        <div class="disease-card">
+
+            <div class="icon">🤍</div>
+
+            <h3 data-disease-lang="powderyMildew">
+                Powdery Mildew
+            </h3>
+
+            <p data-disease-lang="powderyMildewDescription">
+                White powder-like growth appears on leaves.
+            </p>
+
+            <p>
+                <b data-disease-lang="solution">
+                    Solution:
+                </b>
+
+                <span data-disease-lang="powderyMildewSolution">
+                    Improve air circulation and avoid watering the leaves.
+                </span>
+            </p>
+
+        </div>
+
+
+
+        <!-- ROOT ROT -->
+
+        <div class="disease-card">
+
+            <div class="icon">🌿</div>
+
+            <h3 data-disease-lang="rootRot">
+                Root Rot
+            </h3>
+
+            <p data-disease-lang="rootRotDescription">
+                Roots become dark and soft because of excess water.
+            </p>
+
+            <p>
+                <b data-disease-lang="solution">
+                    Solution:
+                </b>
+
+                <span data-disease-lang="rootRotSolution">
+                    Reduce watering and use well-draining soil.
+                </span>
+            </p>
+
+        </div>
+
+
+
+        <!-- RUST DISEASE -->
+
+        <div class="disease-card">
+
+            <div class="icon">🟠</div>
+
+            <h3 data-disease-lang="rustDisease">
+                Rust Disease
+            </h3>
+
+            <p data-disease-lang="rustDiseaseDescription">
+                Orange or reddish spots may appear on leaves.
+            </p>
+
+            <p>
+                <b data-disease-lang="solution">
+                    Solution:
+                </b>
+
+                <span data-disease-lang="rustDiseaseSolution">
+                    Remove infected leaves and keep plants well ventilated.
+                </span>
+            </p>
+
+        </div>
+
+
+
+        <!-- WILT DISEASE -->
+
+        <div class="disease-card">
+
+            <div class="icon">🥀</div>
+
+            <h3 data-disease-lang="wiltDisease">
+                Wilt Disease
+            </h3>
+
+            <p data-disease-lang="wiltDiseaseDescription">
+                Leaves become weak, droopy and may turn yellow.
+            </p>
+
+            <p>
+                <b data-disease-lang="solution">
+                    Solution:
+                </b>
+
+                <span data-disease-lang="wiltDiseaseSolution">
+                    Check watering, roots and soil drainage.
+                </span>
+            </p>
+
+        </div>
+
+
+
+        <!-- DOWNY MILDEW -->
+
+        <div class="disease-card">
+
+            <div class="icon">🦠</div>
+
+            <h3 data-disease-lang="downyMildew">
+                Downy Mildew
+            </h3>
+
+            <p data-disease-lang="downyMildewDescription">
+                Yellow patches and greyish growth can appear on leaves.
+            </p>
+
+            <p>
+                <b data-disease-lang="solution">
+                    Solution:
+                </b>
+
+                <span data-disease-lang="downyMildewSolution">
+                    Keep leaves dry and provide good air circulation.
+                </span>
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<footer>
+
+    <h3 data-disease-lang="footerTitle">
+        🌿 GreenLeaf Plant Nursery
+    </h3>
+
+    <p data-disease-lang="footerText">
+        Healthy Plants • Beautiful Homes • Greener Future
+    </p>
+
+</footer>
+
+
+<!-- LANGUAGE FILE -->
+
+<script src="language.js"></script>
+
+
+<!-- DISEASE PAGE LANGUAGE -->
+
+<script>
+
+const diseaseTranslations = {
+
+    diseaseTitle: {
+        en: "🦠 Common Plant Diseases",
+        te: "🦠 సాధారణ మొక్కల వ్యాధులు",
+        hi: "🦠 सामान्य पौधों के रोग"
+    },
+
+    backExplore: {
+        en: "← Back to Explore Plants",
+        te: "← మొక్కలను చూడటానికి తిరిగి వెళ్ళండి",
+        hi: "← पौधों को देखने के लिए वापस जाएं"
+    },
+
+    leafSpot: {
+        en: "Leaf Spot",
+        te: "ఆకు మచ్చ వ్యాధి",
+        hi: "पत्ती धब्बा रोग"
+    },
+
+    leafSpotDescription: {
+        en: "Brown or black spots appear on plant leaves.",
+        te: "మొక్క ఆకులపై గోధుమ లేదా నల్లటి మచ్చలు కనిపిస్తాయి.",
+        hi: "पौधों की पत्तियों पर भूरे या काले धब्बे दिखाई देते हैं।"
+    },
+
+    leafSpotSolution: {
+        en: "Remove affected leaves and avoid excessive moisture.",
+        te: "ప్రభావిత ఆకులను తొలగించి అధిక తేమను నివారించండి.",
+        hi: "प्रभावित पत्तियों को हटाएं और अत्यधिक नमी से बचें।"
+    },
+
+
+    powderyMildew: {
+        en: "Powdery Mildew",
+        te: "పౌడరీ మిల్డ్యూ",
+        hi: "पाउडरी मिल्ड्यू"
+    },
+
+    powderyMildewDescription: {
+        en: "White powder-like growth appears on leaves.",
+        te: "ఆకులపై తెల్లటి పొడి లాంటి పెరుగుదల కనిపిస్తుంది.",
+        hi: "पत्तियों पर सफेद पाउडर जैसी परत दिखाई देती है।"
+    },
+
+    powderyMildewSolution: {
+        en: "Improve air circulation and avoid watering the leaves.",
+        te: "గాలి ప్రసరణను మెరుగుపరచండి మరియు ఆకులపై నీరు పోయకుండా ఉండండి.",
+        hi: "हवा का संचार बेहतर करें और पत्तियों पर पानी देने से बचें।"
+    },
+
+
+    rootRot: {
+        en: "Root Rot",
+        te: "వేరు కుళ్ళు వ్యాధి",
+        hi: "जड़ सड़न रोग"
+    },
+
+    rootRotDescription: {
+        en: "Roots become dark and soft because of excess water.",
+        te: "అధిక నీటి కారణంగా వేర్లు నల్లగా మరియు మెత్తగా మారుతాయి.",
+        hi: "अधिक पानी के कारण जड़ें काली और नरम हो जाती हैं।"
+    },
+
+    rootRotSolution: {
+        en: "Reduce watering and use well-draining soil.",
+        te: "నీరు పోయడాన్ని తగ్గించి మంచి డ్రైనేజీ ఉన్న మట్టిని ఉపయోగించండి.",
+        hi: "पानी कम दें और अच्छी जल निकासी वाली मिट्टी का उपयोग करें।"
+    },
+
+
+    rustDisease: {
+        en: "Rust Disease",
+        te: "రస్ట్ వ్యాధి",
+        hi: "रस्ट रोग"
+    },
+
+    rustDiseaseDescription: {
+        en: "Orange or reddish spots may appear on leaves.",
+        te: "ఆకులపై నారింజ లేదా ఎరుపు రంగు మచ్చలు కనిపించవచ్చు.",
+        hi: "पत्तियों पर नारंगी या लाल रंग के धब्बे दिखाई दे सकते हैं।"
+    },
+
+    rustDiseaseSolution: {
+        en: "Remove infected leaves and keep plants well ventilated.",
+        te: "వ్యాధి సోకిన ఆకులను తొలగించి మొక్కలకు మంచి గాలి ప్రసరణ ఉండేలా చూడండి.",
+        hi: "संक्रमित पत्तियों को हटाएं और पौधों को अच्छी हवा मिलने दें।"
+    },
+
+
+    wiltDisease: {
+        en: "Wilt Disease",
+        te: "విల్ట్ వ్యాధి",
+        hi: "मुरझाने का रोग"
+    },
+
+    wiltDiseaseDescription: {
+        en: "Leaves become weak, droopy and may turn yellow.",
+        te: "ఆకులు బలహీనంగా, వాలిపోయి పసుపు రంగులోకి మారవచ్చు.",
+        hi: "पत्तियां कमजोर और झुकी हुई हो जाती हैं और पीली पड़ सकती हैं।"
+    },
+
+    wiltDiseaseSolution: {
+        en: "Check watering, roots and soil drainage.",
+        te: "నీరు పోయడం, వేర్లు మరియు మట్టి డ్రైనేజీని తనిఖీ చేయండి.",
+        hi: "पानी, जड़ों और मिट्टी की जल निकासी की जांच करें।"
+    },
+
+
+    downyMildew: {
+        en: "Downy Mildew",
+        te: "డౌనీ మిల్డ్యూ",
+        hi: "डाउनी मिल्ड्यू"
+    },
+
+    downyMildewDescription: {
+        en: "Yellow patches and greyish growth can appear on leaves.",
+        te: "ఆకులపై పసుపు మచ్చలు మరియు బూడిద రంగు పెరుగుదల కనిపించవచ్చు.",
+        hi: "पत्तियों पर पीले धब्बे और भूरे रंग की परत दिखाई दे सकती है।"
+    },
+
+    downyMildewSolution: {
+        en: "Keep leaves dry and provide good air circulation.",
+        te: "ఆకులను పొడిగా ఉంచి మంచి గాలి ప్రసరణ అందించండి.",
+        hi: "पत्तियों को सूखा रखें और अच्छी हवा का संचार करें।"
+    },
+
+
+    solution: {
+        en: "Solution:",
+        te: "పరిష్కారం:",
+        hi: "समाधान:"
+    },
+
+
+    footerTitle: {
+        en: "🌿 GreenLeaf Plant Nursery",
+        te: "🌿 గ్రీన్‌లీఫ్ ప్లాంట్ నర్సరీ",
+        hi: "🌿 ग्रीनलीफ प्लांट नर्सरी"
+    },
+
+    footerText: {
+        en: "Healthy Plants • Beautiful Homes • Greener Future",
+        te: "ఆరోగ్యకరమైన మొక్కలు • అందమైన ఇళ్లు • పచ్చని భవిష్యత్తు",
+        hi: "स्वस्थ पौधे • सुंदर घर • हरित भविष्य"
+    }
+
+};
+
+
+// ======================================================
+// APPLY DISEASE LANGUAGE
+// ======================================================
+
+function applyDiseaseLanguage(language) {
+
+    const elements =
+        document.querySelectorAll(
+            "[data-disease-lang]"
+        );
+
+    elements.forEach(function(element) {
+
+        const key =
+            element.getAttribute(
+                "data-disease-lang"
+            );
+
+        if (
+            diseaseTranslations[key] &&
+            diseaseTranslations[key][language]
+        ) {
+
+            element.innerText =
+                diseaseTranslations[key][language];
+
+        }
+
+    });
+
+}
+
+
+// ======================================================
+// LOAD SELECTED LANGUAGE
+// ======================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const savedLanguage =
+            localStorage.getItem(
+                "selectedLanguage"
+            ) || "en";
+
+        applyDiseaseLanguage(
+            savedLanguage
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Orders - GreenLeaf Nursery</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f8f4;
+            color: #333;
+        }
+
+        header {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .top-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .top-buttons a {
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 7px;
+            background: #2e7d32;
+            color: white;
+            font-weight: bold;
+        }
+
+        .top-buttons a:hover {
+            background: #1b5e20;
+        }
+
+        h2 {
+            color: #1b5e20;
+        }
+
+        .order-card {
+            background: white;
+            padding: 22px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .order-card h3 {
+            color: #1b5e20;
+            margin-top: 0;
+        }
+
+        .order-info {
+            line-height: 1.8;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .ordered {
+            background: #dff5e3;
+            color: #16833a;
+        }
+
+        .cancelled {
+            background: #ffe1e1;
+            color: #d32f2f;
+        }
+
+        /* Cancel Button */
+
+        .cancel-btn {
+            margin-top: 15px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #d32f2f;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .cancel-btn:hover {
+            background: #b71c1c;
+        }
+
+        .empty {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 12px;
+            color: #777;
+            font-size: 18px;
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 94%;
+            }
+
+            .top-buttons {
+                justify-content: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+
+<header>
+
+    <h1>
+        🌿 GreenLeaf Nursery
+    </h1>
+
+    <p>
+        Admin Orders
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- ========================= -->
+    <!-- TOP BUTTONS -->
+    <!-- ========================= -->
+
+    <div class="top-buttons">
+
+        <a href="admin-dashboard.html">
+            📊 Admin Dashboard
+        </a>
+
+        <a href="admin.html">
+            ➕ Add Plant
+        </a>
+
+        <a href="index.html">
+            🏠 Home
+        </a>
+
+    </div>
+
+
+    <h2>
+        📦 Customer Orders
+    </h2>
+
+
+    <!-- ORDERS WILL APPEAR HERE -->
+
+    <div id="ordersContainer"></div>
+
+
+</div>
+
+
+<script>
+
+
+// =================================
+// DISPLAY ORDERS
+// =================================
+
+function displayOrders() {
+
+    const container =
+        document.getElementById("ordersContainer");
+
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem("orders")
+        ) || [];
+
+
+    // =================================
+    // NO ORDERS
+    // =================================
+
+    if (orders.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div style="font-size:45px;">
+                    📦
+                </div>
+
+                <p>
+                    No customer orders found.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    // Clear old orders
+
+    container.innerHTML = "";
+
+
+    // =================================
+    // LATEST ORDER FIRST
+    // =================================
+
+    orders.slice().reverse().forEach(
+        (order, reverseIndex) => {
+
+
+            const actualIndex =
+                orders.length - 1 - reverseIndex;
+
+
+            // =================================
+            // ORDER DETAILS
+            // =================================
+
+            const status =
+                order.status || "Ordered";
+
+
+            const isCancelled =
+                status.toLowerCase() === "cancelled";
+
+
+            const product =
+                order.product || "Plant";
+
+
+            const quantity =
+                order.quantity || 1;
+
+
+            const amount =
+                order.amount || 0;
+
+
+            const name =
+                order.name || "Customer";
+
+
+            const address =
+                order.address || "Not provided";
+
+
+            const payment =
+                order.payment || "Not provided";
+
+
+            const date =
+                order.date || "Recently";
+
+
+            // =================================
+            // CREATE ORDER CARD
+            // =================================
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "order-card";
+
+
+            card.innerHTML = `
+
+                <h3>
+                    📦 Order #${actualIndex + 1}
+                </h3>
+
+
+                <div class="order-info">
+
+
+                    <strong>🌱 Product:</strong>
+                    ${product}
+
+                    <br>
+
+
+                    <strong>🔢 Quantity:</strong>
+                    ${quantity}
+
+                    <br>
+
+
+                    <strong>💰 Amount:</strong>
+                    ₹${amount}
+
+                    <br>
+
+
+                    <strong>👤 Customer Name:</strong>
+                    ${name}
+
+                    <br>
+
+
+                    <strong>📍 Address:</strong>
+                    ${address}
+
+                    <br>
+
+
+                    <strong>💳 Payment:</strong>
+                    ${payment}
+
+                    <br>
+
+
+                    <strong>📅 Date:</strong>
+                    ${date}
+
+                    <br>
+
+
+                    <strong>📌 Status:</strong>
+
+
+                    <span class="status ${
+                        isCancelled
+                        ? "cancelled"
+                        : "ordered"
+                    }">
+
+
+                        ${
+                            isCancelled
+                            ? "Cancelled"
+                            : "Ordered"
+                        }
+
+
+                    </span>
+
+
+                    ${
+                        !isCancelled
+                        ?
+                        `
+
+                        <br>
+
+                        <button
+                            type="button"
+                            class="cancel-btn"
+                            onclick="cancelOrder(${actualIndex})">
+
+                            ❌ Cancel Order
+
+                        </button>
+
+                        `
+                        :
+                        ""
+                    }
+
+
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        }
+    );
+
+}
+
+
+// =================================
+// CANCEL ORDER
+// =================================
+
+function cancelOrder(index) {
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem("orders")
+        ) || [];
+
+
+    // Check order exists
+
+    if (!orders[index]) {
+        return;
+    }
+
+
+    // Directly cancel order
+
+    orders[index].status =
+        "Cancelled";
+
+
+    // Save updated orders
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+
+    // Refresh order list
+
+    displayOrders();
+
+}
+
+
+// =================================
+// LOAD ORDERS
+// =================================
+
+displayOrders();
+
+
+</script>
+
+
+</body>
+
+</html>

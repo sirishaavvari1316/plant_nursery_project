@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add New Plant - GreenLeaf Nursery</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f8f4;
+        }
+
+        header {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 8px 0 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1b5e20;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .add-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #1b5e20;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .dashboard {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            padding: 12px;
+            background: #e8f5e9;
+            color: #1b5e20;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+
+        /* =================================
+           OWNER LOGIN
+        ================================= */
+
+        #ownerLogin {
+
+            position: fixed;
+            inset: 0;
+
+            background: #f1f8f4;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 99999;
+
+        }
+
+
+        .login-box {
+
+            width: 90%;
+            max-width: 400px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+
+        }
+
+
+        .login-box h2 {
+
+            text-align: center;
+
+            color: #1b5e20;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .login-box label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-top: 15px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .login-box input {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+        }
+
+
+        .login-btn {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 13px;
+
+            background: #2e7d32;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+        }
+
+
+        .login-btn:hover {
+
+            background: #1b5e20;
+
+        }
+
+
+        .forgot-btn {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #2e7d32;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+        }
+
+
+        .login-back {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #2e7d32;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+
+        #loginError,
+        #resetError,
+        #resetSuccess {
+
+            text-align: center;
+
+            display: none;
+
+            margin-top: 15px;
+
+            font-weight: bold;
+
+        }
+
+
+        #loginError,
+        #resetError {
+
+            color: red;
+
+        }
+
+
+        #resetSuccess {
+
+            color: #2e7d32;
+
+        }
+
+
+        /* =================================
+           RESET PASSWORD
+        ================================= */
+
+        #resetBox {
+
+            display: none;
+
+        }
+
+
+        .reset-title {
+
+            text-align: center;
+
+            color: #1b5e20;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .reset-btn {
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 13px;
+
+            background: #2e7d32;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+        }
+
+
+        .cancel-reset {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #2e7d32;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     OWNER LOGIN
+================================= -->
+
+<div id="ownerLogin">
+
+    <div class="login-box">
+
+
+        <!-- LOGIN BOX -->
+
+        <div id="loginBox">
+
+
+            <h2 id="loginTitle">
+                🔐 Nursery Owner Login
+            </h2>
+
+
+            <label id="usernameLabel">
+                Username
+            </label>
+
+
+            <input
+                type="text"
+                id="ownerUsername"
+                placeholder="Enter username"
+            >
+
+
+            <label id="passwordLabel">
+                Password
+            </label>
+
+
+            <input
+                type="password"
+                id="ownerPassword"
+                placeholder="Enter password"
+            >
+
+
+            <button
+                type="button"
+                class="login-btn"
+                id="loginButton"
+                onclick="ownerLogin()">
+
+                🔐 Login
+
+            </button>
+
+
+            <span
+                class="forgot-btn"
+                id="forgotButton"
+                onclick="showResetPassword()">
+
+                Forgot Password?
+
+            </span>
+
+
+            <p id="loginError">
+                Incorrect username or password.
+            </p>
+
+
+            <a
+                href="index.html"
+                class="login-back"
+                id="loginBack">
+
+                ← Back to GreenLeaf Nursery
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================
+             RESET PASSWORD BOX
+        ================================= -->
+
+        <div id="resetBox">
+
+
+            <h2
+                class="reset-title"
+                id="resetTitle">
+
+                🔑 Reset Password
+
+            </h2>
+
+
+            <label id="securityLabel">
+
+                What is your nursery name?
+
+            </label>
+
+
+            <input
+                type="text"
+                id="securityAnswer"
+                placeholder="Enter nursery name"
+            >
+
+
+            <label id="newPasswordLabel">
+
+                New Password
+
+            </label>
+
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="Enter new password"
+            >
+
+
+            <label id="confirmPasswordLabel">
+
+                Confirm Password
+
+            </label>
+
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm new password"
+            >
+
+
+            <button
+                type="button"
+                class="reset-btn"
+                id="resetButton"
+                onclick="resetPassword()">
+
+                🔄 Reset Password
+
+            </button>
+
+
+            <p id="resetError"></p>
+
+
+            <p id="resetSuccess"></p>
+
+
+            <span
+                class="cancel-reset"
+                id="cancelReset"
+                onclick="showLogin()">
+
+                ← Back to Login
+
+            </span>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =================================
+     EXISTING ADMIN PAGE
+================================= -->
+
+
+<header>
+
+    <h1>🌿 GreenLeaf Nursery</h1>
+
+    <p data-admin-lang="adminPanel">
+        Admin Panel - Add New Plant
+    </p>
+
+</header>
+
+
+<div class="container">
+
+    <h2 data-admin-lang="addNewPlant">
+        🌱 Add New Plant
+    </h2>
+
+
+    <form id="plantForm">
+
+
+        <!-- PLANT NAME -->
+
+        <label for="plantName"
+               data-admin-lang="plantName">
+
+            Plant Name
+
+        </label>
+
+
+        <input
+            type="text"
+            id="plantName"
+            placeholder="Enter plant name"
+            data-admin-placeholder="plantNamePlaceholder"
+            required
+        >
+
+
+        <!-- CATEGORY -->
+
+        <label
+            for="category"
+            data-admin-lang="category">
+
+            Category
+
+        </label>
+
+
+        <select
+            id="category"
+            required
+        >
+
+            <option
+                value=""
+                data-admin-lang="selectCategory">
+
+                Select Category
+
+            </option>
+
+
+            <option
+                value="Indoor Plant"
+                data-admin-lang="indoorPlantCategory">
+
+                Indoor Plant
+
+            </option>
+
+
+            <option
+                value="Outdoor Plant"
+                data-admin-lang="outdoorPlantCategory">
+
+                Outdoor Plant
+
+            </option>
+
+
+            <option
+                value="Flowering Plant"
+                data-admin-lang="floweringPlantCategory">
+
+                Flowering Plant
+
+            </option>
+
+
+            <option
+                value="Medicinal Plant"
+                data-admin-lang="medicinalPlantCategory">
+
+                Medicinal Plant
+
+            </option>
+
+
+            <option
+                value="Other Countries"
+                data-admin-lang="otherCountriesCategory">
+
+                Other Countries
+
+            </option>
+
+        </select>
+
+
+        <!-- PRICE -->
+
+        <label
+            for="price"
+            data-admin-lang="price">
+
+            Price
+
+        </label>
+
+
+        <input
+            type="number"
+            id="price"
+            placeholder="Enter price"
+            data-admin-placeholder="pricePlaceholder"
+            required
+        >
+
+
+        <!-- IMAGE -->
+
+        <label
+            for="image"
+            data-admin-lang="plantImageURL">
+
+            Plant Image URL
+
+        </label>
+
+
+        <input
+            type="url"
+            id="image"
+            placeholder="https://..."
+            data-admin-placeholder="imagePlaceholder"
+            required
+        >
+
+
+        <!-- SUNLIGHT -->
+
+        <label
+            for="sunlight"
+            data-admin-lang="sunlight">
+
+            Sunlight
+
+        </label>
+
+
+        <input
+            type="text"
+            id="sunlight"
+            placeholder="Example: Full Sun"
+            data-admin-placeholder="sunlightPlaceholder"
+            required
+        >
+
+
+        <!-- WATERING -->
+
+        <label
+            for="watering"
+            data-admin-lang="watering">
+
+            Watering
+
+        </label>
+
+
+        <input
+            type="text"
+            id="watering"
+            placeholder="Example: Moderate"
+            data-admin-placeholder="wateringPlaceholder"
+            required
+        >
+
+
+        <!-- DISEASES -->
+
+        <label
+            for="diseases"
+            data-admin-lang="diseases">
+
+            Diseases
+
+        </label>
+
+
+        <input
+            type="text"
+            id="diseases"
+            placeholder="Example: Leaf Spot"
+            data-admin-placeholder="diseasesPlaceholder"
+        >
+
+
+        <!-- DESCRIPTION -->
+
+        <label
+            for="description"
+            data-admin-lang="description">
+
+            Description
+
+        </label>
+
+
+        <textarea
+            id="description"
+            placeholder="Enter plant description"
+            data-admin-placeholder="descriptionPlaceholder"
+            required
+        ></textarea>
+
+
+        <!-- ADD BUTTON -->
+
+        <button
+            type="submit"
+            class="add-btn"
+            data-admin-lang="addPlant">
+
+            🌱 Add Plant
+
+        </button>
+
+
+    </form>
+
+
+    <!-- DASHBOARD -->
+
+    <a
+        href="admin-dashboard.html"
+        class="dashboard"
+        data-admin-lang="openDashboard">
+
+        📊 Open Admin Dashboard
+
+    </a>
+
+
+    <!-- BACK -->
+
+    <a
+        href="index.html"
+        class="back"
+        data-admin-lang="backGreenLeaf">
+
+        ← Back to GreenLeaf Nursery
+
+    </a>
+
+
+</div>
+
+
+<script>
+
+
+// =================================
+// OWNER LOGIN TRANSLATIONS
+// =================================
+
+const ownerLoginTranslations = {
+
+    en: {
+
+        title:
+            "🔐 Nursery Owner Login",
+
+        username:
+            "Username",
+
+        password:
+            "Password",
+
+        usernamePlaceholder:
+            "Enter username",
+
+        passwordPlaceholder:
+            "Enter password",
+
+        login:
+            "🔐 Login",
+
+        forgot:
+            "Forgot Password?",
+
+        error:
+            "Incorrect username or password.",
+
+        back:
+            "← Back to GreenLeaf Nursery",
+
+        resetTitle:
+            "🔑 Reset Password",
+
+        security:
+            "What is your nursery name?",
+
+        securityPlaceholder:
+            "Enter nursery name",
+
+        newPassword:
+            "New Password",
+
+        newPasswordPlaceholder:
+            "Enter new password",
+
+        confirmPassword:
+            "Confirm Password",
+
+        confirmPasswordPlaceholder:
+            "Confirm new password",
+
+        reset:
+            "🔄 Reset Password",
+
+        backLogin:
+            "← Back to Login",
+
+        wrongAnswer:
+            "Incorrect nursery name.",
+
+        passwordShort:
+            "Password must be at least 6 characters.",
+
+        passwordMismatch:
+            "Passwords do not match.",
+
+        resetSuccess:
+            "Password reset successfully. You can login now."
+
+    },
+
+
+    te: {
+
+        title:
+            "🔐 నర్సరీ యజమాని లాగిన్",
+
+        username:
+            "వినియోగదారు పేరు",
+
+        password:
+            "పాస్‌వర్డ్",
+
+        usernamePlaceholder:
+            "వినియోగదారు పేరు నమోదు చేయండి",
+
+        passwordPlaceholder:
+            "పాస్‌వర్డ్ నమోదు చేయండి",
+
+        login:
+            "🔐 లాగిన్",
+
+        forgot:
+            "పాస్‌వర్డ్ మర్చిపోయారా?",
+
+        error:
+            "వినియోగదారు పేరు లేదా పాస్‌వర్డ్ తప్పుగా ఉంది.",
+
+        back:
+            "← GreenLeaf Nursery కి తిరిగి వెళ్ళండి",
+
+        resetTitle:
+            "🔑 పాస్‌వర్డ్ రీసెట్",
+
+        security:
+            "మీ నర్సరీ పేరు ఏమిటి?",
+
+        securityPlaceholder:
+            "నర్సరీ పేరు నమోదు చేయండి",
+
+        newPassword:
+            "కొత్త పాస్‌వర్డ్",
+
+        newPasswordPlaceholder:
+            "కొత్త పాస్‌వర్డ్ నమోదు చేయండి",
+
+        confirmPassword:
+            "పాస్‌వర్డ్ నిర్ధారించండి",
+
+        confirmPasswordPlaceholder:
+            "కొత్త పాస్‌వర్డ్ మళ్లీ నమోదు చేయండి",
+
+        reset:
+            "🔄 పాస్‌వర్డ్ రీసెట్ చేయండి",
+
+        backLogin:
+            "← లాగిన్‌కి తిరిగి వెళ్ళండి",
+
+        wrongAnswer:
+            "నర్సరీ పేరు తప్పుగా ఉంది.",
+
+        passwordShort:
+            "పాస్‌వర్డ్ కనీసం 6 అక్షరాలు ఉండాలి.",
+
+        passwordMismatch:
+            "పాస్‌వర్డ్‌లు సరిపోలడం లేదు.",
+
+        resetSuccess:
+            "పాస్‌వర్డ్ విజయవంతంగా రీసెట్ అయింది. ఇప్పుడు లాగిన్ చేయవచ్చు."
+
+    },
+
+
+    hi: {
+
+        title:
+            "🔐 नर्सरी मालिक लॉगिन",
+
+        username:
+            "यूज़रनेम",
+
+        password:
+            "पासवर्ड",
+
+        usernamePlaceholder:
+            "यूज़रनेम दर्ज करें",
+
+        passwordPlaceholder:
+            "पासवर्ड दर्ज करें",
+
+        login:
+            "🔐 लॉगिन",
+
+        forgot:
+            "पासवर्ड भूल गए?",
+
+        error:
+            "यूज़रनेम या पासवर्ड गलत है।",
+
+        back:
+            "← GreenLeaf Nursery पर वापस जाएँ",
+
+        resetTitle:
+            "🔑 पासवर्ड रीसेट करें",
+
+        security:
+            "आपकी नर्सरी का नाम क्या है?",
+
+        securityPlaceholder:
+            "नर्सरी का नाम दर्ज करें",
+
+        newPassword:
+            "नया पासवर्ड",
+
+        newPasswordPlaceholder:
+            "नया पासवर्ड दर्ज करें",
+
+        confirmPassword:
+            "पासवर्ड की पुष्टि करें",
+
+        confirmPasswordPlaceholder:
+            "नया पासवर्ड फिर से दर्ज करें",
+
+        reset:
+            "🔄 पासवर्ड रीसेट करें",
+
+        backLogin:
+            "← लॉगिन पर वापस जाएँ",
+
+        wrongAnswer:
+            "नर्सरी का नाम गलत है।",
+
+        passwordShort:
+            "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए।",
+
+        passwordMismatch:
+            "पासवर्ड मेल नहीं खाते।",
+
+        resetSuccess:
+            "पासवर्ड सफलतापूर्वक रीसेट हो गया। अब लॉगिन कर सकते हैं।"
+
+    }
+
+};
+
+
+// =================================
+// ADMIN TRANSLATIONS
+// =================================
+
+const adminTranslations = {
+
+    en: {
+
+        adminPanel:
+            "Admin Panel - Add New Plant",
+
+        addNewPlant:
+            "🌱 Add New Plant",
+
+        plantName:
+            "Plant Name",
+
+        category:
+            "Category",
+
+        selectCategory:
+            "Select Category",
+
+        indoorPlantCategory:
+            "Indoor Plant",
+
+        outdoorPlantCategory:
+            "Outdoor Plant",
+
+        floweringPlantCategory:
+            "Flowering Plant",
+
+        medicinalPlantCategory:
+            "Medicinal Plant",
+
+        otherCountriesCategory:
+            "Other Countries",
+
+        price:
+            "Price",
+
+        plantImageURL:
+            "Plant Image URL",
+
+        sunlight:
+            "Sunlight",
+
+        watering:
+            "Watering",
+
+        diseases:
+            "Diseases",
+
+        description:
+            "Description",
+
+        addPlant:
+            "🌱 Add Plant",
+
+        openDashboard:
+            "📊 Open Admin Dashboard",
+
+        backGreenLeaf:
+            "← Back to GreenLeaf Nursery"
+
+    },
+
+
+    te: {
+
+        adminPanel:
+            "అడ్మిన్ ప్యానెల్ - కొత్త మొక్కను జోడించండి",
+
+        addNewPlant:
+            "🌱 కొత్త మొక్కను జోడించండి",
+
+        plantName:
+            "మొక్క పేరు",
+
+        category:
+            "వర్గం",
+
+        selectCategory:
+            "వర్గాన్ని ఎంచుకోండి",
+
+        indoorPlantCategory:
+            "ఇండోర్ మొక్క",
+
+        outdoorPlantCategory:
+            "అవుట్‌డోర్ మొక్క",
+
+        floweringPlantCategory:
+            "పుష్పించే మొక్క",
+
+        medicinalPlantCategory:
+            "ఔషధ మొక్క",
+
+        otherCountriesCategory:
+            "ఇతర దేశాల మొక్కలు",
+
+        price:
+            "ధర",
+
+        plantImageURL:
+            "మొక్క చిత్ర URL",
+
+        sunlight:
+            "సూర్యకాంతి",
+
+        watering:
+            "నీరు పెట్టడం",
+
+        diseases:
+            "వ్యాధులు",
+
+        description:
+            "వివరణ",
+
+        addPlant:
+            "🌱 మొక్కను జోడించండి",
+
+        openDashboard:
+            "📊 అడ్మిన్ డ్యాష్‌బోర్డ్ తెరవండి",
+
+        backGreenLeaf:
+            "← GreenLeaf Nursery కి తిరిగి వెళ్ళండి"
+
+    },
+
+
+    hi: {
+
+        adminPanel:
+            "एडमिन पैनल - नया पौधा जोड़ें",
+
+        addNewPlant:
+            "🌱 नया पौधा जोड़ें",
+
+        plantName:
+            "पौधे का नाम",
+
+        category:
+            "श्रेणी",
+
+        selectCategory:
+            "श्रेणी चुनें",
+
+        indoorPlantCategory:
+            "इनडोर पौधा",
+
+        outdoorPlantCategory:
+            "आउटडोर पौधा",
+
+        floweringPlantCategory:
+            "फूल वाला पौधा",
+
+        medicinalPlantCategory:
+            "औषधीय पौधा",
+
+        otherCountriesCategory:
+            "अन्य देशों के पौधे",
+
+        price:
+            "कीमत",
+
+        plantImageURL:
+            "पौधे की इमेज URL",
+
+        sunlight:
+            "सूरज की रोशनी",
+
+        watering:
+            "पानी देना",
+
+        diseases:
+            "बीमारियाँ",
+
+        description:
+            "विवरण",
+
+        addPlant:
+            "🌱 पौधा जोड़ें",
+
+        openDashboard:
+            "📊 एडमिन डैशबोर्ड खोलें",
+
+        backGreenLeaf:
+            "← GreenLeaf Nursery पर वापस जाएँ"
+
+    }
+
+};
+
+
+// =================================
+// PLACEHOLDERS
+// =================================
+
+const adminPlaceholders = {
+
+    en: {
+
+        plantNamePlaceholder:
+            "Enter plant name",
+
+        pricePlaceholder:
+            "Enter price",
+
+        imagePlaceholder:
+            "https://...",
+
+        sunlightPlaceholder:
+            "Example: Full Sun",
+
+        wateringPlaceholder:
+            "Example: Moderate",
+
+        diseasesPlaceholder:
+            "Example: Leaf Spot",
+
+        descriptionPlaceholder:
+            "Enter plant description"
+
+    },
+
+
+    te: {
+
+        plantNamePlaceholder:
+            "మొక్క పేరును నమోదు చేయండి",
+
+        pricePlaceholder:
+            "ధరను నమోదు చేయండి",
+
+        imagePlaceholder:
+            "https://...",
+
+        sunlightPlaceholder:
+            "ఉదాహరణ: పూర్తి సూర్యకాంతి",
+
+        wateringPlaceholder:
+            "ఉదాహరణ: మితమైన నీరు",
+
+        diseasesPlaceholder:
+            "ఉదాహరణ: ఆకు మచ్చలు",
+
+        descriptionPlaceholder:
+            "మొక్క వివరణను నమోదు చేయండి"
+
+    },
+
+
+    hi: {
+
+        plantNamePlaceholder:
+            "पौधे का नाम दर्ज करें",
+
+        pricePlaceholder:
+            "कीमत दर्ज करें",
+
+        imagePlaceholder:
+            "https://...",
+
+        sunlightPlaceholder:
+            "उदाहरण: पूरी धूप",
+
+        wateringPlaceholder:
+            "उदाहरण: मध्यम",
+
+        diseasesPlaceholder:
+            "उदाहरण: पत्ती के धब्बे",
+
+        descriptionPlaceholder:
+            "पौधे का विवरण दर्ज करें"
+
+    }
+
+};
+
+
+// =================================
+// APPLY LOGIN LANGUAGE
+// =================================
+
+function applyOwnerLoginLanguage() {
+
+    const language =
+        localStorage.getItem(
+            "selectedLanguage"
+        ) || "en";
+
+
+    const selectedLanguage =
+        ownerLoginTranslations[language]
+        ? language
+        : "en";
+
+
+    const t =
+        ownerLoginTranslations[
+            selectedLanguage
+        ];
+
+
+    document.getElementById(
+        "loginTitle"
+    ).textContent = t.title;
+
+
+    document.getElementById(
+        "usernameLabel"
+    ).textContent = t.username;
+
+
+    document.getElementById(
+        "passwordLabel"
+    ).textContent = t.password;
+
+
+    document.getElementById(
+        "ownerUsername"
+    ).placeholder =
+        t.usernamePlaceholder;
+
+
+    document.getElementById(
+        "ownerPassword"
+    ).placeholder =
+        t.passwordPlaceholder;
+
+
+    document.getElementById(
+        "loginButton"
+    ).textContent = t.login;
+
+
+    document.getElementById(
+        "forgotButton"
+    ).textContent = t.forgot;
+
+
+    document.getElementById(
+        "loginBack"
+    ).textContent = t.back;
+
+
+    document.getElementById(
+        "resetTitle"
+    ).textContent = t.resetTitle;
+
+
+    document.getElementById(
+        "securityLabel"
+    ).textContent = t.security;
+
+
+    document.getElementById(
+        "securityAnswer"
+    ).placeholder =
+        t.securityPlaceholder;
+
+
+    document.getElementById(
+        "newPasswordLabel"
+    ).textContent = t.newPassword;
+
+
+    document.getElementById(
+        "newPassword"
+    ).placeholder =
+        t.newPasswordPlaceholder;
+
+
+    document.getElementById(
+        "confirmPasswordLabel"
+    ).textContent = t.confirmPassword;
+
+
+    document.getElementById(
+        "confirmPassword"
+    ).placeholder =
+        t.confirmPasswordPlaceholder;
+
+
+    document.getElementById(
+        "resetButton"
+    ).textContent = t.reset;
+
+
+    document.getElementById(
+        "cancelReset"
+    ).textContent = t.backLogin;
+
+}
+
+
+// =================================
+// SHOW RESET PASSWORD
+// =================================
+
+function showResetPassword() {
+
+    document.getElementById(
+        "loginBox"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "resetBox"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "loginError"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "resetError"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "resetSuccess"
+    ).style.display = "none";
+
+}
+
+
+// =================================
+// SHOW LOGIN
+// =================================
+
+function showLogin() {
+
+    document.getElementById(
+        "resetBox"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "loginBox"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "resetError"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "resetSuccess"
+    ).style.display = "none";
+
+}
+
+
+// =================================
+// OWNER LOGIN
+// =================================
+
+function ownerLogin() {
+
+    const username =
+        document
+        .getElementById("ownerUsername")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("ownerPassword")
+        .value;
+
+
+    const savedPassword =
+        localStorage.getItem(
+            "greenleafOwnerPassword"
+        ) || "greenleaf123";
+
+
+    if (
+        username === "admin" &&
+        password === savedPassword
+    ) {
+
+        sessionStorage.setItem(
+            "greenleafOwnerLoggedIn",
+            "true"
+        );
+
+
+        document.getElementById(
+            "ownerLogin"
+        ).style.display = "none";
+
+
+    }
+    else {
+
+        const error =
+            document.getElementById(
+                "loginError"
+            );
+
+
+        error.style.display = "block";
+
+    }
+
+}
+
+
+// =================================
+// RESET PASSWORD
+// =================================
+
+function resetPassword() {
+
+    const language =
+        localStorage.getItem(
+            "selectedLanguage"
+        ) || "en";
+
+
+    const t =
+        ownerLoginTranslations[
+            language
+        ] || ownerLoginTranslations.en;
+
+
+    const answer =
+        document
+        .getElementById("securityAnswer")
+        .value
+        .trim();
+
+
+    const newPassword =
+        document
+        .getElementById("newPassword")
+        .value;
+
+
+    const confirmPassword =
+        document
+        .getElementById("confirmPassword")
+        .value;
+
+
+    const resetError =
+        document.getElementById(
+            "resetError"
+        );
+
+
+    const resetSuccess =
+        document.getElementById(
+            "resetSuccess"
+        );
+
+
+    resetError.style.display = "none";
+
+    resetSuccess.style.display = "none";
+
+
+    /* Security Answer */
+
+    if (
+        answer.toLowerCase() !==
+        "greenleaf"
+    ) {
+
+        resetError.textContent =
+            t.wrongAnswer;
+
+        resetError.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* Password Length */
+
+    if (
+        newPassword.length < 6
+    ) {
+
+        resetError.textContent =
+            t.passwordShort;
+
+        resetError.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* Password Match */
+
+    if (
+        newPassword !==
+        confirmPassword
+    ) {
+
+        resetError.textContent =
+            t.passwordMismatch;
+
+        resetError.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /* SAVE NEW PASSWORD */
+
+    localStorage.setItem(
+        "greenleafOwnerPassword",
+        newPassword
+    );
+
+
+    resetSuccess.textContent =
+        t.resetSuccess;
+
+
+    resetSuccess.style.display =
+        "block";
+
+
+    document.getElementById(
+        "securityAnswer"
+    ).value = "";
+
+
+    document.getElementById(
+        "newPassword"
+    ).value = "";
+
+
+    document.getElementById(
+        "confirmPassword"
+    ).value = "";
+
+
+    setTimeout(
+        function() {
+
+            showLogin();
+
+        },
+        1800
+    );
+
+}
+
+
+// =================================
+// ENTER KEY LOGIN
+// =================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        document
+        .getElementById("ownerPassword")
+        .addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    ownerLogin();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+// =================================
+// APPLY ADMIN LANGUAGE
+// =================================
+
+function applyAdminLanguage(language) {
+
+    const selectedLanguage =
+        adminTranslations[language]
+        ? language
+        : "en";
+
+
+    document
+    .querySelectorAll(
+        "[data-admin-lang]"
+    )
+    .forEach(
+        function(element) {
+
+            const key =
+                element.getAttribute(
+                    "data-admin-lang"
+                );
+
+
+            if (
+                adminTranslations[
+                    selectedLanguage
+                ][key]
+            ) {
+
+                element.textContent =
+                    adminTranslations[
+                        selectedLanguage
+                    ][key];
+
+            }
+
+        }
+    );
+
+
+    document
+    .querySelectorAll(
+        "[data-admin-placeholder]"
+    )
+    .forEach(
+        function(element) {
+
+            const key =
+                element.getAttribute(
+                    "data-admin-placeholder"
+                );
+
+
+            if (
+                adminPlaceholders[
+                    selectedLanguage
+                ][key]
+            ) {
+
+                element.placeholder =
+                    adminPlaceholders[
+                        selectedLanguage
+                    ][key];
+
+            }
+
+        }
+    );
+
+
+    document.documentElement.lang =
+        selectedLanguage;
+
+
+    if (
+        selectedLanguage === "te"
+    ) {
+
+        document.title =
+            "కొత్త మొక్కను జోడించండి - GreenLeaf Nursery";
+
+    }
+
+    else if (
+        selectedLanguage === "hi"
+    ) {
+
+        document.title =
+            "नया पौधा जोड़ें - GreenLeaf Nursery";
+
+    }
+
+    else {
+
+        document.title =
+            "Add New Plant - GreenLeaf Nursery";
+
+    }
+
+
+    applyOwnerLoginLanguage();
+
+}
+
+
+// =================================
+// PAGE LOAD
+// =================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+
+        const savedLanguage =
+            localStorage.getItem(
+                "selectedLanguage"
+            ) || "en";
+
+
+        applyAdminLanguage(
+            savedLanguage
+        );
+
+
+        const loggedIn =
+            sessionStorage.getItem(
+                "greenleafOwnerLoggedIn"
+            );
+
+
+        if (
+            loggedIn === "true"
+        ) {
+
+            document.getElementById(
+                "ownerLogin"
+            ).style.display = "none";
+
+        }
+
+        else {
+
+            document.getElementById(
+                "ownerLogin"
+            ).style.display = "flex";
+
+        }
+
+    }
+);
+
+
+// =================================
+// LANGUAGE CHANGE
+// =================================
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key ===
+            "selectedLanguage"
+        ) {
+
+            applyAdminLanguage(
+                event.newValue || "en"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+<script>
+
+
+// =================================
+// ADD NEW PLANT
+// =================================
+
+document
+.getElementById("plantForm")
+.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        // ===============================
+        // CREATE PLANT OBJECT
+        // ===============================
+
+        const plant = {
+
+            id:
+                Date.now(),
+
+            name:
+                document
+                .getElementById("plantName")
+                .value
+                .trim(),
+
+            category:
+                document
+                .getElementById("category")
+                .value,
+
+            price:
+                document
+                .getElementById("price")
+                .value,
+
+            image:
+                document
+                .getElementById("image")
+                .value
+                .trim(),
+
+            sunlight:
+                document
+                .getElementById("sunlight")
+                .value
+                .trim(),
+
+            watering:
+                document
+                .getElementById("watering")
+                .value
+                .trim(),
+
+            diseases:
+                document
+                .getElementById("diseases")
+                .value
+                .trim(),
+
+            description:
+                document
+                .getElementById("description")
+                .value
+                .trim()
+
+        };
+
+
+        // ===============================
+        // GET EXISTING PLANTS
+        // ===============================
+
+        let plants =
+            JSON.parse(
+                localStorage.getItem(
+                    "greenleafPlants"
+                )
+            ) || [];
+
+
+        // ===============================
+        // ADD NEW PLANT
+        // ===============================
+
+        plants.push(plant);
+
+
+        // ===============================
+        // SAVE TO LOCAL STORAGE
+        // ===============================
+
+        localStorage.setItem(
+            "greenleafPlants",
+            JSON.stringify(plants)
+        );
+
+
+        // ===============================
+        // RESET FORM
+        // ===============================
+
+        document
+        .getElementById("plantForm")
+        .reset();
+
+
+        // No alert popup.
+        // Plant is added directly.
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

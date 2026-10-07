@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Indoor Plants - GreenLeaf Nursery</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#f3f8f3;
+            color:#222;
+        }
+
+        header{
+            background:#173d27;
+            color:white;
+            padding:18px 30px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        .logo{
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin:8px;
+            font-weight:bold;
+        }
+
+        nav a:hover{
+            text-decoration:underline;
+        }
+
+        .language-box{
+            margin-left:10px;
+            padding:8px 12px;
+            border-radius:8px;
+            border:none;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .plants{
+            padding-top:25px;
+        }
+
+        .plants h2{
+            text-align:center;
+            color:#176b2c;
+            font-size:30px;
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn{
+            display:block;
+            width:max-content;
+            margin:10px auto 25px;
+            padding:10px 20px;
+            background:#176b2c;
+            color:white;
+            text-decoration:none;
+            border-radius:20px;
+            font-size:15px;
+            font-weight:bold;
+        }
+
+        .back-btn:hover{
+            background:#0e4e20;
+        }
+
+        /* SEARCH */
+
+        .search-box{
+            text-align:center;
+            margin:25px auto;
+        }
+
+        .search-box input{
+            width:90%;
+            max-width:600px;
+            padding:15px 20px;
+            border:2px solid #176b2c;
+            border-radius:30px;
+            font-size:17px;
+            outline:none;
+        }
+
+        .search-box input:focus{
+            box-shadow:0 0 10px rgba(23,107,44,0.25);
+        }
+
+        /* PLANTS */
+
+        .plant-container{
+            display:flex;
+            justify-content:center;
+            gap:30px;
+            flex-wrap:wrap;
+            padding:30px 7% 50px;
+        }
+
+        .plant-card{
+            width:280px;
+            background:white;
+            border-radius:15px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.15);
+            text-align:center;
+            padding-bottom:20px;
+            transition:0.3s;
+        }
+
+        .plant-card:hover{
+            transform:translateY(-5px);
+            box-shadow:0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .plant-card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+            display:block;
+            cursor:pointer;
+        }
+
+        .plant-card h3{
+            margin:15px 0 8px;
+            font-size:22px;
+            color:#176b2c;
+        }
+
+        .plant-card p{
+            color:#555;
+            font-size:17px;
+        }
+
+        .plant-card button{
+            background:#176b2c;
+            color:white;
+            border:none;
+            padding:11px 22px;
+            border-radius:20px;
+            cursor:pointer;
+            font-size:15px;
+            margin:5px;
+        }
+
+        .plant-card button:hover{
+            background:#0e4e20;
+        }
+
+        .details-btn{
+            background:#2e7d32 !important;
+        }
+
+        .details-btn:hover{
+            background:#1b5e20 !important;
+        }
+
+        /* NO RESULT */
+
+        .no-result{
+            display:none;
+            text-align:center;
+            font-size:20px;
+            color:#555;
+            padding:30px;
+        }
+
+        /* FOOTER */
+
+        footer{
+            background:#173d27;
+            color:white;
+            text-align:center;
+            padding:25px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        🌿 GreenLeaf Nursery
+    </div>
+
+    <nav>
+
+        <a href="index.html" data-lang="home">
+            Home
+        </a>
+
+        <a href="indoor.html" data-lang="indoor">
+            Indoor Plants
+        </a>
+
+        <a href="outdoor.html" data-lang="outdoor">
+            Outdoor Plants
+        </a>
+
+        <a href="countries.html" data-lang="countries">
+            Other Countries
+        </a>
+
+        <a href="diseases.html" data-lang="diseases">
+            Diseases
+        </a>
+
+        <a href="cart.html" data-lang="cart">
+            🛒 Cart
+        </a>
+
+        <a href="orders.html" data-lang="orders">
+            📦 My Orders
+        </a>
+
+        <select
+            id="languageSelect"
+            class="language-box"
+            onchange="changeLanguage(this.value)">
+
+            <option value="en">English</option>
+            <option value="te">తెలుగు</option>
+            <option value="hi">हिन्दी</option>
+
+        </select>
+
+    </nav>
+
+</header>
+
+
+
+<!-- INDOOR PLANTS -->
+
+<section class="plants">
+
+    <h2 data-lang="indoorPlantsTitle">
+        🌿 Indoor Plants
+    </h2>
+
+
+    <!-- BACK TO EXPLORE PLANTS -->
+
+    <a
+        href="plants.html"
+        class="back-btn"
+        data-lang="backExplore">
+
+        ← Back to Explore Plants
+
+    </a>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="plantSearch"
+            data-lang-placeholder="indoorSearchPlaceholder"
+            placeholder="🔍 Search for a plant..."
+            onkeyup="searchPlants()"
+        >
+
+    </div>
+
+
+
+    <div
+        class="plant-container"
+        id="plantContainer">
+
+
+
+        <!-- =========================
+             SNAKE PLANT
+        ========================== -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Sansevieria_trifasciata.jpg"
+                alt="Snake Plant"
+                onclick="viewPlant('Snake Plant')"
+            >
+
+            <h3
+                data-plant-name="Snake Plant">
+                Snake Plant
+            </h3>
+
+            <p data-lang="price299">
+                Price: ₹299
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Snake Plant',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Sansevieria_trifasciata.jpg'
+                )"
+                data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewPlant('Snake Plant')"
+                data-lang="viewDetails">
+
+                View Details 🔍
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             PEACE LILY
+        ========================== -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Peace_Lily.jpg"
+                alt="Peace Lily"
+                onclick="viewPlant('Peace Lily')"
+            >
+
+            <h3
+                data-plant-name="Peace Lily">
+                Peace Lily
+            </h3>
+
+            <p data-lang="price349">
+                Price: ₹349
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Peace Lily',
+                    349,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Peace_Lily.jpg'
+                )"
+                data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewPlant('Peace Lily')"
+                data-lang="viewDetails">
+
+                View Details 🔍
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             SPIDER PLANT
+        ========================== -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Spider_Plant_%28Chlorophytum_comosum%29.jpg"
+                alt="Spider Plant"
+                onclick="viewPlant('Spider Plant')"
+            >
+
+            <h3
+                data-plant-name="Spider Plant">
+                Spider Plant
+            </h3>
+
+            <p>
+                <span data-lang="price249">
+                    Price: ₹249
+                </span>
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Spider Plant',
+                    249,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Spider_Plant_%28Chlorophytum_comosum%29.jpg'
+                )"
+                data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewPlant('Spider Plant')"
+                data-lang="viewDetails">
+
+                View Details 🔍
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             ZZ PLANT
+        ========================== -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Zamioculcas_zamiifolia.jpg"
+                alt="ZZ Plant"
+                onclick="viewPlant('ZZ Plant')"
+            >
+
+            <h3
+                data-plant-name="ZZ Plant">
+                ZZ Plant
+            </h3>
+
+            <p data-lang="price399">
+                Price: ₹399
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'ZZ Plant',
+                    399,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Zamioculcas_zamiifolia.jpg'
+                )"
+                data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewPlant('ZZ Plant')"
+                data-lang="viewDetails">
+
+                View Details 🔍
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             RUBBER PLANT
+        ========================== -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Rubber_Plant_%28Ficus_elastica%29.jpg"
+                alt="Rubber Plant"
+                onclick="viewPlant('Rubber Plant')"
+            >
+
+            <h3
+                data-plant-name="Rubber Plant">
+                Rubber Plant
+            </h3>
+
+            <p>
+                <span data-lang="price499">
+                    Price: ₹499
+                </span>
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Rubber Plant',
+                    499,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Rubber_Plant_%28Ficus_elastica%29.jpg'
+                )"
+                data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewPlant('Rubber Plant')"
+                data-lang="viewDetails">
+
+                View Details 🔍
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             ARECA PALM
+        ========================== -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Areca_palm.jpg"
+                alt="Areca Palm"
+                onclick="viewPlant('Areca Palm')"
+            >
+
+            <h3
+                data-plant-name="Areca Palm">
+                Areca Palm
+            </h3>
+
+            <p>
+                <span data-lang="price449">
+                    Price: ₹449
+                </span>
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Areca Palm',
+                    449,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Areca_palm.jpg'
+                )"
+                data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewPlant('Areca Palm')"
+                data-lang="viewDetails">
+
+                View Details 🔍
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             BOSTON FERN
+        ========================== -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Boston_Fern_%28Nephrolepis_exaltata%29.jpg"
+                alt="Boston Fern"
+                onclick="viewPlant('Boston Fern')"
+            >
+
+            <h3
+                data-plant-name="Boston Fern">
+                Boston Fern
+            </h3>
+
+            <p data-lang="price299">
+                Price: ₹299
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Boston Fern',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Boston_Fern_%28Nephrolepis_exaltata%29.jpg'
+                )"
+                data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewPlant('Boston Fern')"
+                data-lang="viewDetails">
+
+                View Details 🔍
+
+            </button>
+
+        </div>
+
+
+
+    </div>
+
+
+    <!-- NO RESULT -->
+
+    <div
+        id="noResult"
+        class="no-result"
+        data-lang="noIndoorPlants">
+
+        🌱 No plants found.
+
+    </div>
+
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3 data-lang="footerTitle">
+        🌿 GreenLeaf Plant Nursery
+    </h3>
+
+    <p data-lang="footerText">
+        Healthy Plants • Beautiful Homes • Greener Future
+    </p>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+<script src="language.js"></script>
+
+
+<script>
+
+/* =========================================
+   SEARCH FUNCTION
+========================================= */
+
+function searchPlants(){
+
+    let search =
+        document
+        .getElementById("plantSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    let cards =
+        document.querySelectorAll(".plant-card");
+
+
+    let found = 0;
+
+
+    cards.forEach(function(card){
+
+        let plantName =
+            card
+            .querySelector("h3")
+            .getAttribute("data-plant-name")
+            .toLowerCase();
+
+
+        if(plantName.includes(search)){
+
+            card.style.display = "block";
+
+            found++;
+
+        }
+        else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    let noResult =
+        document.getElementById("noResult");
+
+
+    if(found === 0){
+
+        noResult.style.display = "block";
+
+    }
+    else{
+
+        noResult.style.display = "none";
+
+    }
+
+}
+
+
+
+/* =========================================
+   PLANT DATABASE
+   Each plant has its OWN details
+========================================= */
+
+const indoorPlants = {
+
+    "Snake Plant": {
+
+        name: "Snake Plant",
+
+        price: "₹299",
+
+        type: "Indoor Plant",
+
+        description:
+        "A hardy and low-maintenance indoor plant with tall upright leaves. It is suitable for homes, bedrooms and offices.",
+
+        sunlight:
+        "Bright indirect light. It can also tolerate low light.",
+
+        watering:
+        "Water once every 1-2 weeks. Allow the soil to dry between watering.",
+
+        soil:
+        "Well-draining potting soil.",
+
+        temperature:
+        "18°C - 30°C",
+
+        care:
+        "Avoid overwatering and provide good drainage.",
+
+        image:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sansevieria_trifasciata.jpg"
+
+    },
+
+
+    "Peace Lily": {
+
+        name: "Peace Lily",
+
+        price: "₹349",
+
+        type: "Indoor Plant",
+
+        description:
+        "Beautiful flowering indoor plant with attractive green leaves and white flowers. It is ideal for homes and offices.",
+
+        sunlight:
+        "Bright indirect light.",
+
+        watering:
+        "Water when the top layer of soil feels dry.",
+
+        soil:
+        "Moist, well-draining potting soil.",
+
+        temperature:
+        "18°C - 30°C",
+
+        care:
+        "Keep the soil slightly moist and avoid direct harsh sunlight.",
+
+        image:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Peace_Lily.jpg"
+
+    },
+
+
+    "Spider Plant": {
+
+        name: "Spider Plant",
+
+        price: "₹249",
+
+        type: "Indoor Plant",
+
+        description:
+        "Easy-growing indoor plant with attractive green and white striped leaves. It is suitable for beginners.",
+
+        sunlight:
+        "Medium to bright indirect light.",
+
+        watering:
+        "Water when the top soil becomes slightly dry.",
+
+        soil:
+        "Well-draining, fertile potting soil.",
+
+        temperature:
+        "15°C - 30°C",
+
+        care:
+        "Avoid waterlogging and provide indirect sunlight.",
+
+        image:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Spider_Plant_%28Chlorophytum_comosum%29.jpg"
+
+    },
+
+
+    "ZZ Plant": {
+
+        name: "ZZ Plant",
+
+        price: "₹399",
+
+        type: "Indoor Plant",
+
+        description:
+        "A very low-maintenance indoor plant with glossy green leaves. It is excellent for homes and offices.",
+
+        sunlight:
+        "Low to bright indirect light.",
+
+        watering:
+        "Water every 2-3 weeks and allow the soil to dry between watering.",
+
+        soil:
+        "Well-draining sandy or cactus potting soil.",
+
+        temperature:
+        "18°C - 30°C",
+
+        care:
+        "Avoid overwatering and keep the plant in a well-drained pot.",
+
+        image:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Zamioculcas_zamiifolia.jpg"
+
+    },
+
+
+    "Rubber Plant": {
+
+        name: "Rubber Plant",
+
+        price: "₹499",
+
+        type: "Indoor Plant",
+
+        description:
+        "Popular indoor plant with large glossy leaves. It adds a beautiful green appearance to indoor spaces.",
+
+        sunlight:
+        "Bright indirect light.",
+
+        watering:
+        "Water when the top soil becomes dry.",
+
+        soil:
+        "Rich, well-draining potting soil.",
+
+        temperature:
+        "18°C - 30°C",
+
+        care:
+        "Keep away from very harsh direct sunlight and avoid overwatering.",
+
+        image:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rubber_Plant_%28Ficus_elastica%29.jpg"
+
+    },
+
+
+    "Areca Palm": {
+
+        name: "Areca Palm",
+
+        price: "₹449",
+
+        type: "Indoor Plant",
+
+        description:
+        "Beautiful tropical palm that adds a fresh and natural look to homes and offices.",
+
+        sunlight:
+        "Bright indirect light.",
+
+        watering:
+        "Water regularly but allow the top soil to dry slightly.",
+
+        soil:
+        "Well-draining fertile soil.",
+
+        temperature:
+        "18°C - 32°C",
+
+        care:
+        "Maintain moderate humidity and avoid overwatering.",
+
+        image:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Areca_palm.jpg"
+
+    },
+
+
+    "Boston Fern": {
+
+        name: "Boston Fern",
+
+        price: "₹299",
+
+        type: "Indoor Plant",
+
+        description:
+        "Lush green fern with beautiful soft fronds. It is commonly grown indoors in humid environments.",
+
+        sunlight:
+        "Bright indirect light.",
+
+        watering:
+        "Keep the soil slightly moist and do not allow it to completely dry.",
+
+        soil:
+        "Moist, rich and well-draining soil.",
+
+        temperature:
+        "18°C - 27°C",
+
+        care:
+        "Provide humidity and indirect light. Avoid very dry conditions.",
+
+        image:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Boston_Fern_%28Nephrolepis_exaltata%29.jpg"
+
+    }
+
+};
+
+
+
+/* =========================================
+   VIEW PLANT DETAILS
+========================================= */
+
+function viewPlant(plantName){
+
+    const plant =
+        indoorPlants[plantName];
+
+
+    if(!plant){
+
+        alert("Plant details not found!");
+
+        return;
+
+    }
+
+
+    /*
+       Save the COMPLETE selected plant
+       into localStorage
+    */
+
+    localStorage.setItem(
+        "selectedPlant",
+        JSON.stringify(plant)
+    );
+
+
+    /*
+       Open details page
+    */
+
+    window.location.href =
+        "plant-details.html";
+
+}
+
+</script>
+
+
+</body>
+</html>

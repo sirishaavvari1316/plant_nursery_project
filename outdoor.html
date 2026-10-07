@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Outdoor Plants - GreenLeaf Nursery</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           SEARCH BAR
+        ========================= */
+
+        .page-search {
+            text-align: center;
+            padding: 25px 15px;
+            background: #f4f8f3;
+        }
+
+        .page-search h2 {
+            color: #145c2a;
+            margin-bottom: 15px;
+        }
+
+        #outdoorSearch {
+            width: 80%;
+            max-width: 650px;
+            padding: 14px 20px;
+            font-size: 17px;
+            border: 2px solid #4caf50;
+            border-radius: 30px;
+            outline: none;
+        }
+
+        #outdoorSearch:focus {
+            border-color: #2e7d32;
+        }
+
+        #noOutdoorPlants {
+            text-align: center;
+            font-size: 18px;
+            margin: 25px;
+            color: #555;
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-btn {
+            display: block;
+            width: max-content;
+            margin: 10px auto 25px;
+            padding: 10px 20px;
+            background: #176b2c;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #0e4d1e;
+        }
+
+
+        /* =========================
+           PLANT CONTAINER
+        ========================= */
+
+        .plant-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 7%;
+        }
+
+
+        /* =========================
+           PLANT CARD
+        ========================= */
+
+        .plant-card {
+            width: 280px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+
+        .plant-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+
+        .plant-card h3 {
+            margin: 15px 0 8px;
+            font-size: 22px;
+        }
+
+
+        .plant-card p {
+            color: #555;
+            font-size: 17px;
+        }
+
+
+        .plant-card button {
+            background: #176b2c;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+
+        .plant-card button:hover {
+            background: #0e4d1e;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🌿 GreenLeaf Nursery
+    </div>
+
+
+    <nav>
+
+        <a href="index.html" data-lang="home">
+            Home
+        </a>
+
+        <a href="indoor.html" data-lang="indoor">
+            Indoor Plants
+        </a>
+
+        <a href="outdoor.html" data-lang="outdoor">
+            Outdoor Plants
+        </a>
+
+        <a href="countries.html" data-lang="countries">
+            Other Countries
+        </a>
+
+        <a href="diseases.html" data-lang="diseases">
+            Diseases
+        </a>
+
+        <a href="cart.html" data-lang="cart">
+            🛒 Cart
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     SEARCH BAR
+========================= -->
+
+<section class="page-search">
+
+    <h2 data-lang="outdoorSearchTitle">
+        🔍 Search Outdoor Plants
+    </h2>
+
+
+    <input
+        type="text"
+        id="outdoorSearch"
+        placeholder="Search outdoor plants..."
+        onkeyup="searchOutdoorPlants()"
+    >
+
+</section>
+
+
+
+<!-- =========================
+     OUTDOOR PLANTS
+========================= -->
+
+<section class="plants">
+
+    <h2 data-lang="outdoorPlantsTitle">
+        🌺 Outdoor Plants
+    </h2>
+
+
+    <!-- BACK TO EXPLORE PLANTS -->
+
+    <a
+        href="plants.html"
+        class="back-btn"
+        data-lang="backExplore"
+    >
+        ← Back to Explore Plants
+    </a>
+
+
+    <div
+        class="plant-container"
+        id="outdoorPlants"
+    >
+
+
+        <!-- HIBISCUS -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Jasud_%28hibiscus_flower%29.jpg"
+                alt="Hibiscus"
+            >
+
+            <h3>
+                Hibiscus
+            </h3>
+
+            <p data-lang="price299">
+                Price: ₹299
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Hibiscus',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Jasud_%28hibiscus_flower%29.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Hibiscus',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Jasud_%28hibiscus_flower%29.jpg',
+                    'Hibiscus is a beautiful outdoor flowering plant. It grows well in sunlight and needs regular watering.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- BOUGAINVILLEA -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Bougainvillea_glabra_at_Kadavoor.jpg"
+                alt="Bougainvillea"
+            >
+
+            <h3>
+                Bougainvillea
+            </h3>
+
+            <p data-lang="price399">
+                Price: ₹399
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Bougainvillea',
+                    399,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bougainvillea_glabra_at_Kadavoor.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Bougainvillea',
+                    399,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bougainvillea_glabra_at_Kadavoor.jpg',
+                    'Bougainvillea is a colorful outdoor flowering plant that loves bright sunlight and warm conditions.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- ROSE -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/A_small_garden_rose_in_Bengal.jpg"
+                alt="Rose Plant"
+            >
+
+            <h3>
+                Rose Plant
+            </h3>
+
+            <p data-lang="price349">
+                Price: ₹349
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Rose Plant',
+                    349,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_small_garden_rose_in_Bengal.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Rose Plant',
+                    349,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_small_garden_rose_in_Bengal.jpg',
+                    'Rose is a popular outdoor flowering plant. It needs good sunlight, regular watering and well-drained soil.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- MARIGOLD -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/A_red_marigold_flower_%28Japanese_marigold%29_in_West_Bengal%2C_India%2C_photographed_by_Yogabrata_Chakraborty%2C_on_May_12%2C_2023.jpg"
+                alt="Marigold"
+            >
+
+            <h3>
+                Marigold
+            </h3>
+
+            <p data-lang="price199">
+                Price: ₹199
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Marigold',
+                    199,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_red_marigold_flower_%28Japanese_marigold%29_in_West_Bengal%2C_India%2C_photographed_by_Yogabrata_Chakraborty%2C_on_May_12%2C_2023.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Marigold',
+                    199,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_red_marigold_flower_%28Japanese_marigold%29_in_West_Bengal%2C_India%2C_photographed_by_Yogabrata_Chakraborty%2C_on_May_12%2C_2023.jpg',
+                    'Marigold is an easy-to-grow outdoor flowering plant. It prefers full sunlight and moderate watering.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- JASMINE -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Buds_and_flowers_of_Jasminum_azoricum_in_West_Bengal%2C_India.jpg"
+                alt="Jasmine"
+            >
+
+            <h3>
+                Jasmine
+            </h3>
+
+            <p data-lang="price299">
+                Price: ₹299
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Jasmine',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Buds_and_flowers_of_Jasminum_azoricum_in_West_Bengal%2C_India.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Jasmine',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Buds_and_flowers_of_Jasminum_azoricum_in_West_Bengal%2C_India.jpg',
+                    'Jasmine is a fragrant outdoor flowering plant. It grows well in sunlight and needs regular watering.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- PORTULACA -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Pink_flower_of_Portulaca_grandiflora.jpg"
+                alt="Portulaca"
+            >
+
+            <h3>
+                Portulaca
+            </h3>
+
+            <p data-lang="price199">
+                Price: ₹199
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Portulaca',
+                    199,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Pink_flower_of_Portulaca_grandiflora.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Portulaca',
+                    199,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Pink_flower_of_Portulaca_grandiflora.jpg',
+                    'Portulaca is a colorful outdoor flowering plant. It loves sunlight and requires less water compared with many other plants.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- NO RESULT -->
+
+    <p
+        id="noOutdoorPlants"
+        data-lang="noOutdoorPlants"
+    ></p>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>
+        🌿 GreenLeaf Plant Nursery
+    </h3>
+
+    <p data-lang="footerText">
+        Healthy Plants • Beautiful Homes • Greener Future
+    </p>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+<!-- LANGUAGE SYSTEM -->
+
+<script src="language.js"></script>
+
+
+
+<!-- =========================
+     OUTDOOR SEARCH
+========================= -->
+
+<script>
+
+function searchOutdoorPlants() {
+
+    const input =
+        document.getElementById("outdoorSearch");
+
+    const searchText =
+        input.value.toLowerCase().trim();
+
+    const cards =
+        document.querySelectorAll(
+            "#outdoorPlants .plant-card"
+        );
+
+    const message =
+        document.getElementById(
+            "noOutdoorPlants"
+        );
+
+    let found = false;
+
+
+    cards.forEach(function(card) {
+
+        const title =
+            card.querySelector("h3");
+
+        if (!title) return;
+
+        const plantName =
+            title.innerText.toLowerCase();
+
+
+        if (
+            plantName.includes(searchText)
+        ) {
+
+            card.style.display = "";
+
+            found = true;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    if (
+        searchText !== "" &&
+        !found
+    ) {
+
+        message.innerText =
+            "❌ No outdoor plants found.";
+
+    } else {
+
+        message.innerText = "";
+
+    }
+
+}
+
+</script>
+
+
+
+<!-- =========================
+     VIEW DETAILS
+========================= -->
+
+<script>
+
+function viewDetails(
+    name,
+    price,
+    image,
+    description
+) {
+
+    const plantDetails = {
+
+        name: name,
+
+        price: price,
+
+        image: image,
+
+        description: description
+
+    };
+
+
+    localStorage.setItem(
+        "selectedPlant",
+        JSON.stringify(plantDetails)
+    );
+
+
+    window.location.href =
+        "plant-details.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Outdoor Plants - GreenLeaf Nursery</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           SEARCH BAR
+        ========================= */
+
+        .page-search {
+            text-align: center;
+            padding: 25px 15px;
+            background: #f4f8f3;
+        }
+
+        .page-search h2 {
+            color: #145c2a;
+            margin-bottom: 15px;
+        }
+
+        #outdoorSearch {
+            width: 80%;
+            max-width: 650px;
+            padding: 14px 20px;
+            font-size: 17px;
+            border: 2px solid #4caf50;
+            border-radius: 30px;
+            outline: none;
+        }
+
+        #outdoorSearch:focus {
+            border-color: #2e7d32;
+        }
+
+        #noOutdoorPlants {
+            text-align: center;
+            font-size: 18px;
+            margin: 25px;
+            color: #555;
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-btn {
+            display: block;
+            width: max-content;
+            margin: 10px auto 25px;
+            padding: 10px 20px;
+            background: #176b2c;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #0e4d1e;
+        }
+
+
+        /* =========================
+           PLANT CONTAINER
+        ========================= */
+
+        .plant-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 7%;
+        }
+
+
+        /* =========================
+           PLANT CARD
+        ========================= */
+
+        .plant-card {
+            width: 280px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+
+        .plant-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+
+        .plant-card h3 {
+            margin: 15px 0 8px;
+            font-size: 22px;
+        }
+
+
+        .plant-card p {
+            color: #555;
+            font-size: 17px;
+        }
+
+
+        .plant-card button {
+            background: #176b2c;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+
+        .plant-card button:hover {
+            background: #0e4d1e;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🌿 GreenLeaf Nursery
+    </div>
+
+
+    <nav>
+
+        <a href="index.html" data-lang="home">
+            Home
+        </a>
+
+        <a href="indoor.html" data-lang="indoor">
+            Indoor Plants
+        </a>
+
+        <a href="outdoor.html" data-lang="outdoor">
+            Outdoor Plants
+        </a>
+
+        <a href="countries.html" data-lang="countries">
+            Other Countries
+        </a>
+
+        <a href="diseases.html" data-lang="diseases">
+            Diseases
+        </a>
+
+        <a href="cart.html" data-lang="cart">
+            🛒 Cart
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     SEARCH BAR
+========================= -->
+
+<section class="page-search">
+
+    <h2 data-lang="outdoorSearchTitle">
+        🔍 Search Outdoor Plants
+    </h2>
+
+
+    <input
+        type="text"
+        id="outdoorSearch"
+        placeholder="Search outdoor plants..."
+        onkeyup="searchOutdoorPlants()"
+    >
+
+</section>
+
+
+
+<!-- =========================
+     OUTDOOR PLANTS
+========================= -->
+
+<section class="plants">
+
+    <h2 data-lang="outdoorPlantsTitle">
+        🌺 Outdoor Plants
+    </h2>
+
+
+    <!-- BACK TO EXPLORE PLANTS -->
+
+    <a
+        href="plants.html"
+        class="back-btn"
+        data-lang="backExplore"
+    >
+        ← Back to Explore Plants
+    </a>
+
+
+    <div
+        class="plant-container"
+        id="outdoorPlants"
+    >
+
+
+        <!-- HIBISCUS -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Jasud_%28hibiscus_flower%29.jpg"
+                alt="Hibiscus"
+            >
+
+            <h3>
+                Hibiscus
+            </h3>
+
+            <p data-lang="price299">
+                Price: ₹299
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Hibiscus',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Jasud_%28hibiscus_flower%29.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Hibiscus',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Jasud_%28hibiscus_flower%29.jpg',
+                    'Hibiscus is a beautiful outdoor flowering plant. It grows well in sunlight and needs regular watering.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- BOUGAINVILLEA -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Bougainvillea_glabra_at_Kadavoor.jpg"
+                alt="Bougainvillea"
+            >
+
+            <h3>
+                Bougainvillea
+            </h3>
+
+            <p data-lang="price399">
+                Price: ₹399
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Bougainvillea',
+                    399,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bougainvillea_glabra_at_Kadavoor.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Bougainvillea',
+                    399,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bougainvillea_glabra_at_Kadavoor.jpg',
+                    'Bougainvillea is a colorful outdoor flowering plant that loves bright sunlight and warm conditions.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- ROSE -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/A_small_garden_rose_in_Bengal.jpg"
+                alt="Rose Plant"
+            >
+
+            <h3>
+                Rose Plant
+            </h3>
+
+            <p data-lang="price349">
+                Price: ₹349
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Rose Plant',
+                    349,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_small_garden_rose_in_Bengal.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Rose Plant',
+                    349,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_small_garden_rose_in_Bengal.jpg',
+                    'Rose is a popular outdoor flowering plant. It needs good sunlight, regular watering and well-drained soil.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- MARIGOLD -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/A_red_marigold_flower_%28Japanese_marigold%29_in_West_Bengal%2C_India%2C_photographed_by_Yogabrata_Chakraborty%2C_on_May_12%2C_2023.jpg"
+                alt="Marigold"
+            >
+
+            <h3>
+                Marigold
+            </h3>
+
+            <p data-lang="price199">
+                Price: ₹199
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Marigold',
+                    199,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_red_marigold_flower_%28Japanese_marigold%29_in_West_Bengal%2C_India%2C_photographed_by_Yogabrata_Chakraborty%2C_on_May_12%2C_2023.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Marigold',
+                    199,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_red_marigold_flower_%28Japanese_marigold%29_in_West_Bengal%2C_India%2C_photographed_by_Yogabrata_Chakraborty%2C_on_May_12%2C_2023.jpg',
+                    'Marigold is an easy-to-grow outdoor flowering plant. It prefers full sunlight and moderate watering.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- JASMINE -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Buds_and_flowers_of_Jasminum_azoricum_in_West_Bengal%2C_India.jpg"
+                alt="Jasmine"
+            >
+
+            <h3>
+                Jasmine
+            </h3>
+
+            <p data-lang="price299">
+                Price: ₹299
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Jasmine',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Buds_and_flowers_of_Jasminum_azoricum_in_West_Bengal%2C_India.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Jasmine',
+                    299,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Buds_and_flowers_of_Jasminum_azoricum_in_West_Bengal%2C_India.jpg',
+                    'Jasmine is a fragrant outdoor flowering plant. It grows well in sunlight and needs regular watering.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+
+        <!-- PORTULACA -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Pink_flower_of_Portulaca_grandiflora.jpg"
+                alt="Portulaca"
+            >
+
+            <h3>
+                Portulaca
+            </h3>
+
+            <p data-lang="price199">
+                Price: ₹199
+            </p>
+
+            <button
+                onclick="addToCart(
+                    'Portulaca',
+                    199,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Pink_flower_of_Portulaca_grandiflora.jpg'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart 🛒
+            </button>
+
+            <button
+                onclick="viewDetails(
+                    'Portulaca',
+                    199,
+                    'https://commons.wikimedia.org/wiki/Special:Redirect/file/Pink_flower_of_Portulaca_grandiflora.jpg',
+                    'Portulaca is a colorful outdoor flowering plant. It loves sunlight and requires less water compared with many other plants.'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details 👁️
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- NO RESULT -->
+
+    <p
+        id="noOutdoorPlants"
+        data-lang="noOutdoorPlants"
+    ></p>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>
+        🌿 GreenLeaf Plant Nursery
+    </h3>
+
+    <p data-lang="footerText">
+        Healthy Plants • Beautiful Homes • Greener Future
+    </p>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+<!-- LANGUAGE SYSTEM -->
+
+<script src="language.js"></script>
+
+
+
+<!-- =========================
+     OUTDOOR SEARCH
+========================= -->
+
+<script>
+
+function searchOutdoorPlants() {
+
+    const input =
+        document.getElementById("outdoorSearch");
+
+    const searchText =
+        input.value.toLowerCase().trim();
+
+    const cards =
+        document.querySelectorAll(
+            "#outdoorPlants .plant-card"
+        );
+
+    const message =
+        document.getElementById(
+            "noOutdoorPlants"
+        );
+
+    let found = false;
+
+
+    cards.forEach(function(card) {
+
+        const title =
+            card.querySelector("h3");
+
+        if (!title) return;
+
+        const plantName =
+            title.innerText.toLowerCase();
+
+
+        if (
+            plantName.includes(searchText)
+        ) {
+
+            card.style.display = "";
+
+            found = true;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    if (
+        searchText !== "" &&
+        !found
+    ) {
+
+        message.innerText =
+            "❌ No outdoor plants found.";
+
+    } else {
+
+        message.innerText = "";
+
+    }
+
+}
+
+</script>
+
+
+
+<!-- =========================
+     VIEW DETAILS
+========================= -->
+
+<script>
+
+function viewDetails(
+    name,
+    price,
+    image,
+    description
+) {
+
+    const plantDetails = {
+
+        name: name,
+
+        price: price,
+
+        image: image,
+
+        description: description
+
+    };
+
+
+    localStorage.setItem(
+        "selectedPlant",
+        JSON.stringify(plantDetails)
+    );
+
+
+    window.location.href =
+        "plant-details.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

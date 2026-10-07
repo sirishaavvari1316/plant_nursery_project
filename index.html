@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>GreenLeaf Plant Nursery</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .home-search {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f4f8f3;
+        }
+
+        .home-search h2 {
+            margin-bottom: 15px;
+            color: #145c2a;
+        }
+
+        #plantSearch {
+            width: 80%;
+            max-width: 650px;
+            padding: 15px 20px;
+            font-size: 17px;
+            border: 2px solid #4caf50;
+            border-radius: 30px;
+            outline: none;
+        }
+
+        #plantSearch:focus {
+            border-color: #2e7d32;
+        }
+
+        #searchResults {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .search-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .search-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .search-card h3 {
+            margin: 10px 0 5px;
+            color: #145c2a;
+        }
+
+        .search-card p {
+            margin: 5px 0;
+        }
+
+        #searchMessage {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px;
+        }
+
+        .details-btn {
+            background: #145c2a;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 15px;
+        }
+
+        .details-btn:hover {
+            background: #0d421e;
+        }
+
+        /* =========================
+           HERO OVERLAP FIX
+        ========================= */
+
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
+            margin: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .welcome {
+            position: relative;
+            width: 100%;
+            clear: both;
+            z-index: 2;
+        }
+
+        .plants {
+            position: relative;
+            width: 100%;
+            clear: both;
+            z-index: 2;
+            display: block;
+            margin-top: 0;
+            padding: 40px 20px;
+        }
+
+        .plant-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            width: 100%;
+            position: relative;
+            clear: both;
+        }
+
+        .plant-card {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero::after,
+        .welcome::after,
+        .plants::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        /* =========================
+           ADMIN BUTTON
+        ========================= */
+
+        .admin-link {
+            background: #145c2a;
+            color: white !important;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .admin-link:hover {
+            background: #0d421e;
+        }
+
+        /* =========================
+           NAVBAR ONE LINE + GAP
+        ========================= */
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 20px;
+        }
+
+        header .logo {
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 18px;
+
+            flex-wrap: nowrap;
+            white-space: nowrap;
+        }
+
+        header nav a {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 900px) {
+
+            header nav {
+                flex-wrap: wrap;
+            }
+
+        }
+
+        /* =========================
+           AI BUTTON
+        ========================= */
+
+        #aiButton {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 65px;
+            height: 65px;
+            border: none;
+            border-radius: 50%;
+            background: #145c2a;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-decoration: none;
+        }
+
+        #aiButton:hover {
+            background: #0d421e;
+            transform: scale(1.08);
+        }
+
+        @media (max-width: 500px) {
+
+            #aiButton {
+                right: 15px;
+                bottom: 15px;
+                width: 60px;
+                height: 60px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🌿 GreenLeaf Nursery
+    </div>
+
+    <nav>
+
+        <a href="index.html" data-lang="home">
+            Home
+        </a>
+
+        <a href="indoor.html" data-lang="indoor">
+            Indoor Plants
+        </a>
+
+        <a href="outdoor.html" data-lang="outdoor">
+            Outdoor Plants
+        </a>
+
+        <a href="countries.html" data-lang="countries">
+            Other Countries
+        </a>
+
+        <a href="diseases.html" data-lang="diseases">
+            Diseases
+        </a>
+
+        <a href="orders.html" data-lang="orders">
+            My Orders
+        </a>
+
+        <a href="cart.html" data-lang="cart">
+            🛒 Cart
+        </a>
+
+
+        <!-- LANGUAGE -->
+
+        <select
+            id="languageSelect"
+            onchange="changeLanguage(this.value)"
+            style="
+                padding: 8px 10px;
+                border-radius: 6px;
+                border: 1px solid #145c2a;
+                cursor: pointer;
+                font-size: 14px;
+            "
+        >
+
+            <option value="en">🇬🇧 English</option>
+
+            <option value="te">🇮🇳 తెలుగు</option>
+
+            <option value="hi">🇮🇳 हिन्दी</option>
+
+        </select>
+
+
+        <!-- ADMIN IS LAST -->
+
+        <a href="admin.html"
+           class="admin-link"
+           data-lang="admin">
+
+            🔐 Admin
+
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1 data-lang="heroTitle">
+            Bring Nature Into Your Life 🌱
+        </h1>
+
+        <p data-lang="heroText">
+            Discover beautiful indoor, outdoor and unique plants from around the world.
+        </p>
+
+        <button
+            onclick="location.href='plants.html'"
+            data-lang="explore"
+        >
+            Explore Plants
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SEARCH
+========================= -->
+
+<section class="home-search">
+
+    <h2 data-lang="searchTitle">
+        🔍 Search Plants & Diseases
+    </h2>
+
+    <input
+        type="text"
+        id="plantSearch"
+        data-lang-placeholder="searchPlaceholder"
+        placeholder="Search Money Plant, Snake Plant, Rose, Disease..."
+        onkeyup="searchEverything()"
+    >
+
+</section>
+
+
+<div id="searchMessage"></div>
+
+<div id="searchResults"></div>
+
+
+<!-- =========================
+     WELCOME
+========================= -->
+
+<section class="welcome">
+
+    <h2 data-lang="welcome">
+        Welcome to GreenLeaf Nursery
+    </h2>
+
+    <p data-lang="welcomeText">
+        Find healthy and beautiful plants for your home, garden and office.
+    </p>
+
+</section>
+
+
+<!-- =========================
+     POPULAR PLANTS
+========================= -->
+
+<section class="plants">
+
+    <h2 data-lang="popular">
+        Popular Plants 🌿
+    </h2>
+
+    <div class="plant-container">
+
+
+        <!-- MONEY PLANT -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80"
+                alt="Money Plant"
+            >
+
+            <h3 data-plant-name="Money Plant">
+                Money Plant
+            </h3>
+
+            <p data-lang="indoorPlant">
+                Indoor Plant
+            </p>
+
+            <h4>
+                ₹199
+            </h4>
+
+            <button
+                onclick="addToCart(
+                    'Money Plant',
+                    199,
+                    'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewDetails(
+                    'Money Plant',
+                    199,
+                    'Indoor Plant',
+                    'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- SNAKE PLANT -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1669663723051-e197810a63b6?auto=format&fit=crop&w=600&q=80"
+                alt="Snake Plant"
+            >
+
+            <h3 data-plant-name="Snake Plant">
+                Snake Plant
+            </h3>
+
+            <p data-lang="indoorPlant">
+                Indoor Plant
+            </p>
+
+            <h4>
+                ₹299
+            </h4>
+
+            <button
+                onclick="addToCart(
+                    'Snake Plant',
+                    299,
+                    'https://images.unsplash.com/photo-1669663723051-e197810a63b6?auto=format&fit=crop&w=600&q=80'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewDetails(
+                    'Snake Plant',
+                    299,
+                    'Indoor Plant',
+                    'https://images.unsplash.com/photo-1669663723051-e197810a63b6?auto=format&fit=crop&w=600&q=80'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details
+            </button>
+
+        </div>
+
+
+        <!-- GARDEN PLANT -->
+
+        <div class="plant-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=600&q=80"
+                alt="Garden Plant"
+            >
+
+            <h3 data-plant-name="Garden Plant">
+                Garden Plant
+            </h3>
+
+            <p data-lang="outdoorPlant">
+                Outdoor Plant
+            </p>
+
+            <h4>
+                ₹249
+            </h4>
+
+            <button
+                onclick="addToCart(
+                    'Garden Plant',
+                    249,
+                    'https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=600&q=80'
+                )"
+                data-lang="addCart"
+            >
+                Add to Cart
+            </button>
+
+            <button
+                class="details-btn"
+                onclick="viewDetails(
+                    'Garden Plant',
+                    249,
+                    'Outdoor Plant',
+                    'https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=600&q=80'
+                )"
+                data-lang="viewDetails"
+            >
+                View Details
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3 data-lang="footerTitle">
+        🌿 GreenLeaf Plant Nursery
+    </h3>
+
+    <p data-lang="footerText">
+        Healthy Plants • Beautiful Homes • Greener Future
+    </p>
+
+    <p>
+        © 2026 GreenLeaf Nursery
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<script src="language.js"></script>
+
+
+<!-- =========================
+     VIEW DETAILS
+========================= -->
+
+<script>
+
+function viewDetails(name, price, type, image) {
+
+    localStorage.setItem(
+        "selectedPlant",
+        JSON.stringify({
+            name: name,
+            price: price,
+            type: type,
+            image: image
+        })
+    );
+
+    window.location.href = "plant-details.html";
+}
+
+</script>
+
+
+<!-- =========================
+     SEARCH EVERYTHING
+========================= -->
+
+<script>
+
+async function searchEverything() {
+
+    const input =
+        document.getElementById("plantSearch");
+
+    const searchText =
+        input.value.toLowerCase().trim();
+
+    const results =
+        document.getElementById("searchResults");
+
+    const message =
+        document.getElementById("searchMessage");
+
+    results.innerHTML = "";
+
+    message.innerHTML = "";
+
+    if (searchText === "") {
+        return;
+    }
+
+    const pages = [
+
+        {
+            file: "indoor.html",
+            category: "🌿 Indoor Plants"
+        },
+
+        {
+            file: "outdoor.html",
+            category: "🌳 Outdoor Plants"
+        },
+
+        {
+            file: "countries.html",
+            category: "🌍 Other Countries"
+        },
+
+        {
+            file: "diseases.html",
+            category: "🦠 Diseases"
+        }
+
+    ];
+
+    let found = false;
+
+    const homeCards =
+        document.querySelectorAll(".plant-card");
+
+    homeCards.forEach(function(card) {
+
+        const cardText =
+            card.innerText.toLowerCase();
+
+        const image =
+            card.querySelector("img");
+
+        const imageAlt =
+            image
+            ? image.alt.toLowerCase()
+            : "";
+
+        if (
+            cardText.includes(searchText) ||
+            imageAlt.includes(searchText)
+        ) {
+
+            found = true;
+
+            const resultCard =
+                document.createElement("div");
+
+            resultCard.className =
+                "search-card";
+
+            if (image) {
+
+                const img =
+                    document.createElement("img");
+
+                img.src =
+                    image.src;
+
+                img.alt =
+                    image.alt;
+
+                resultCard.appendChild(img);
+
+            }
+
+            const heading =
+                card.querySelector("h3");
+
+            if (heading) {
+
+                const title =
+                    document.createElement("h3");
+
+                title.innerText =
+                    heading.innerText;
+
+                resultCard.appendChild(title);
+
+            }
+
+            const category =
+                document.createElement("p");
+
+            const type =
+                card.querySelector("p");
+
+            if (type) {
+
+                category.innerText =
+                    "🌿 " + type.innerText;
+
+            } else {
+
+                category.innerText =
+                    "🌿 GreenLeaf Plant";
+
+            }
+
+            resultCard.appendChild(category);
+
+            const price =
+                card.querySelector("h4");
+
+            if (price) {
+
+                const priceText =
+                    document.createElement("h4");
+
+                priceText.innerText =
+                    price.innerText;
+
+                resultCard.appendChild(priceText);
+
+            }
+
+            resultCard.onclick =
+                function() {
+
+                    if (!heading) {
+                        return;
+                    }
+
+                    const plantName =
+                        heading.getAttribute(
+                            "data-plant-name"
+                        ) ||
+                        heading.innerText;
+
+                    const priceValue =
+                        price
+                        ? price.innerText
+                            .replace("₹", "")
+                            .trim()
+                        : "0";
+
+                    const typeValue =
+                        type
+                        ? type.innerText
+                        : "Plant";
+
+                    const imageValue =
+                        image
+                        ? image.src
+                        : "";
+
+                    localStorage.setItem(
+                        "selectedPlant",
+                        JSON.stringify({
+                            name: plantName,
+                            price: priceValue,
+                            type: typeValue,
+                            image: imageValue
+                        })
+                    );
+
+                    window.location.href =
+                        "plant-details.html";
+
+                };
+
+            results.appendChild(resultCard);
+
+        }
+
+    });
+
+
+    for (const page of pages) {
+
+        try {
+
+            const response =
+                await fetch(page.file);
+
+            if (!response.ok) {
+                continue;
+            }
+
+            const html =
+                await response.text();
+
+            const parser =
+                new DOMParser();
+
+            const doc =
+                parser.parseFromString(
+                    html,
+                    "text/html"
+                );
+
+            const cards =
+                doc.querySelectorAll(
+                    ".plant-card, .disease-card, .card"
+                );
+
+            cards.forEach(function(card) {
+
+                const cardText =
+                    card.innerText.toLowerCase();
+
+                const image =
+                    card.querySelector("img");
+
+                const imageAlt =
+                    image
+                    ? image.alt.toLowerCase()
+                    : "";
+
+                const heading =
+                    card.querySelector(
+                        "h1, h2, h3, h4"
+                    );
+
+                const headingText =
+                    heading
+                    ? heading.innerText.toLowerCase()
+                    : "";
+
+                if (
+                    cardText.includes(searchText) ||
+                    imageAlt.includes(searchText) ||
+                    headingText.includes(searchText)
+                ) {
+
+                    found = true;
+
+                    const resultCard =
+                        document.createElement("div");
+
+                    resultCard.className =
+                        "search-card";
+
+                    if (image) {
+
+                        const img =
+                            document.createElement("img");
+
+                        img.src =
+                            image.src;
+
+                        img.alt =
+                            image.alt;
+
+                        resultCard.appendChild(img);
+
+                    }
+
+                    if (heading) {
+
+                        const title =
+                            document.createElement("h3");
+
+                        title.innerText =
+                            heading.innerText;
+
+                        resultCard.appendChild(title);
+
+                    }
+
+                    const category =
+                        document.createElement("p");
+
+                    category.innerText =
+                        page.category;
+
+                    resultCard.appendChild(category);
+
+                    const paragraph =
+                        card.querySelector("p");
+
+                    if (paragraph) {
+
+                        const desc =
+                            document.createElement("p");
+
+                        desc.innerText =
+                            paragraph.innerText;
+
+                        resultCard.appendChild(desc);
+
+                    }
+
+                    const price =
+                        card.querySelector("h4");
+
+                    if (price) {
+
+                        const priceText =
+                            document.createElement("h4");
+
+                        priceText.innerText =
+                            price.innerText;
+
+                        resultCard.appendChild(priceText);
+
+                    }
+
+                    resultCard.onclick =
+                        function() {
+
+                            window.location.href =
+                                page.file;
+
+                        };
+
+                    results.appendChild(resultCard);
+
+                }
+
+            });
+
+        } catch (error) {
+
+            console.log(
+                "Search error:",
+                page.file,
+                error
+            );
+
+        }
+
+    }
+
+
+    if (!found) {
+
+        message.innerHTML =
+            "❌ No matching plant or disease found.";
+
+    } else {
+
+        message.innerHTML =
+            "🔎 Search Results";
+
+    }
+
+}
+
+</script>
+
+
+<!-- =========================
+     AI ASSISTANT
+     DIRECT PAGE OPEN
+========================= -->
+
+<a
+    href="ai-assistant.html"
+    id="aiButton"
+    title="GreenLeaf AI Assistant"
+>
+    🤖
+</a>
+
+
+</body>
+
+</html>

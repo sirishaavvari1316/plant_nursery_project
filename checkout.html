@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - GreenLeaf Nursery</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f8f3;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        nav {
+            background: #1b5e20;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            color: #2e7d32;
+            text-align: center;
+        }
+
+        .order-summary {
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .location-btn {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #388e3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+        }
+
+        .upi-box {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 15px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* THANK YOU */
+
+        #thankYou {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        #thankYou h1 {
+            color: #2e7d32;
+            font-size: 36px;
+        }
+
+        #thankYou p {
+            font-size: 19px;
+        }
+
+        .thank-icon {
+            font-size: 70px;
+        }
+
+        footer {
+            margin-top: 30px;
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌿 GreenLeaf Nursery</h1>
+    <p>Checkout</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="cart.html">Cart</a>
+    <a href="orders.html">My Orders</a>
+</nav>
+
+
+<!-- CHECKOUT -->
+
+<div class="container" id="checkoutBox">
+
+    <h2>🛒 Checkout</h2>
+
+    <div class="order-summary">
+        <h3>Order Summary</h3>
+
+        <div id="orderItems"></div>
+
+        <div class="total">
+            Total: ₹<span id="totalAmount">0</span>
+        </div>
+    </div>
+
+
+    <form id="checkoutForm">
+
+        <div class="form-group">
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+            >
+        </div>
+
+
+        <div class="form-group">
+            <label>Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter phone number"
+                maxlength="10"
+            >
+        </div>
+
+
+        <div class="form-group">
+            <label>Delivery Address</label>
+
+            <textarea
+                id="address"
+                placeholder="Enter your delivery address"
+            ></textarea>
+
+            <button
+                type="button"
+                class="location-btn"
+                onclick="getLocation()"
+            >
+                📍 Use My Current Location
+            </button>
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Payment Method</label>
+
+            <select id="payment" onchange="showUPI()">
+
+                <option value="">
+                    Select Payment Method
+                </option>
+
+                <option value="Cash on Delivery">
+                    Cash on Delivery
+                </option>
+
+                <option value="UPI">
+                    UPI
+                </option>
+
+                <option value="Card">
+                    Card
+                </option>
+
+            </select>
+
+
+            <div class="upi-box" id="upiBox">
+
+                <label>UPI ID</label>
+
+                <input
+                    type="text"
+                    id="upi"
+                    placeholder="example@upi"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="place-order"
+            onclick="placeOrder()"
+        >
+            🛍️ Place Order
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- THANK YOU -->
+
+<div class="container" id="thankYou">
+
+    <div class="thank-icon">
+        🎉
+    </div>
+
+    <h1>
+        Thank You!
+    </h1>
+
+    <p>
+        Your order has been placed successfully.
+    </p>
+
+    <p>
+        🌿 Thank you for shopping with GreenLeaf Nursery!
+    </p>
+
+</div>
+
+
+<footer>
+    <p>© 2026 GreenLeaf Nursery</p>
+</footer>
+
+
+<script>
+
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+    let total = 0;
+
+
+    // LOAD CART
+
+    function loadOrderSummary() {
+
+        const orderItems =
+            document.getElementById("orderItems");
+
+        orderItems.innerHTML = "";
+
+        total = 0;
+
+
+        if (cart.length === 0) {
+
+            orderItems.innerHTML =
+                "<p>No products in cart.</p>";
+
+            return;
+        }
+
+
+        cart.forEach(function(item) {
+
+            let quantity =
+                Number(item.quantity) || 1;
+
+            let price =
+                Number(item.price) || 0;
+
+            let itemTotal =
+                price * quantity;
+
+            total += itemTotal;
+
+
+            orderItems.innerHTML +=
+                "<p>🌱 " +
+                item.name +
+                " × " +
+                quantity +
+                " — ₹" +
+                itemTotal +
+                "</p>";
+
+        });
+
+
+        document.getElementById(
+            "totalAmount"
+        ).innerText = total;
+
+    }
+
+
+    // UPI
+
+    function showUPI() {
+
+        let payment =
+            document.getElementById("payment").value;
+
+        let upiBox =
+            document.getElementById("upiBox");
+
+
+        if (payment === "UPI") {
+
+            upiBox.style.display = "block";
+
+        } else {
+
+            upiBox.style.display = "none";
+
+        }
+
+    }
+
+
+    // LOCATION
+
+    function getLocation() {
+
+        let address =
+            document.getElementById("address");
+
+
+        if (navigator.geolocation) {
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position) {
+
+                    address.value +=
+                        "\nLocation: " +
+                        position.coords.latitude +
+                        ", " +
+                        position.coords.longitude;
+
+                }
+
+            );
+
+        }
+
+    }
+
+
+    // PLACE ORDER
+
+    function placeOrder() {
+
+        // SAVE ORDER
+
+        let name =
+            document.getElementById("name").value;
+
+        let phone =
+            document.getElementById("phone").value;
+
+        let address =
+            document.getElementById("address").value;
+
+        let payment =
+            document.getElementById("payment").value;
+
+
+        let order = {
+
+            product: cart.map(function(item) {
+
+                return item.name +
+                    " × " +
+                    item.quantity;
+
+            }).join(", "),
+
+            quantity: cart.reduce(
+                function(sum, item) {
+
+                    return sum +
+                        Number(item.quantity);
+
+                },
+                0
+            ),
+
+            amount: total,
+
+            name: name,
+
+            phone: phone,
+
+            address: address,
+
+            payment: payment,
+
+            date: new Date().toLocaleString(),
+
+            status: "Ordered"
+
+        };
+
+
+        let orders =
+            JSON.parse(
+                localStorage.getItem("orders")
+            ) || [];
+
+
+        orders.push(order);
+
+
+        localStorage.setItem(
+            "orders",
+            JSON.stringify(orders)
+        );
+
+
+        // CLEAR CART
+
+        localStorage.removeItem("cart");
+
+
+        // HIDE CHECKOUT
+
+        document.getElementById(
+            "checkoutBox"
+        ).style.display = "none";
+
+
+        // SHOW THANK YOU
+
+        document.getElementById(
+            "thankYou"
+        ).style.display = "block";
+
+    }
+
+
+    // START
+
+    loadOrderSummary();
+
+</script>
+
+</body>
+</html>

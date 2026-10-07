@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Plant Details - GreenLeaf Nursery</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f8f3;
+            color: #333;
+        }
+
+        header {
+            background: #176b3a;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* LANGUAGE SELECTOR - ADDED */
+
+        .language-box {
+            margin-left: 15px;
+            display: inline-block;
+        }
+
+        .language-box select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            background: white;
+            color: #176b3a;
+        }
+
+        .details-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .details-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .details-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .details-image img {
+            width: 100%;
+            max-width: 430px;
+            height: 430px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .details-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .details-info h2 {
+            color: #176b3a;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 26px;
+            font-weight: bold;
+            color: #e67e22;
+            margin: 15px 0;
+        }
+
+        .description {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .info-box {
+            background: #f1f8f3;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .info-box p {
+            margin: 10px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .info-box strong {
+            color: #176b3a;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 13px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .cart-btn {
+            background: #176b3a;
+            color: white;
+        }
+
+        .back-btn {
+            background: #ddd;
+            color: #333;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #176b3a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 15px;
+                text-align: center;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .details-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .details-image img {
+                height: 300px;
+            }
+
+            .details-info h2 {
+                font-size: 28px;
+            }
+
+            .language-box {
+                margin-top: 10px;
+                margin-left: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🌿 GreenLeaf Nursery</h1>
+
+    <nav>
+
+        <a href="index.html" data-lang="home">Home</a>
+
+        <a href="indoor.html" data-lang="indoor">Indoor</a>
+
+        <a href="outdoor.html" data-lang="outdoor">Outdoor</a>
+
+        <a href="countries.html" data-lang="countries">
+            Other Countries
+        </a>
+
+        <a href="diseases.html" data-lang="diseases">
+            Diseases
+        </a>
+
+        <a href="cart.html" data-lang="cart">
+            Cart 🛒
+        </a>
+
+    </nav>
+
+
+    <!-- LANGUAGE SELECTOR -->
+
+    <div class="language-box">
+
+        <select id="languageSelect"
+                onchange="changeLanguage()">
+
+            <option value="en">English</option>
+
+            <option value="te">తెలుగు</option>
+
+            <option value="hi">हिन्दी</option>
+
+        </select>
+
+    </div>
+
+</header>
+
+
+<div class="details-container">
+
+    <div id="plantDetails">
+
+        <p style="text-align:center;">
+            Loading plant details... 🌱
+        </p>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 GreenLeaf Nursery | Grow Green, Live Green 🌿
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   LANGUAGE DATA
+========================================= */
+
+var translations = {
+
+    en: {
+
+        home: "Home",
+        indoor: "Indoor",
+        outdoor: "Outdoor",
+        countries: "Other Countries",
+        diseases: "Diseases",
+        cart: "Cart 🛒",
+
+        loading: "Loading plant details... 🌱",
+
+        detailsNotFound:
+            "🌱 Plant Details Not Found",
+
+        goBackSelect:
+            "Please go back and click View Details.",
+
+        somethingWrong:
+            "Something went wrong 🌱",
+
+        selectAgain:
+            "Please go back and select the plant again.",
+
+        sunlight: "Sunlight:",
+
+        water: "Water:",
+
+        soil: "Soil:",
+
+        type: "Plant Type:",
+
+        origin: "Origin:",
+
+        benefits: "Benefits:",
+
+        care: "Care:",
+
+        addCart: "🛒 Add to Cart",
+
+        back: "← Back"
+
+    },
+
+
+    te: {
+
+        home: "హోమ్",
+
+        indoor: "ఇండోర్",
+
+        outdoor: "అవుట్‌డోర్",
+
+        countries: "ఇతర దేశాల మొక్కలు",
+
+        diseases: "వ్యాధులు",
+
+        cart: "కార్ట్ 🛒",
+
+        loading:
+            "మొక్క వివరాలు లోడ్ అవుతున్నాయి... 🌱",
+
+        detailsNotFound:
+            "🌱 మొక్క వివరాలు కనుగొనబడలేదు",
+
+        goBackSelect:
+            "దయచేసి వెనక్కి వెళ్లి View Details పై క్లిక్ చేయండి.",
+
+        somethingWrong:
+            "ఏదో సమస్య వచ్చింది 🌱",
+
+        selectAgain:
+            "దయచేసి వెనక్కి వెళ్లి మొక్కను మళ్లీ ఎంచుకోండి.",
+
+        sunlight: "సూర్యకాంతి:",
+
+        water: "నీరు:",
+
+        soil: "మట్టి:",
+
+        type: "మొక్క రకం:",
+
+        origin: "మూలం:",
+
+        benefits: "ప్రయోజనాలు:",
+
+        care: "సంరక్షణ:",
+
+        addCart:
+            "🛒 కార్ట్‌కు జోడించండి",
+
+        back:
+            "← వెనక్కి"
+
+    },
+
+
+    hi: {
+
+        home: "होम",
+
+        indoor: "इनडोर",
+
+        outdoor: "आउटडोर",
+
+        countries: "अन्य देशों के पौधे",
+
+        diseases: "बीमारियाँ",
+
+        cart: "कार्ट 🛒",
+
+        loading:
+            "पौधे की जानकारी लोड हो रही है... 🌱",
+
+        detailsNotFound:
+            "🌱 पौधे की जानकारी नहीं मिली",
+
+        goBackSelect:
+            "कृपया वापस जाकर View Details पर क्लिक करें।",
+
+        somethingWrong:
+            "कुछ गलत हो गया 🌱",
+
+        selectAgain:
+            "कृपया वापस जाकर पौधे को फिर से चुनें।",
+
+        sunlight: "सूरज की रोशनी:",
+
+        water: "पानी:",
+
+        soil: "मिट्टी:",
+
+        type: "पौधे का प्रकार:",
+
+        origin: "उत्पत्ति:",
+
+        benefits: "लाभ:",
+
+        care: "देखभाल:",
+
+        addCart:
+            "🛒 कार्ट में जोड़ें",
+
+        back:
+            "← वापस"
+
+    }
+
+};
+
+
+/* =========================================
+   PLANT TRANSLATION DATA
+========================================= */
+
+var plantTranslations = {
+
+    "money": {
+
+        te: {
+            description:
+                "మనీ ప్లాంట్ అందమైన ఆకులతో ఉండే ప్రసిద్ధ ఇండోర్ మొక్క. ఇది పెంచడం మరియు సంరక్షించడం చాలా సులభం.",
+
+            sunlight:
+                "ప్రకాశవంతమైన పరోక్ష సూర్యకాంతి",
+
+            water:
+                "పై మట్టి ఎండినప్పుడు నీరు ఇవ్వాలి",
+
+            soil:
+                "నీరు సులభంగా బయటకు వెళ్లే పాటింగ్ మట్టి",
+
+            type:
+                "ఇండోర్ ఎక్కే మొక్క",
+
+            origin:
+                "దక్షిణ ఆసియా",
+
+            benefits:
+                "ఇళ్లు మరియు కార్యాలయాలకు అనుకూలమైన, సులభంగా పెంచగల మొక్క.",
+
+            care:
+                "తీవ్రమైన ప్రత్యక్ష సూర్యకాంతి మరియు అధిక నీటిని నివారించండి.",
+
+            name:
+                "మనీ ప్లాంట్"
+        },
+
+        hi: {
+
+            description:
+                "मनी प्लांट सुंदर पत्तियों वाला एक लोकप्रिय इनडोर पौधा है। इसे उगाना और संभालना आसान है।",
+
+            sunlight:
+                "तेज़ अप्रत्यक्ष धूप",
+
+            water:
+                "ऊपरी मिट्टी सूखने पर पानी दें",
+
+            soil:
+                "अच्छी जल निकासी वाली गमले की मिट्टी",
+
+            type:
+                "इनडोर चढ़ने वाला पौधा",
+
+            origin:
+                "दक्षिण एशिया",
+
+            benefits:
+                "घर और कार्यालय के लिए उपयुक्त और आसानी से उगने वाला पौधा।",
+
+            care:
+                "तेज़ सीधी धूप और अधिक पानी से बचाएँ।",
+
+            name:
+                "मनी प्लांट"
+        }
+
+    },
+
+
+    "snake": {
+
+        te: {
+
+            description:
+                "స్నేక్ ప్లాంట్ పొడవైన నిటారుగా ఉండే ఆకులతో కూడిన బలమైన ఇండోర్ మొక్క. దీనికి చాలా తక్కువ సంరక్షణ అవసరం.",
+
+            sunlight:
+                "తక్కువ నుండి ప్రకాశవంతమైన పరోక్ష కాంతి",
+
+            water:
+                "మట్టి పూర్తిగా ఎండిన తర్వాత మాత్రమే నీరు ఇవ్వాలి",
+
+            soil:
+                "ఇసుకతో కూడిన నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "ఇండోర్ ఆకుల మొక్క",
+
+            origin:
+                "ఉష్ణమండల ఆఫ్రికా",
+
+            benefits:
+                "చాలా సులభంగా సంరక్షించగల మొక్క.",
+
+            care:
+                "నీరు పెట్టే ముందు మట్టి ఎండిపోయేలా చేయండి.",
+
+            name:
+                "స్నేక్ ప్లాంట్"
+        },
+
+        hi: {
+
+            description:
+                "स्नेक प्लांट लंबे सीधे पत्तों वाला एक मजबूत इनडोर पौधा है। इसे बहुत कम देखभाल की आवश्यकता होती है।",
+
+            sunlight:
+                "कम से तेज़ अप्रत्यक्ष रोशनी",
+
+            water:
+                "मिट्टी सूखने के बाद ही पानी दें",
+
+            soil:
+                "रेतीली और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "इनडोर पत्तियों वाला पौधा",
+
+            origin:
+                "उष्णकटिबंधीय अफ्रीका",
+
+            benefits:
+                "बहुत आसानी से देखभाल किया जा सकता है।",
+
+            care:
+                "पानी देने से पहले मिट्टी को सूखने दें।",
+
+            name:
+                "स्नेक प्लांट"
+        }
+
+    },
+
+
+    "peace lily": {
+
+        te: {
+
+            description:
+                "పీస్ లిల్లీ ముదురు ఆకుపచ్చ ఆకులు మరియు అందమైన తెల్లని పూలతో ఉండే అందమైన ఇండోర్ మొక్క.",
+
+            sunlight:
+                "ప్రకాశవంతమైన పరోక్ష సూర్యకాంతి",
+
+            water:
+                "క్రమం తప్పకుండా మితమైన నీరు",
+
+            soil:
+                "తేమగా ఉండే నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "ఇండోర్ పుష్పించే మొక్క",
+
+            origin:
+                "ఉష్ణమండల అమెరికా",
+
+            benefits:
+                "అందమైన తెల్లని పూలు మరియు ఆకర్షణీయమైన ఆకులు.",
+
+            care:
+                "మట్టిని కొద్దిగా తేమగా ఉంచి బలమైన ప్రత్యక్ష సూర్యకాంతిని నివారించండి.",
+
+            name:
+                "పీస్ లిల్లీ"
+        },
+
+        hi: {
+
+            description:
+                "पीस लिली गहरे हरे पत्तों और सुंदर सफेद फूलों वाला एक आकर्षक इनडोर पौधा है।",
+
+            sunlight:
+                "तेज़ अप्रत्यक्ष धूप",
+
+            water:
+                "नियमित मध्यम पानी",
+
+            soil:
+                "नम और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "इनडोर फूल वाला पौधा",
+
+            origin:
+                "उष्णकटिबंधीय अमेरिका",
+
+            benefits:
+                "सुंदर सफेद फूल और आकर्षक हरे पत्ते।",
+
+            care:
+                "मिट्टी को हल्का नम रखें और तेज़ सीधी धूप से बचाएँ।",
+
+            name:
+                "पीस लिली"
+        }
+
+    },
+
+
+    "aloe": {
+
+        te: {
+
+            description:
+                "అలోవెరా మందపాటి ఆకులతో ఉండే సులభంగా సంరక్షించగల సక్కులెంట్ మొక్క.",
+
+            sunlight:
+                "ప్రకాశవంతమైన సూర్యకాంతి",
+
+            water:
+                "తక్కువ నీరు",
+
+            soil:
+                "ఇసుకతో కూడిన నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "ఔషధ సక్కులెంట్",
+
+            origin:
+                "అరేబియా ద్వీపకల్పం",
+
+            benefits:
+                "ప్రసిద్ధ ఔషధ మరియు అలంకార మొక్క.",
+
+            care:
+                "నీరు పెట్టే మధ్యలో మట్టి ఎండిపోయేలా చేయండి.",
+
+            name:
+                "అలోవెరా"
+        },
+
+        hi: {
+
+            description:
+                "एलोवेरा मोटी हरी पत्तियों वाला एक आसान देखभाल वाला रसीला पौधा है।",
+
+            sunlight:
+                "तेज़ धूप",
+
+            water:
+                "कम पानी",
+
+            soil:
+                "रेतीली और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "औषधीय रसीला पौधा",
+
+            origin:
+                "अरब प्रायद्वीप",
+
+            benefits:
+                "लोकप्रिय औषधीय और सजावटी पौधा।",
+
+            care:
+                "दो बार पानी देने के बीच मिट्टी को सूखने दें।",
+
+            name:
+                "एलोवेरा"
+        }
+
+    },
+
+
+    "hibiscus": {
+
+        te: {
+
+            description:
+                "హిబిస్కస్ పెద్ద రంగురంగుల పూలకు ప్రసిద్ధి చెందిన అందమైన పుష్పించే మొక్క.",
+
+            sunlight:
+                "పూర్తి సూర్యకాంతి",
+
+            water:
+                "క్రమం తప్పకుండా నీరు",
+
+            soil:
+                "సారవంతమైన, నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "పుష్పించే అవుట్‌డోర్ మొక్క",
+
+            origin:
+                "ఉష్ణమండల మరియు ఉపఉష్ణమండల ప్రాంతాలు",
+
+            benefits:
+                "అందమైన రంగురంగుల పూలు.",
+
+            care:
+                "4–6 గంటల సూర్యకాంతి ఇవ్వండి మరియు ఎండిపోయిన పూలను తొలగించండి.",
+
+            name:
+                "మందారం"
+        },
+
+        hi: {
+
+            description:
+                "हिबिस्कस बड़े रंगीन फूलों के लिए प्रसिद्ध एक सुंदर फूल वाला पौधा है।",
+
+            sunlight:
+                "पूरी धूप",
+
+            water:
+                "नियमित पानी",
+
+            soil:
+                "उपजाऊ और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "फूल वाला आउटडोर पौधा",
+
+            origin:
+                "उष्णकटिबंधीय और उपोष्णकटिबंधीय क्षेत्र",
+
+            benefits:
+                "सुंदर रंगीन फूल।",
+
+            care:
+                "4–6 घंटे धूप दें और सूखे फूलों को हटाएँ।",
+
+            name:
+                "गुड़हल"
+        }
+
+    },
+
+
+    "rose": {
+
+        te: {
+
+            description:
+                "రోజ్ అత్యంత ప్రసిద్ధ పుష్పించే మొక్కలలో ఒకటి. ఇది అందమైన సువాసన గల పూలను ఇస్తుంది.",
+
+            sunlight:
+                "పూర్తి సూర్యకాంతి",
+
+            water:
+                "క్రమం తప్పకుండా నీరు",
+
+            soil:
+                "సారవంతమైన, నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "పుష్పించే మొక్క",
+
+            origin:
+                "ఆసియా, యూరప్ మరియు ఉత్తర అమెరికా",
+
+            benefits:
+                "అందమైన పూలు మరియు మంచి సువాసన.",
+
+            care:
+                "సూర్యకాంతి, క్రమం తప్పకుండా నీరు మరియు ఎండిపోయిన కొమ్మలను కత్తిరించడం అవసరం.",
+
+            name:
+                "గులాబీ"
+        },
+
+        hi: {
+
+            description:
+                "गुलाब सबसे लोकप्रिय फूल वाले पौधों में से एक है और सुंदर सुगंधित फूल देता है।",
+
+            sunlight:
+                "पूरी धूप",
+
+            water:
+                "नियमित पानी",
+
+            soil:
+                "उपजाऊ और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "फूल वाला पौधा",
+
+            origin:
+                "एशिया, यूरोप और उत्तरी अमेरिका",
+
+            benefits:
+                "सुंदर फूल और सुखद सुगंध।",
+
+            care:
+                "धूप, नियमित पानी और सूखी शाखाओं की छंटाई करें।",
+
+            name:
+                "गुलाब"
+        }
+
+    },
+
+
+    "lavender": {
+
+        te: {
+
+            description:
+                "లావెండర్ ఊదా రంగు పూలు మరియు ఆహ్లాదకరమైన సువాసనకు ప్రసిద్ధి చెందిన మొక్క.",
+
+            sunlight:
+                "పూర్తి సూర్యకాంతి",
+
+            water:
+                "తక్కువ నుండి మితమైన నీరు",
+
+            soil:
+                "ఇసుకతో కూడిన నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "సువాసన గల పుష్పించే మొక్క",
+
+            origin:
+                "మధ్యధరా ప్రాంతం",
+
+            benefits:
+                "అందమైన ఊదా పూలు మరియు ఆహ్లాదకరమైన సువాసన.",
+
+            care:
+                "అధిక నీటిని నివారించి మంచి గాలి ప్రసరణ ఉండేలా చూడండి.",
+
+            name:
+                "లావెండర్"
+        },
+
+        hi: {
+
+            description:
+                "लैवेंडर अपने बैंगनी फूलों और सुखद सुगंध के लिए प्रसिद्ध है।",
+
+            sunlight:
+                "पूरी धूप",
+
+            water:
+                "कम से मध्यम पानी",
+
+            soil:
+                "रेतीली और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "सुगंधित फूल वाला पौधा",
+
+            origin:
+                "भूमध्यसागरीय क्षेत्र",
+
+            benefits:
+                "सुंदर बैंगनी फूल और सुखद सुगंध।",
+
+            care:
+                "अधिक पानी से बचाएँ और अच्छी हवा का प्रवाह रखें।",
+
+            name:
+                "लैवेंडर"
+        }
+
+    },
+
+
+    "monstera": {
+
+        te: {
+
+            description:
+                "మాన్‌స్టెరా పెద్ద సహజమైన చీలికలు ఉన్న ఆకులకు ప్రసిద్ధి చెందిన ఉష్ణమండల మొక్క.",
+
+            sunlight:
+                "ప్రకాశవంతమైన పరోక్ష సూర్యకాంతి",
+
+            water:
+                "మితమైన నీరు",
+
+            soil:
+                "సారవంతమైన, నీరు సులభంగా బయటకు వెళ్లే పాటింగ్ మట్టి",
+
+            type:
+                "ఉష్ణమండల ఆకుల మొక్క",
+
+            origin:
+                "మధ్య అమెరికా",
+
+            benefits:
+                "ఇంటికి అందమైన ఉష్ణమండల రూపాన్ని ఇస్తుంది.",
+
+            care:
+                "మట్టిని కొద్దిగా తేమగా ఉంచి పరోక్ష కాంతిని అందించండి.",
+
+            name:
+                "మాన్‌స్టెరా"
+        },
+
+        hi: {
+
+            description:
+                "मॉन्स्टेरा बड़े प्राकृतिक कटाव वाले पत्तों वाला एक उष्णकटिबंधीय पौधा है।",
+
+            sunlight:
+                "तेज़ अप्रत्यक्ष धूप",
+
+            water:
+                "मध्यम पानी",
+
+            soil:
+                "समृद्ध और अच्छी जल निकासी वाली गमले की मिट्टी",
+
+            type:
+                "उष्णकटिबंधीय पत्तियों वाला पौधा",
+
+            origin:
+                "मध्य अमेरिका",
+
+            benefits:
+                "घर को सुंदर उष्णकटिबंधीय रूप देता है।",
+
+            care:
+                "मिट्टी को हल्का नम रखें और अप्रत्यक्ष रोशनी दें।",
+
+            name:
+                "मॉन्स्टेरा"
+        }
+
+    },
+
+
+    "bird": {
+
+        te: {
+
+            description:
+                "బర్డ్ ఆఫ్ ప్యారడైజ్ పెద్ద ఆకులు మరియు ఆకర్షణీయమైన పూలతో ఉండే ఉష్ణమండల అలంకార మొక్క.",
+
+            sunlight:
+                "ప్రకాశవంతమైన సూర్యకాంతి",
+
+            water:
+                "క్రమం తప్పకుండా మితమైన నీరు",
+
+            soil:
+                "సారవంతమైన, నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "ఉష్ణమండల అలంకార మొక్క",
+
+            origin:
+                "దక్షిణ ఆఫ్రికా",
+
+            benefits:
+                "అందమైన ఉష్ణమండల రూపాన్ని ఇస్తుంది.",
+
+            care:
+                "ప్రకాశవంతమైన కాంతి మరియు తగినంత స్థలం ఇవ్వండి.",
+
+            name:
+                "బర్డ్ ఆఫ్ ప్యారడైజ్"
+        },
+
+        hi: {
+
+            description:
+                "बर्ड ऑफ पैराडाइज बड़े पत्तों और आकर्षक फूलों वाला एक उष्णकटिबंधीय सजावटी पौधा है।",
+
+            sunlight:
+                "तेज़ धूप",
+
+            water:
+                "नियमित मध्यम पानी",
+
+            soil:
+                "समृद्ध और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "उष्णकटिबंधीय सजावटी पौधा",
+
+            origin:
+                "दक्षिण अफ्रीका",
+
+            benefits:
+                "सुंदर उष्णकटिबंधीय रूप देता है।",
+
+            care:
+                "तेज़ रोशनी और पर्याप्त जगह दें।",
+
+            name:
+                "बर्ड ऑफ पैराडाइज"
+        }
+
+    },
+
+
+    "jasmine": {
+
+        te: {
+
+            description:
+                "జాస్మిన్ అందమైన మరియు బలమైన సువాసన గల పూలకు ప్రసిద్ధి చెందిన పుష్పించే మొక్క.",
+
+            sunlight:
+                "ప్రకాశవంతమైన సూర్యకాంతి",
+
+            water:
+                "క్రమం తప్పకుండా నీరు",
+
+            soil:
+                "సారవంతమైన, నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "పుష్పించే ఎక్కే మొక్క",
+
+            origin:
+                "ఉష్ణమండల మరియు ఉపఉష్ణమండల ప్రాంతాలు",
+
+            benefits:
+                "అందమైన మరియు సువాసన గల పూలు.",
+
+            care:
+                "ఎక్కేందుకు సహాయం అందించి క్రమం తప్పకుండా కత్తిరించండి.",
+
+            name:
+                "మల్లె"
+        },
+
+        hi: {
+
+            description:
+                "चमेली सुंदर और तेज़ सुगंध वाले फूलों के लिए प्रसिद्ध फूल वाला पौधा है।",
+
+            sunlight:
+                "तेज़ धूप",
+
+            water:
+                "नियमित पानी",
+
+            soil:
+                "उपजाऊ और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "फूल वाला चढ़ने वाला पौधा",
+
+            origin:
+                "उष्णकटिबंधीय और उपोष्णकटिबंधीय क्षेत्र",
+
+            benefits:
+                "सुंदर और सुगंधित फूल।",
+
+            care:
+                "चढ़ने के लिए सहारा दें और नियमित रूप से छंटाई करें।",
+
+            name:
+                "चमेली"
+        }
+
+    },
+
+
+    "marigold": {
+
+        te: {
+
+            description:
+                "మరిగోల్డ్ పసుపు, నారింజ మరియు బంగారు రంగు పూలను ఇచ్చే ప్రకాశవంతమైన పుష్పించే మొక్క.",
+
+            sunlight:
+                "పూర్తి సూర్యకాంతి",
+
+            water:
+                "మితమైన నీరు",
+
+            soil:
+                "సారవంతమైన, నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "పుష్పించే మొక్క",
+
+            origin:
+                "మెక్సికో మరియు మధ్య అమెరికా",
+
+            benefits:
+                "ప్రకాశవంతమైన రంగురంగుల పూలు.",
+
+            care:
+                "వాడిపోయిన పూలను క్రమం తప్పకుండా తొలగించండి.",
+
+            name:
+                "బంతి పువ్వు"
+        },
+
+        hi: {
+
+            description:
+                "गेंदा पीले, नारंगी और सुनहरे फूलों वाला एक चमकीला फूल वाला पौधा है।",
+
+            sunlight:
+                "पूरी धूप",
+
+            water:
+                "मध्यम पानी",
+
+            soil:
+                "उपजाऊ और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "फूल वाला पौधा",
+
+            origin:
+                "मेक्सिको और मध्य अमेरिका",
+
+            benefits:
+                "चमकीले रंगीन फूल।",
+
+            care:
+                "मुरझाए हुए फूलों को नियमित रूप से हटाएँ।",
+
+            name:
+                "गेंदा"
+        }
+
+    },
+
+
+    "bougainvillea": {
+
+        te: {
+
+            description:
+                "బోగన్‌విల్లియా వేడి వాతావరణంలో బాగా పెరిగే రంగురంగుల అవుట్‌డోర్ పుష్పించే మొక్క.",
+
+            sunlight:
+                "పూర్తి సూర్యకాంతి",
+
+            water:
+                "మితమైన నీరు",
+
+            soil:
+                "నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "పుష్పించే ఎక్కే మొక్క",
+
+            origin:
+                "దక్షిణ అమెరికా",
+
+            benefits:
+                "తోటలు మరియు బాల్కనీలకు చాలా అనుకూలమైనది.",
+
+            care:
+                "ఎక్కువ సూర్యకాంతి ఇవ్వండి మరియు అధిక నీటిని నివారించండి.",
+
+            name:
+                "బోగన్‌విల్లియా"
+        },
+
+        hi: {
+
+            description:
+                "बोगनवेलिया एक रंगीन आउटडोर फूल वाला पौधा है जो गर्म जलवायु में अच्छी तरह बढ़ता है।",
+
+            sunlight:
+                "पूरी धूप",
+
+            water:
+                "मध्यम पानी",
+
+            soil:
+                "अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "फूल वाला चढ़ने वाला पौधा",
+
+            origin:
+                "दक्षिण अमेरिका",
+
+            benefits:
+                "बगीचों और बालकनी के लिए बहुत अच्छा है।",
+
+            care:
+                "भरपूर धूप दें और अधिक पानी से बचाएँ।",
+
+            name:
+                "बोगनवेलिया"
+        }
+
+    },
+
+    "portulaca": {
+
+        te: {
+
+            description:
+                "పోర్టులాకా ఎండ మరియు పొడి పరిస్థితుల్లో బాగా పెరిగే రంగురంగుల పుష్పించే మొక్క.",
+
+            sunlight:
+                "పూర్తి సూర్యకాంతి",
+
+            water:
+                "తక్కువ నుండి మితమైన నీరు",
+
+            soil:
+                "ఇసుకతో కూడిన నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "పుష్పించే సక్కులెంట్",
+
+            origin:
+                "దక్షిణ అమెరికా",
+
+            benefits:
+                "తక్కువ నీటితో రంగురంగుల పూలు ఇస్తుంది.",
+
+            care:
+                "సూర్యకాంతి ఇవ్వండి మరియు అధిక నీటిని నివారించండి.",
+
+            name:
+                "పోర్టులాకా"
+        },
+
+        hi: {
+
+            description:
+                "पोर्टुलाका एक रंगीन फूल वाला पौधा है जो धूप और सूखी परिस्थितियों में अच्छी तरह बढ़ता है।",
+
+            sunlight:
+                "पूरी धूप",
+
+            water:
+                "कम से मध्यम पानी",
+
+            soil:
+                "रेतीली और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "फूल वाला रसीला पौधा",
+
+            origin:
+                "दक्षिण अमेरिका",
+
+            benefits:
+                "कम पानी में रंगीन फूल देता है।",
+
+            care:
+                "धूप दें और अधिक पानी से बचाएँ।",
+
+            name:
+                "पोर्टुलाका"
+        }
+
+    },
+
+
+    "japanese maple": {
+
+        te: {
+
+            description:
+                "జపనీస్ మేపుల్ అందమైన ఆకులు మరియు కాలానుగుణ రంగులకు ప్రసిద్ధి చెందిన అలంకార చెట్టు.",
+
+            sunlight:
+                "పాక్షిక సూర్యకాంతి",
+
+            water:
+                "క్రమం తప్పకుండా నీరు",
+
+            soil:
+                "తేమగా ఉండే నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "అలంకార చెట్టు",
+
+            origin:
+                "జపాన్, కొరియా మరియు చైనా",
+
+            benefits:
+                "అందమైన రంగురంగుల ఆకులు.",
+
+            care:
+                "అధిక వేడి నుండి రక్షించి మట్టిని మితంగా తేమగా ఉంచండి.",
+
+            name:
+                "జపనీస్ మేపుల్"
+        },
+
+        hi: {
+
+            description:
+                "जापानी मेपल सुंदर पत्तियों और मौसमी रंगों के लिए प्रसिद्ध एक सजावटी पेड़ है।",
+
+            sunlight:
+                "आंशिक धूप",
+
+            water:
+                "नियमित पानी",
+
+            soil:
+                "नम और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "सजावटी पेड़",
+
+            origin:
+                "जापान, कोरिया और चीन",
+
+            benefits:
+                "सुंदर रंगीन पत्तियाँ।",
+
+            care:
+                "अत्यधिक गर्मी से बचाएँ और मिट्टी को मध्यम नम रखें।",
+
+            name:
+                "जापानी मेपल"
+        }
+
+    },
+
+
+    "sakura": {
+
+        te: {
+
+            description:
+                "సకురా లేదా చెర్రీ బ్లాసమ్ అందమైన గులాబీ మరియు తెల్లని పూలకు ప్రసిద్ధి చెందిన చెట్టు.",
+
+            sunlight:
+                "పూర్తి నుండి పాక్షిక సూర్యకాంతి",
+
+            water:
+                "క్రమం తప్పకుండా నీరు",
+
+            soil:
+                "సారవంతమైన, నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "పుష్పించే చెట్టు",
+
+            origin:
+                "జపాన్ మరియు తూర్పు ఆసియా",
+
+            benefits:
+                "అందమైన గులాబీ మరియు తెల్లని కాలానుగుణ పూలు.",
+
+            care:
+                "సూర్యకాంతి ఇవ్వండి మరియు చిన్న మొక్కలను అధిక వేడి నుండి రక్షించండి.",
+
+            name:
+                "సకురా"
+        },
+
+        hi: {
+
+            description:
+                "सकुरा या चेरी ब्लॉसम सुंदर गुलाबी और सफेद फूलों के लिए प्रसिद्ध पेड़ है।",
+
+            sunlight:
+                "पूरी से आंशिक धूप",
+
+            water:
+                "नियमित पानी",
+
+            soil:
+                "उपजाऊ और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "फूल वाला पेड़",
+
+            origin:
+                "जापान और पूर्वी एशिया",
+
+            benefits:
+                "सुंदर गुलाबी और सफेद मौसमी फूल।",
+
+            care:
+                "धूप दें और छोटे पौधों को अत्यधिक गर्मी से बचाएँ।",
+
+            name:
+                "सकुरा"
+        }
+
+    },
+
+
+    "tulip": {
+
+        te: {
+
+            description:
+                "ట్యూలిప్ అందమైన కప్పు ఆకారపు పూలకు ప్రసిద్ధి చెందిన రంగురంగుల పుష్పించే మొక్క.",
+
+            sunlight:
+                "పూర్తి సూర్యకాంతి",
+
+            water:
+                "మితమైన నీరు",
+
+            soil:
+                "సారవంతమైన, నీరు సులభంగా బయటకు వెళ్లే మట్టి",
+
+            type:
+                "బల్బ్ పుష్పించే మొక్క",
+
+            origin:
+                "మధ్య ఆసియా మరియు టర్కీ",
+
+            benefits:
+                "అందమైన రంగురంగుల పూలు.",
+
+            care:
+                "నీరు నిలిచిపోకుండా మంచి సూర్యకాంతి అందించండి.",
+
+            name:
+                "ట్యూలిప్"
+        },
+
+        hi: {
+
+            description:
+                "ट्यूलिप सुंदर कप के आकार के फूलों वाला एक रंगीन फूल वाला पौधा है।",
+
+            sunlight:
+                "पूरी धूप",
+
+            water:
+                "मध्यम पानी",
+
+            soil:
+                "उपजाऊ और अच्छी जल निकासी वाली मिट्टी",
+
+            type:
+                "बल्ब वाला फूल पौधा",
+
+            origin:
+                "मध्य एशिया और तुर्की",
+
+            benefits:
+                "सुंदर रंगीन फूल।",
+
+            care:
+                "जलभराव से बचाएँ और अच्छी धूप दें।",
+
+            name:
+                "ट्यूलिप"
+        }
+
+    }
+
+};
+
+
+/* =========================================
+   GET CURRENT LANGUAGE
+========================================= */
+
+function getLanguage() {
+
+    return localStorage.getItem("greenLeafLanguage") || "en";
+
+}
+
+
+/* =========================================
+   CHANGE LANGUAGE
+========================================= */
+
+function changeLanguage() {
+
+    var language =
+        document.getElementById("languageSelect").value;
+
+    localStorage.setItem(
+        "greenLeafLanguage",
+        language
+    );
+
+    applyLanguage();
+
+    loadPlantDetails();
+
+}
+
+
+/* =========================================
+   APPLY LANGUAGE TO HEADER
+========================================= */
+
+function applyLanguage() {
+
+    var language = getLanguage();
+
+    var t = translations[language];
+
+    document
+        .querySelectorAll("[data-lang]")
+        .forEach(function(element) {
+
+            var key =
+                element.getAttribute("data-lang");
+
+            if (t[key]) {
+
+                element.textContent =
+                    t[key];
+
+            }
+
+        });
+
+    var selector =
+        document.getElementById("languageSelect");
+
+    if (selector) {
+
+        selector.value = language;
+
+    }
+
+}
+
+
+/* =========================================
+   GET SELECTED PLANT
+========================================= */
+
+function loadPlantDetails() {
+
+    var data =
+        localStorage.getItem("selectedPlant");
+
+    if (!data) {
+
+        var t = translations[getLanguage()];
+
+        document.getElementById("plantDetails").innerHTML = `
+
+            <div class="error">
+
+                <h2>
+                    ${t.detailsNotFound}
+                </h2>
+
+                <p>
+                    ${t.goBackSelect}
+                </p>
+
+                <button
+                    class="back-btn"
+                    onclick="goBack()">
+
+                    ${t.back}
+
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    var plant;
+
+    try {
+
+        plant =
+            JSON.parse(data);
+
+    }
+
+    catch (error) {
+
+        var t = translations[getLanguage()];
+
+        document.getElementById("plantDetails").innerHTML = `
+
+            <div class="error">
+
+                <h2>
+                    ${t.somethingWrong}
+                </h2>
+
+                <p>
+                    ${t.selectAgain}
+                </p>
+
+                <button
+                    class="back-btn"
+                    onclick="goBack()">
+
+                    ${t.back}
+
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    showPlant(plant);
+
+}
+
+
+/* =========================================
+   SHOW PLANT DETAILS
+========================================= */
+
+function showPlant(plant) {
+
+    var language = getLanguage();
+
+    var t =
+        translations[language];
+
+
+    var name =
+        plant.name || "Plant";
+
+    var price =
+        plant.price || "N/A";
+
+    var image =
+        plant.image || "";
+
+
+    var description =
+        "This is a beautiful plant suitable for your home or garden.";
+
+    var sunlight =
+        "Bright sunlight";
+
+    var water =
+        "Moderate watering";
+
+    var soil =
+        "Well-drained soil";
+
+    var type =
+        plant.type || "Ornamental plant";
+
+    var origin =
+        "Varies by plant";
+
+    var care =
+        "Provide suitable sunlight, water and good soil.";
+
+    var benefits =
+        "Adds beauty and greenery.";
+
+    var plantName =
+        name.toLowerCase();
+
+
+    /* MONEY PLANT */
+
+    if (plantName.includes("money")) {
+
+        sunlight =
+            "Bright indirect sunlight";
+
+        water =
+            "Water when top soil becomes dry";
+
+        soil =
+            "Well-drained potting soil";
+
+        type =
+            "Indoor climbing plant";
+
+        origin =
+            "South Asia";
+
+        benefits =
+            "Easy to grow and suitable for homes and offices.";
+
+        care =
+            "Avoid harsh direct sunlight and overwatering.";
+
+        description =
+            "Money Plant is a popular indoor climbing plant with beautiful green leaves. It is easy to grow and maintain.";
+    }
+
+
+    /* SNAKE PLANT */
+
+    else if (plantName.includes("snake")) {
+
+        sunlight =
+            "Low to bright indirect light";
+
+        water =
+            "Low watering";
+
+        soil =
+            "Sandy, well-drained soil";
+
+        type =
+            "Indoor foliage plant";
+
+        origin =
+            "Tropical Africa";
+
+        benefits =
+            "Very easy to maintain.";
+
+        care =
+            "Allow soil to dry before watering.";
+
+        description =
+            "Snake Plant is a hardy indoor plant with long upright leaves. It requires very little maintenance.";
+    }
+
+
+    /* PEACE LILY */
+
+    else if (plantName.includes("peace lily")) {
+
+        sunlight =
+            "Bright indirect sunlight";
+
+        water =
+            "Regular moderate watering";
+
+        soil =
+            "Moist, well-drained soil";
+
+        type =
+            "Indoor flowering plant";
+
+        origin =
+            "Tropical Americas";
+
+        benefits =
+            "Beautiful white flowers and attractive green leaves.";
+
+        care =
+            "Keep soil slightly moist and avoid strong direct sunlight.";
+
+        description =
+            "Peace Lily is a beautiful indoor plant with dark green leaves and elegant white flowers.";
+    }
+
+
+    /* ALOE VERA */
+
+    else if (plantName.includes("aloe")) {
+
+        sunlight =
+            "Bright sunlight";
+
+        water =
+            "Low watering";
+
+        soil =
+            "Sandy, well-drained soil";
+
+        type =
+            "Medicinal succulent";
+
+        origin =
+            "Arabian Peninsula";
+
+        benefits =
+            "Popular medicinal and decorative plant.";
+
+        care =
+            "Allow soil to dry between watering.";
+
+        description =
+            "Aloe Vera is an easy-care succulent plant with thick green leaves.";
+    }
+
+
+    /* HIBISCUS */
+
+    else if (plantName.includes("hibiscus")) {
+
+        sunlight =
+            "Full sunlight";
+
+        water =
+            "Regular watering";
+
+        soil =
+            "Well-drained fertile soil";
+
+        type =
+            "Flowering outdoor plant";
+
+        origin =
+            "Tropical and subtropical regions";
+
+        benefits =
+            "Beautiful colourful flowers.";
+
+        care =
+            "Give 4–6 hours of sunlight and remove dry flowers.";
+
+        description =
+            "Hibiscus is a beautiful flowering plant famous for its large colourful flowers.";
+    }
+
+
+    /* BOUGAINVILLEA */
+
+    else if (plantName.includes("bougainvillea")) {
+
+        sunlight =
+            "Full sunlight";
+
+        water =
+            "Moderate watering";
+
+        soil =
+            "Well-drained soil";
+
+        type =
+            "Flowering climber";
+
+        origin =
+            "South America";
+
+        benefits =
+            "Excellent for gardens and balconies.";
+
+        care =
+            "Provide plenty of sunlight and avoid overwatering.";
+
+        description =
+            "Bougainvillea is a colourful outdoor flowering plant that grows well in warm climates.";
+    }
+
+
+    /* ROSE */
+
+    else if (plantName.includes("rose")) {
+
+        sunlight =
+            "Full sunlight";
+
+        water =
+            "Regular watering";
+
+        soil =
+            "Rich, well-drained soil";
+
+        type =
+            "Flowering plant";
+
+        origin =
+            "Asia, Europe and North America";
+
+        benefits =
+            "Beautiful flowers and pleasant fragrance.";
+
+        care =
+            "Provide sunlight, regular watering and prune dry branches.";
+
+        description =
+            "Rose is one of the most popular flowering plants and produces beautiful fragrant flowers.";
+    }
+
+
+    /* MARIGOLD */
+
+    else if (plantName.includes("marigold")) {
+
+        sunlight =
+            "Full sunlight";
+
+        water =
+            "Moderate watering";
+
+        soil =
+            "Well-drained fertile soil";
+
+        type =
+            "Flowering plant";
+
+        origin =
+            "Mexico and Central America";
+
+        benefits =
+            "Bright colourful flowers.";
+
+        care =
+            "Remove faded flowers regularly.";
+
+        description =
+            "Marigold is a bright flowering plant producing yellow, orange and golden flowers.";
+    }
+
+
+    /* JASMINE */
+
+    else if (plantName.includes("jasmine")) {
+
+        sunlight =
+            "Bright sunlight";
+
+        water =
+            "Regular watering";
+
+        soil =
+            "Fertile, well-drained soil";
+
+        type =
+            "Flowering climber";
+
+        origin =
+            "Tropical and subtropical regions";
+
+        benefits =
+            "Beautiful and strongly scented flowers.";
+
+        care =
+            "Provide climbing support and prune regularly.";
+
+        description =
+            "Jasmine is a fragrant flowering plant widely grown in gardens and homes.";
+    }
+
+
+    /* PORTULACA */
+
+    else if (plantName.includes("portulaca")) {
+
+        sunlight =
+            "Full sunlight";
+
+        water =
+            "Low to moderate watering";
+
+        soil =
+            "Sandy, well-drained soil";
+
+        type =
+            "Flowering succulent";
+
+        origin =
+            "South America";
+
+        benefits =
+            "Colourful flowers with low water requirements.";
+
+        care =
+            "Provide sunlight and avoid excess watering.";
+
+        description =
+            "Portulaca is a colourful flowering plant that grows well in sunny and dry conditions.";
+    }
+
+
+    /* MONSTERA */
+
+    else if (plantName.includes("monstera")) {
+
+        sunlight =
+            "Bright indirect sunlight";
+
+        water =
+            "Moderate watering";
+
+        soil =
+            "Rich, well-drained potting soil";
+
+        type =
+            "Tropical foliage plant";
+
+        origin =
+            "Central America";
+
+        benefits =
+            "Creates a beautiful tropical appearance.";
+
+        care =
+            "Keep soil slightly moist and provide indirect light.";
+
+        description =
+            "Monstera is a tropical foliage plant famous for its large green leaves with natural splits.";
+    }
+
+
+    /* BIRD OF PARADISE */
+
+    else if (plantName.includes("bird")) {
+
+        sunlight =
+            "Bright sunlight";
+
+        water =
+            "Regular moderate watering";
+
+        soil =
+            "Rich, well-drained soil";
+
+        type =
+            "Tropical ornamental plant";
+
+        origin =
+            "South Africa";
+
+        benefits =
+            "Creates a beautiful tropical appearance.";
+
+        care =
+            "Provide bright light and enough space.";
+
+        description =
+            "Bird of Paradise is a tropical ornamental plant with large leaves and striking flowers.";
+    }
+
+
+    /* LAVENDER */
+
+    else if (plantName.includes("lavender")) {
+
+        sunlight =
+            "Full sunlight";
+
+        water =
+            "Low to moderate watering";
+
+        soil =
+            "Sandy, well-drained soil";
+
+        type =
+            "Fragrant flowering plant";
+
+        origin =
+            "Mediterranean region";
+
+        benefits =
+            "Beautiful purple flowers and pleasant fragrance.";
+
+        care =
+            "Avoid excess water and provide good air circulation.";
+
+        description =
+            "Lavender is a fragrant flowering plant known for its purple flowers and pleasant aroma.";
+    }
+
+
+    /* JAPANESE MAPLE */
+
+    else if (plantName.includes("japanese maple")) {
+
+        sunlight =
+            "Partial sunlight";
+
+        water =
+            "Regular watering";
+
+        soil =
+            "Moist, well-drained soil";
+
+        type =
+            "Ornamental tree";
+
+        origin =
+            "Japan, Korea and China";
+
+        benefits =
+            "Beautiful colourful foliage.";
+
+        care =
+            "Protect from extreme heat and keep soil moderately moist.";
+
+        description =
+            "Japanese Maple is a beautiful ornamental tree known for its attractive leaves and seasonal colours.";
+    }
+
+
+    /* SAKURA / CHERRY */
+
+    else if (
+        plantName.includes("sakura") ||
+        plantName.includes("cherry")
+    ) {
+
+        sunlight =
+            "Full to partial sunlight";
+
+        water =
+            "Regular watering";
+
+        soil =
+            "Fertile, well-drained soil";
+
+        type =
+            "Flowering tree";
+
+        origin =
+            "Japan and East Asia";
+
+        benefits =
+            "Beautiful pink and white seasonal blossoms.";
+
+        care =
+            "Provide sunlight and protect young plants from extreme heat.";
+
+        description =
+            "Sakura, also called Cherry Blossom, is famous for its beautiful pink and white flowers.";
+    }
+
+
+    /* TULIP */
+
+    else if (plantName.includes("tulip")) {
+
+        sunlight =
+            "Full sunlight";
+
+        water =
+            "Moderate watering";
+
+        soil =
+            "Well-drained fertile soil";
+
+        type =
+            "Bulb flowering plant";
+
+        origin =
+            "Central Asia and Turkey";
+
+        benefits =
+            "Produces beautiful colourful flowers.";
+
+        care =
+            "Avoid waterlogging and provide good sunlight.";
+
+        description =
+            "Tulip is a colourful flowering plant known for its beautiful cup-shaped flowers.";
+    }
+
+
+    /* =========================================
+       APPLY TRANSLATION
+    ========================================= */
+
+    var key = null;
+
+
+    if (plantName.includes("money"))
+        key = "money";
+
+    else if (plantName.includes("snake"))
+        key = "snake";
+
+    else if (plantName.includes("peace lily"))
+        key = "peace lily";
+
+    else if (plantName.includes("aloe"))
+        key = "aloe";
+
+    else if (plantName.includes("hibiscus"))
+        key = "hibiscus";
+
+    else if (plantName.includes("bougainvillea"))
+        key = "bougainvillea";
+
+    else if (plantName.includes("rose"))
+        key = "rose";
+
+    else if (plantName.includes("marigold"))
+        key = "marigold";
+
+    else if (plantName.includes("jasmine"))
+        key = "jasmine";
+
+    else if (plantName.includes("portulaca"))
+        key = "portulaca";
+
+    else if (plantName.includes("monstera"))
+        key = "monstera";
+
+    else if (plantName.includes("bird"))
+        key = "bird";
+
+    else if (plantName.includes("lavender"))
+        key = "lavender";
+
+    else if (plantName.includes("japanese maple"))
+        key = "japanese maple";
+
+    else if (
+        plantName.includes("sakura") ||
+        plantName.includes("cherry")
+    )
+        key = "sakura";
+
+    else if (plantName.includes("tulip"))
+        key = "tulip";
+
+
+    if (
+        language !== "en" &&
+        key &&
+        plantTranslations[key] &&
+        plantTranslations[key][language]
+    ) {
+
+        var translated =
+            plantTranslations[key][language];
+
+        description =
+            translated.description;
+
+        sunlight =
+            translated.sunlight;
+
+        water =
+            translated.water;
+
+        soil =
+            translated.soil;
+
+        type =
+            translated.type;
+
+        origin =
+            translated.origin;
+
+        benefits =
+            translated.benefits;
+
+        care =
+            translated.care;
+
+        name =
+            translated.name;
+
+    }
+
+
+    /* =========================================
+       DISPLAY
+    ========================================= */
+
+    document.getElementById("plantDetails").innerHTML = `
+
+        <div class="details-content">
+
+            <div class="details-image">
+
+                <img
+                    src="${image}"
+                    alt="${name}"
+                    onerror="this.style.display='none';"
+                >
+
+            </div>
+
+
+            <div class="details-info">
+
+                <h2>
+                    🌿 ${name}
+                </h2>
+
+
+                <div class="price">
+                    ₹${price}
+                </div>
+
+
+                <p class="description">
+                    ${description}
+                </p>
+
+
+                <div class="info-box">
+
+                    <p>
+                        🌞
+                        <strong>
+                            ${t.sunlight}
+                        </strong>
+                        ${sunlight}
+                    </p>
+
+                    <p>
+                        💧
+                        <strong>
+                            ${t.water}
+                        </strong>
+                        ${water}
+                    </p>
+
+                    <p>
+                        🌱
+                        <strong>
+                            ${t.soil}
+                        </strong>
+                        ${soil}
+                    </p>
+
+                    <p>
+                        🌿
+                        <strong>
+                            ${t.type}
+                        </strong>
+                        ${type}
+                    </p>
+
+                    <p>
+                        🌍
+                        <strong>
+                            ${t.origin}
+                        </strong>
+                        ${origin}
+                    </p>
+
+                    <p>
+                        ⭐
+                        <strong>
+                            ${t.benefits}
+                        </strong>
+                        ${benefits}
+                    </p>
+
+                    <p>
+                        ❤️
+                        <strong>
+                            ${t.care}
+                        </strong>
+                        ${care}
+                    </p>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button
+                        class="cart-btn"
+                        onclick="addPlantToCart()">
+
+                        ${t.addCart}
+
+                    </button>
+
+
+                    <button
+                        class="back-btn"
+                        onclick="goBack()">
+
+                        ${t.back}
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================
+   ADD TO CART
+========================================= */
+
+function addPlantToCart() {
+
+    var data =
+        localStorage.getItem("selectedPlant");
+
+    if (!data) {
+
+        alert("Plant details not found!");
+
+        return;
+    }
+
+    var plant =
+        JSON.parse(data);
+
+    var cart =
+        JSON.parse(
+            localStorage.getItem("cart")
+        ) || [];
+
+    cart.push(plant);
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    window.location.href =
+        "cart.html";
+
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+function goBack() {
+
+    window.history.back();
+
+}
+
+
+/* =========================================
+   PAGE LOAD
+========================================= */
+
+window.onload = function () {
+
+    var savedLanguage =
+        localStorage.getItem(
+            "greenLeafLanguage"
+        ) || "en";
+
+
+    var selector =
+        document.getElementById(
+            "languageSelect"
+        );
+
+
+    if (selector) {
+
+        selector.value =
+            savedLanguage;
+
+    }
+
+
+    applyLanguage();
+
+    loadPlantDetails();
+
+};
+
+</script>
+
+
+</body>
+
+</html>

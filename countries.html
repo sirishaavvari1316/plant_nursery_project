@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Other Countries - GreenLeaf Nursery</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .page-search {
+            text-align: center;
+            padding: 25px 15px;
+            background: #f4f8f3;
+        }
+
+        .page-search h2 {
+            color: #145c2a;
+            margin-bottom: 15px;
+        }
+
+        #countrySearch {
+            width: 80%;
+            max-width: 650px;
+            padding: 14px 20px;
+            font-size: 17px;
+            border: 2px solid #4caf50;
+            border-radius: 30px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        #countrySearch:focus {
+            border-color: #2e7d32;
+        }
+
+        #noCountryPlants {
+            text-align: center;
+            font-size: 18px;
+            margin: 25px;
+            color: #555;
+        }
+
+        .plant-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 7%;
+        }
+
+        .plant-card {
+            width: 280px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .plant-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .plant-card h3 {
+            margin: 15px 0 8px;
+            font-size: 22px;
+        }
+
+        .plant-card p {
+            color: #555;
+            font-size: 17px;
+        }
+
+        .plant-card button {
+            background: #176b2c;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        /* Back Button */
+
+        .back-btn {
+            display: block;
+            width: max-content;
+            margin: 10px auto 25px;
+            padding: 10px 20px;
+            background: #176b2c;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #0e4d1e;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🌿 GreenLeaf Nursery
+    </div>
+
+    <nav>
+
+        <a href="index.html" data-lang="home">Home</a>
+
+        <a href="indoor.html" data-lang="indoor">Indoor Plants</a>
+
+        <a href="outdoor.html" data-lang="outdoor">Outdoor Plants</a>
+
+        <a href="countries.html" data-lang="countries">
+            Other Countries
+        </a>
+
+        <a href="diseases.html" data-lang="diseases">
+            Diseases
+        </a>
+
+        <a href="cart.html" data-lang="cart">
+            🛒 Cart
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- SEARCH BAR -->
+
+<section class="page-search">
+
+    <h2 data-lang="countrySearchTitle">
+        🔍 Search Other Country Plants
+    </h2>
+
+    <input
+        type="text"
+        id="countrySearch"
+        placeholder="Search plants..."
+        data-lang-placeholder="countrySearchPlaceholder"
+        onkeyup="searchCountryPlants()"
+    >
+
+</section>
+
+
+<section class="plants">
+
+    <h2 data-lang="countriesPlantsTitle">
+        🌍 Plants from Other Countries
+    </h2>
+
+    <!-- BACK TO EXPLORE PLANTS -->
+
+    <a href="plants.html" class="back-btn" data-lang="backExplore">
+        ← Back to Explore Plants
+    </a>
+
+    <div class="plant-container" id="countryPlants">
+
+
+        <!-- MONSTERA -->
+
+        <div class="plant-card">
+
+            <img
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Monstera_deliciosa_WPC.jpg"
+            alt="Monstera">
+
+            <h3 data-plant-name="Monstera">
+                Monstera
+            </h3>
+
+            <p data-lang="price599">
+                Price: ₹599
+            </p>
+
+            <button onclick="addToCart(
+                'Monstera',
+                599,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Monstera_deliciosa_WPC.jpg'
+            )" data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button onclick="viewDetails(
+                'Monstera',
+                599,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Monstera_deliciosa_WPC.jpg',
+                'Monstera is a popular tropical plant known for its large decorative leaves. It prefers bright indirect light and moderate watering.'
+            )" data-lang="viewDetails">
+
+                View Details 👁️
+
+            </button>
+
+        </div>
+
+
+        <!-- BIRD OF PARADISE -->
+
+        <div class="plant-card">
+
+            <img
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Bird_of_paradise_--_Strelitzia.jpg"
+            alt="Bird of Paradise">
+
+            <h3 data-plant-name="Bird of Paradise">
+                Bird of Paradise
+            </h3>
+
+            <p data-lang="price699">
+                Price: ₹699
+            </p>
+
+            <button onclick="addToCart(
+                'Bird of Paradise',
+                699,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bird_of_paradise_--_Strelitzia.jpg'
+            )" data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button onclick="viewDetails(
+                'Bird of Paradise',
+                699,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bird_of_paradise_--_Strelitzia.jpg',
+                'Bird of Paradise is a tropical ornamental plant with large leaves. It grows well with bright light and regular watering.'
+            )" data-lang="viewDetails">
+
+                View Details 👁️
+
+            </button>
+
+        </div>
+
+
+        <!-- LAVENDER -->
+
+        <div class="plant-card">
+
+            <img
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Lavender_plant.jpg"
+            alt="Lavender">
+
+            <h3 data-plant-name="Lavender">
+                Lavender
+            </h3>
+
+            <p data-lang="price449">
+                Price: ₹449
+            </p>
+
+            <button onclick="addToCart(
+                'Lavender',
+                449,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Lavender_plant.jpg'
+            )" data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button onclick="viewDetails(
+                'Lavender',
+                449,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Lavender_plant.jpg',
+                'Lavender is a fragrant plant popular in many countries. It prefers plenty of sunlight and well-drained soil.'
+            )" data-lang="viewDetails">
+
+                View Details 👁️
+
+            </button>
+
+        </div>
+
+
+        <!-- JAPANESE MAPLE -->
+
+        <div class="plant-card">
+
+            <img
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Japanese_Maple_plant.jpg"
+            alt="Japanese Maple">
+
+            <h3 data-plant-name="Japanese Maple">
+                Japanese Maple
+            </h3>
+
+            <p data-lang="price799">
+                Price: ₹799
+            </p>
+
+            <button onclick="addToCart(
+                'Japanese Maple',
+                799,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Japanese_Maple_plant.jpg'
+            )" data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button onclick="viewDetails(
+                'Japanese Maple',
+                799,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Japanese_Maple_plant.jpg',
+                'Japanese Maple is a beautiful ornamental plant famous for its attractive leaves. It prefers suitable sunlight and well-drained soil.'
+            )" data-lang="viewDetails">
+
+                View Details 👁️
+
+            </button>
+
+        </div>
+
+
+        <!-- SAKURA -->
+
+        <div class="plant-card">
+
+            <img
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Sakura_-_Prunus_serrulata_(7106560853).jpg"
+            alt="Sakura">
+
+            <h3 data-plant-name="Sakura">
+                Sakura
+            </h3>
+
+            <p data-lang="price899">
+                Price: ₹899
+            </p>
+
+            <button onclick="addToCart(
+                'Sakura',
+                899,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Sakura_-_Prunus_serrulata_(7106560853).jpg'
+            )" data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button onclick="viewDetails(
+                'Sakura',
+                899,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/Sakura_-_Prunus_serrulata_(7106560853).jpg',
+                'Sakura, also known as cherry blossom, is an ornamental flowering plant associated with Japan. It needs suitable sunlight and proper care.'
+            )" data-lang="viewDetails">
+
+                View Details 👁️
+
+            </button>
+
+        </div>
+
+
+        <!-- ALOE VERA -->
+
+        <div class="plant-card">
+
+            <img
+            src="https://commons.wikimedia.org/wiki/Special:Redirect/file/ALOE_VERA.jpg"
+            alt="Aloe Vera">
+
+            <h3 data-plant-name="Aloe Vera">
+                Aloe Vera
+            </h3>
+
+            <p data-lang="price299">
+                Price: ₹299
+            </p>
+
+            <button onclick="addToCart(
+                'Aloe Vera',
+                299,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/ALOE_VERA.jpg'
+            )" data-lang="addCart">
+
+                Add to Cart 🛒
+
+            </button>
+
+            <button onclick="viewDetails(
+                'Aloe Vera',
+                299,
+                'https://commons.wikimedia.org/wiki/Special:Redirect/file/ALOE_VERA.jpg',
+                'Aloe Vera is a hardy succulent plant that needs plenty of sunlight and relatively less watering. It grows well in well-drained soil.'
+            )" data-lang="viewDetails">
+
+                View Details 👁️
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+    <p id="noCountryPlants" data-lang="noPlantsFound"></p>
+
+</section>
+
+
+<footer>
+
+    <h3 data-lang="footerTitle">
+        🌿 GreenLeaf Plant Nursery
+    </h3>
+
+    <p data-lang="footerText">
+        Healthy Plants • Beautiful Homes • Greener Future
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<script src="language.js"></script>
+
+
+<script>
+
+function searchCountryPlants() {
+
+    const input = document.getElementById("countrySearch");
+
+    const searchText = input.value.toLowerCase().trim();
+
+    const cards = document.querySelectorAll(
+        "#countryPlants .plant-card"
+    );
+
+    const message = document.getElementById("noCountryPlants");
+
+    let found = false;
+
+
+    cards.forEach(function(card) {
+
+        const title = card.querySelector("h3");
+
+        if (!title) return;
+
+        const plantName =
+            title.getAttribute("data-plant-name").toLowerCase();
+
+
+        if (plantName.includes(searchText)) {
+
+            card.style.display = "";
+
+            found = true;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    if (searchText !== "" && !found) {
+
+        message.innerText = "❌ No plants found.";
+
+    } else {
+
+        message.innerText = "";
+
+    }
+
+}
+
+</script>
+
+
+<!-- =========================
+     VIEW DETAILS
+========================= -->
+
+<script>
+
+function viewDetails(
+    name,
+    price,
+    image,
+    description
+) {
+
+    const plantDetails = {
+
+        name: name,
+
+        price: price,
+
+        image: image,
+
+        description: description
+
+    };
+
+
+    localStorage.setItem(
+        "selectedPlant",
+        JSON.stringify(plantDetails)
+    );
+
+
+    window.location.href = "plant-details.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
